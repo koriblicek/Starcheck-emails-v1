@@ -1,0 +1,1 @@
+export { EmailTemplatesView } from './EmailTemplatesView';
