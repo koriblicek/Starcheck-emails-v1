@@ -31,7 +31,7 @@ export function EmailTemplateItem({ template, isCustomTemplate }: IEmailTemplate
                 onPointerLeave={() => setCursorOver(false)}
                 sx={{ width: '300px' }}
             >
-                <CardHeader title={template.name} subheader={template.id} subheaderTypographyProps={{ variant: "subtitle2" }} />
+                <CardHeader title={template.name.value} subheader={template.id} subheaderTypographyProps={{ variant: "subtitle2" }} />
                 <CardContent sx={{ p: 1 }}>
                     <Grid container justifyContent='space-evenly'>
                         <Grid item>
@@ -49,7 +49,7 @@ export function EmailTemplateItem({ template, isCustomTemplate }: IEmailTemplate
 
                 {
                     isCustomTemplate ?
-                        <Fade in={cursorOver} timeout={600}>
+                        <Fade in={cursorOver} timeout={300}>
                             <CardActions sx={{ p: 0, pb: 1, justifyContent: "center" }}>
                                 <Button size="small" color="info" variant="contained" startIcon={<EditNoteOutlinedIcon />}
                                     onClick={() => dispatch(emailsCurrentEmailActions.setTemplate({ template: template, updateIds: false }))}
@@ -62,7 +62,7 @@ export function EmailTemplateItem({ template, isCustomTemplate }: IEmailTemplate
                             </CardActions>
                         </Fade>
                         :
-                        <Fade in={cursorOver} timeout={600}>
+                        <Fade in={cursorOver} timeout={300}>
                             <CardActions sx={{ p: 1, justifyContent: "center" }}>
                                 <Button size="small" color="primary" variant="contained" startIcon={<AddCircleOutlineOutlinedIcon />}
                                     onClick={() => dispatch(emailsCurrentEmailActions.setTemplate({ template: template, updateIds: true }))}

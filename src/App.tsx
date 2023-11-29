@@ -5,6 +5,7 @@ import { emailsSettingsActions } from "./store/debuilder-data/emailsSettingsSlic
 import { Alert, AlertTitle, Typography } from "@mui/material";
 import { Wrapper } from "./components/Wrapper";
 import useGetFromAPI from "./hooks/useGetFromAPI";
+import { emailsDataActions } from "./store/debuilder-data/emailsDataSlice";
 
 interface IAppProps {
   inputData: IAppInputData;
@@ -25,7 +26,11 @@ function App({ inputData }: IAppProps) {
 
   useEffect(() => {
     if (data) {
+      //initialize loaded urls
       dispatch(emailsSettingsActions.initialize({ urls: data }));
+      //initialize data
+      dispatch(emailsDataActions.initiBuiltinTemplates())
+      dispatch(emailsDataActions.initBuiltinContainers())
       setProceed(true);
     }
     if (error) {

@@ -1,26 +1,120 @@
 import { IContainer, ITemplate } from '../types';
-import * as uuid from 'uuid';
 
 export const emptyTemplate: ITemplate = {
-    id: uuid.v4(),
-    backgroundColor: "transparent",
-    textColor: "#000000",
-    widthPixels: 600,
-    name: "Empty Template",
-    subjectLine: "subject line",
-    previewLine1: "preview line 1",
-    previewLine2: "preview line 2",
-    containers: [],
-    modificationDate: 0
+    id: '',
+    modificationDate: 0,
+    name: {
+        type: "text",
+        value: "Empty template",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "template_name"
+    },
+    backgroundColor: {
+        type: "color",
+        value: "#ffffff",
+        defaultValue: "transparent",
+        active: true,
+        required: true,
+        label: "background_color"
+    },
+    textColor: {
+        type: "color",
+        value: "#000000",
+        defaultValue: "#000000",
+        active: true,
+        required: true,
+        label: "text_color"
+    },
+    contentWidthPixels: {
+        type: "size",
+        value: 600,
+        defaultValue: 650,
+        max: 800,
+        min: 400,
+        step: 10,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "content_width"
+    },
+    subjectLine: {
+        type: "text",
+        value: "subject line",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "template_subject_line"
+    },
+    previewLine1: {
+        type: "text",
+        value: "preview line 1",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "template_preview_line_1"
+    },
+    previewLine2: {
+        type: "text",
+        value: "preview line 2",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "template_preview_line_2"
+    },
+    htmlText: "",
+    exportedText: "",
+    containers: []
 };
 
-export const singleContainer: IContainer = {
-    parentWidth: 600,
-    id: 'uuid.v4()',
-    backgroundColor: "transparent",
-    contentBackgroundColor: "transparent",
+//This container is used to display in app
+export const emptyContainer: IContainer = {
+    parentWidthPixels: 600,
+    id: '',
+    logo: '',
+    backgroundColor: {
+        type: "color",
+        value: "transparent",
+        defaultValue: "transparent",
+        active: true,
+        required: true,
+        label: "background_color"
+    },
+    contentBackgroundColor: {
+        type: "color",
+        value: "#f5f5f5",
+        defaultValue: "transparent",
+        active: true,
+        required: true,
+        label: "content_background_color"
+    },
     backgroundImage: null,
-    paddingTopPixels: 0,
-    paddingBottomPixels: 0,
+    paddingTopPixels: {
+        type: "size",
+        value: 10,
+        defaultValue: 10,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding_top"
+    },
+    paddingBottomPixels: {
+        type: "size",
+        value: 10,
+        defaultValue: 10,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding_bottom"
+    },
+    htmlText: "",
+    exportedText: "",
     columns: []
 };
