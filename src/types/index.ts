@@ -51,14 +51,20 @@ export interface IContainer extends ISharedProps, ISharedHtml {
     backgroundImage: string | null;
     paddingTopPixels: ISizeType;
     paddingBottomPixels: ISizeType;
+    columnsWidthsPercents: INumberArrayType;
     columns: IColumn[];
 }
 //#endregion
 
 //#region COLUMN
 export interface IColumn extends ISharedProps, ISharedHtml {
-    widthPercent: number;
     widthPixels: number;
+    backgroundColor: IColorType;
+    padding: ISizeType;
+    borderWidthPixels: ISizeType;
+    borderColor: IColorType;
+    borderType: ISelectionType;
+    blocks: IBlock[];
 }
 //#endregion
 
@@ -69,7 +75,7 @@ export interface IBlock extends ISharedProps, ISharedHtml {
 
 //#region SHARED PROPS
 export interface ISharedProps {
-    parentWidthPixels: number;
+    calculatedWidthPixels: number;
     id: string;
 }
 export interface ISharedHtml {
@@ -77,15 +83,34 @@ export interface ISharedHtml {
     exportedText: string;
 }
 //#endregion
+export interface INumberArrayType extends IPropertyBase {
+    value: number[];
+    defaultValue: number[];
+    max: number;
+    min: number;
+    step: number;
+}
+
+export interface ISelectionType extends IPropertyBase {
+    value: string;
+    defaultValue: string;
+    options: ISelectionTypeOptions[];
+}
+export interface ISelectionTypeOptions {
+    key: string;
+    label: string;
+}
 
 export interface ITextType extends IPropertyBase {
     value: string;
     defaultValue: string;
 };
+
 export interface IColorType extends IPropertyBase {
     value: string;
     defaultValue: string;
 };
+
 export interface ISizeType extends IPropertyBase {
     value: number;
     defaultValue: number;
@@ -94,6 +119,7 @@ export interface ISizeType extends IPropertyBase {
     step: number;
     sizeSuffix: string;
 };
+
 export interface IPropertyBase {
     type: TPropertyIdentifiers; //property identifier
     active: boolean; //is property exposed for edit
@@ -101,8 +127,8 @@ export interface IPropertyBase {
     label: string; //property label
 };
 
-export type TPropertyIdentifiers = "color" | "size" | "text";
-export type TPropertyTypes = IColorType | ISizeType | ITextType;
+export type TPropertyIdentifiers = "color" | "size" | "text" | "selection" | "numberArray";
+export type TPropertyTypes = IColorType | ISizeType | ITextType | INumberArrayType | ISelectionType;
 
 export interface IProperty {
     [name: string]: TPropertyTypes;

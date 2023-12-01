@@ -7,12 +7,12 @@ import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emai
 import { useTranslation } from "react-i18next";
 import { ControlSize } from "../shared/ControlSize";
 import { ControlText } from "../shared/ControlText";
+import { ContainersList } from "./ContainersList";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
-import { ContainersList } from "./ContainersList";
 
 interface ITemplatePanelProps {
     template: ITemplate;
@@ -28,10 +28,7 @@ export function TemplatePanel({ template }: ITemplatePanelProps) {
     const { t } = useTranslation();
 
     function updateKey(propertyKey: string, value: string) {
-        const propertyIndex = Object.keys(template).findIndex(key => key === propertyKey);
-        if (propertyIndex > 0) {
-            dispatch(emailsCurrentEmailActions.updateModuleProperty({ propertyIndex: propertyIndex, value }));
-        }
+        dispatch(emailsCurrentEmailActions.updateTemplateProperty({ propertyKey, value }));
     }
     return (
         <Box sx={{ mt: 2 }}>
@@ -50,7 +47,7 @@ export function TemplatePanel({ template }: ITemplatePanelProps) {
                     {openContainers ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={openContainers} timeout="auto" unmountOnExit>
-                    <List component="div" sx={{padding:1}}>
+                    <List component="div" sx={{ padding: 1 }}>
                         <ContainersList />
                     </List>
                 </Collapse>
@@ -60,7 +57,7 @@ export function TemplatePanel({ template }: ITemplatePanelProps) {
                     {openGeneral ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={openGeneral} timeout="auto" unmountOnExit>
-                    <List component="div" sx={{padding:1}}>
+                    <List component="div" sx={{ padding: 1 }}>
                         <ControlText propertyKey="name" data={template.name} handleUpdateProperty={updateKey} />
                         <Divider light sx={{ m: 1 }} />
                         <ControlColor propertyKey="backgroundColor" data={template.backgroundColor} handleUpdateProperty={updateKey} />
@@ -76,7 +73,7 @@ export function TemplatePanel({ template }: ITemplatePanelProps) {
                     {openEmailTemplate ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={openEmailTemplate} timeout="auto" unmountOnExit>
-                    <List component="div" sx={{padding:1}}>
+                    <List component="div" sx={{ padding: 1 }}>
                         <ControlText propertyKey="subjectLine" data={template.subjectLine} handleUpdateProperty={updateKey} />
                         <Divider light sx={{ m: 1 }} />
                         <ControlText propertyKey="previewLine1" data={template.previewLine1} handleUpdateProperty={updateKey} />

@@ -9,8 +9,8 @@ export function ContainersList() {
 
     const { t } = useTranslation();
 
-    const items = builtinContainers.map(container => {
-        return <Grid item key={container.id} ><ContainerItem container={container} /></Grid>;
+    const items = builtinContainers.map((container, index) => {
+        return <Grid item key={container.id + "_" + index} ><ContainerItem container={container} /></Grid>;
     });
 
     return (

@@ -3,6 +3,7 @@ import { IContainer } from "../../../../../../types";
 import DragIndicatorOutlinedIcon from '@mui/icons-material/DragIndicatorOutlined';
 import { useDispatch } from "react-redux";
 import { emailsAppActions } from "../../../../../../store/debuilder-data/emailsAppSlice";
+import { emailsCurrentEmailActions } from "../../../../../../store/debuilder-data/emailsCurrentEmailSlice";
 
 interface IContainerItemProps {
     container: IContainer;
@@ -24,12 +25,11 @@ export function ContainerItem({ container }: IContainerItemProps) {
         switch (e.detail) {
             case 2:
                 //double click
-                //TODO
-                console.log("TODO");
-                //dispatch(debuilderSaveActions.addModuleEnd({ module: JSON.parse(JSON.stringify(module)), selectAddedModule: false }));
+                dispatch(emailsCurrentEmailActions.addContainer({ container: container }));
                 break;
         }
     }
+    
     return (
         <Card elevation={1} sx={{ cursor: 'grab', ':hover': { boxShadow: 5 } }}
             draggable

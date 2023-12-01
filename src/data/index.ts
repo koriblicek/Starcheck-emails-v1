@@ -1,5 +1,6 @@
-import { IContainer, ITemplate } from '../types';
+import { IColumn, IContainer, ITemplate } from '../types';
 
+//MAIN email template
 export const emptyTemplate: ITemplate = {
     id: '',
     modificationDate: 0,
@@ -13,16 +14,16 @@ export const emptyTemplate: ITemplate = {
     },
     backgroundColor: {
         type: "color",
-        value: "#ffffff",
-        defaultValue: "transparent",
+        value: "rgba(255,255,255,255)",
+        defaultValue: "rgba(255,255,255,255)",
         active: true,
         required: true,
         label: "background_color"
     },
     textColor: {
         type: "color",
-        value: "#000000",
-        defaultValue: "#000000",
+        value: "rgba(0,0,0,255)",
+        defaultValue: "rgba(0,0,0,255)",
         active: true,
         required: true,
         label: "text_color"
@@ -68,23 +69,23 @@ export const emptyTemplate: ITemplate = {
     containers: []
 };
 
-//This container is used to display in app
-export const emptyContainer: IContainer = {
-    parentWidthPixels: 600,
+//CONTAINER to be is used as base for all types of containers in app
+export const baseContainer: IContainer = {
+    calculatedWidthPixels: 0,
     id: '',
     logo: '',
     backgroundColor: {
         type: "color",
-        value: "transparent",
-        defaultValue: "transparent",
+        value: "rgba(255,255,255,0)",
+        defaultValue: "rgba(255,255,255,0)",
         active: true,
         required: true,
         label: "background_color"
     },
     contentBackgroundColor: {
         type: "color",
-        value: "#f5f5f5",
-        defaultValue: "transparent",
+        value: "rgba(250,250,250,255)",
+        defaultValue: "rgba(0,0,0,0)",
         active: true,
         required: true,
         label: "content_background_color"
@@ -116,5 +117,75 @@ export const emptyContainer: IContainer = {
     },
     htmlText: "",
     exportedText: "",
+    columnsWidthsPercents: {
+        type: 'numberArray',
+        value: [],
+        defaultValue: [],
+        min: 0,
+        max: 100,
+        step: 1,
+        active: true,
+        required: true,
+        label: 'columns_width'
+    },
     columns: []
+};
+
+//COLUMN to be used as base for all columns in app
+export const baseColumn: IColumn = {
+    calculatedWidthPixels: 0,
+    id: '',
+    widthPixels: 0,
+    backgroundColor: {
+        type: "color",
+        value: "rgba(255,255,255,0)",
+        defaultValue: "rgba(255,255,255,0)",
+        active: true,
+        required: true,
+        label: "background_color"
+    },
+    padding: {
+        type: "size",
+        value: 0,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding"
+    },
+    borderWidthPixels: {
+        type: "size",
+        value: 0,
+        defaultValue: 0,
+        max: 10,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "border_width"
+    },
+    borderColor: {
+        type: "color",
+        value: "rgba(0,0,0,255)",
+        defaultValue: "rgba(0,0,0,255)",
+        active: true,
+        required: true,
+        label: "border_color"
+    },
+    borderType: {
+        value: 'solid',
+        defaultValue: 'solid',
+        options: [{ key: "solid", label: "border_type_solid" }, { key: "dashed", label: "border_type_dashed" }, { key: "dotted", label: "border_type_dotted" }],
+        type: 'text',
+        active: true,
+        required: true,
+        label: 'border_style'
+    },
+    htmlText: '',
+    exportedText: '',
+    blocks: []
 };

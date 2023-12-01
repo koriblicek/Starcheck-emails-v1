@@ -1,38 +1,45 @@
 import { Box } from "@mui/material";
 import { Fragment, useState } from "react";
-//import DragIndicatorOutlinedIcon from '@mui/icons-material/DragIndicatorOutlined';
-import { useAppSelector } from "../../../../store/hooks";
+import { IContainer } from "../../../../types";
+import { useDispatch } from "react-redux";
+import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { DesktopItemColumn } from "../DesktopItemColumn";
+import { ContainerOverlay } from "./ContainerOverlay";
 
-export function DesktopItemContainer() {
-    const [visible, setVisible] = useState<boolean>(false);
+interface IDesktopItemContainerProps {
+    container: IContainer;
+}
 
-    const { selectedContainer } = useAppSelector(state => state.emailsCurrentEmail);
+export function DesktopItemContainer({ container }: IDesktopItemContainerProps) {
+    const dispatch = useDispatch();
+
+    const [over, setOver] = useState<boolean>(false);
+
+    const items = container.columns.map((column, index) => {
+        return <DesktopItemColumn column={column} key={column.id} />;
+    });
+
 
     return (
         <Fragment>
             <Box sx={{ position: 'relative' }}
-                onPointerEnter={() => setVisible(true)}
-                onPointerLeave={() => setVisible(false)}
+                onPointerEnter={() => setOver(true)}
+                onPointerLeave={() => setOver(false)}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(emailsCurrentEmailActions.selectContainer({ container: container }));
+                }}
             >
-                test
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        backgroundColor: "#00000010",
-                        left: '-50px',
-                        right: '-50px',
-                        top: 0,
-                        bottom: 0,
-                        border: selectedContainer ? '1px blue dashed' : '1px lightblue dashed',
-                        //visibility: (visible) ? "visible" : "hidden",
-                        opacity: visible ? 1:.000001,
-                        pointerEvents: 'none'
-                    }}
-                >
-                    <Box sx={{ pointerEvents: 'auto', position: 'absolute', right: 0 }} onClick={() => setVisible(false)}>
-                        asd
-                    </Box>
-                </Box>
+                <div className="u-row-container" style={{ paddingTop: container.paddingTopPixels.value + container.paddingTopPixels.sizeSuffix, paddingBottom: container.paddingBottomPixels.value + container.paddingBottomPixels.sizeSuffix, backgroundColor: container.backgroundColor.value }}>
+                    <div className="u-row" style={{ margin: '0 auto', minWidth: '320px', maxWidth: container.calculatedWidthPixels + "px", overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word', backgroundColor: container.contentBackgroundColor.value }}>
+                        <div style={{ borderCollapse: 'collapse', display: 'table', width: '100%', height: '100%', backgroundColor: 'transparent' }}>
+                            {items}
+                        </div>
+                    </div>
+                </div>
+                {/* Overlay */}
+                <ContainerOverlay isOver={over} container={container} />
+                <Box sx={{ position: 'absolute', top: 0, left: 0, fontSize: '9px' }}>{container.id}</Box>
             </Box>
         </Fragment >
 

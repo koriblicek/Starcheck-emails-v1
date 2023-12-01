@@ -15,7 +15,7 @@ export function ControlSize({ propertyKey, data, handleUpdateProperty }: IContro
 
     const { t } = useTranslation();
 
-    const label = t("templates." + data.label);
+    const label = t("controls." + data.label);
 
     const theme = useTheme();
 
@@ -48,6 +48,8 @@ export function ControlSize({ propertyKey, data, handleUpdateProperty }: IContro
                         <Typography sx={{
                             p: '3px',
                             border: `1px ${theme.palette.info.main} solid`,
+                            width: '30px',
+                            textAlign: 'center'
                         }}>{value}</Typography>
                     </Grid>
                     <Grid item>

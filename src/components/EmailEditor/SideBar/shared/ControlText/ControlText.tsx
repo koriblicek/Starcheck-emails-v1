@@ -14,7 +14,7 @@ export function ControlText({ propertyKey, data, handleUpdateProperty }: IContro
 
     const { t } = useTranslation();
 
-    const label = t("templates." + data.label);
+    const label = t("controls." + data.label);
 
     const theme = useTheme();
 
@@ -31,7 +31,6 @@ export function ControlText({ propertyKey, data, handleUpdateProperty }: IContro
             <Grid item xs>
                 <TextField
                     name={propertyKey}
-                    id={propertyKey}
                     type="text"
                     color='info'
                     fullWidth

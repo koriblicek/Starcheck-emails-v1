@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IBlock, IColorType, IContainer, IPropertyBase, ISizeType, ITemplate } from '../../types';
+import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType } from '../../types';
 import * as uuid from 'uuid';
 
 interface IState {
@@ -16,6 +16,73 @@ const initialState: IState = {
     saveIsRequired: false
 } as IState;
 
+function regenerateIDsTemplate(template: ITemplate, templateIDs: boolean = true, containersIds: boolean = true, columnsIds: boolean = true, blocksIds: boolean = true) {
+    if (templateIDs) {
+        template.id = uuid.v4();
+    }
+    template.containers.forEach((container) => {
+        regenerateIDsContainer(container, containersIds, columnsIds, blocksIds);
+    });
+
+}
+function regenerateIDsContainer(container: IContainer, containersIds: boolean = true, columnsIds: boolean = true, blocksIds: boolean = true) {
+    if (containersIds) {
+        container.id = uuid.v4();
+    }
+    container.columns.forEach((column) => {
+        regenerateIDsColumn(column, columnsIds, blocksIds);
+    });
+}
+function regenerateIDsColumn(column: IColumn, columnsIds: boolean = true, blocksIds: boolean = true) {
+    if (columnsIds) {
+        column.id = uuid.v4();
+    }
+    column.blocks.forEach((block) => {
+        regenerateIDsBlock(block, blocksIds);
+    });
+}
+function regenerateIDsBlock(block: IBlock, blocksIds: boolean = true) {
+    if (blocksIds) {
+        block.id = uuid.v4();
+    }
+}
+
+function updateProperty(object: Object, propertyKey: string, value: string) {
+    const propertyIndex = Object.keys(object).findIndex(key => key === propertyKey);
+    //if property exists - update value
+    if (propertyIndex > 0) {
+        switch ((Object.values(object)[propertyIndex] as IPropertyBase).type) {
+            case "color":
+                console.log("color");
+                (Object.values(object)[propertyIndex] as IColorType).value = value;
+                break;
+            case "size":
+                (Object.values(object)[propertyIndex] as ISizeType).value = Number(value);
+                break;
+            case "text":
+                (Object.values(object)[propertyIndex] as ITextType).value = value;
+                break;
+            case "numberArray":
+                console.log(value);
+                (Object.values(object)[propertyIndex] as INumberArrayType).value = value.split("|").map(item => Number(item));
+                break;
+        }
+    }
+}
+
+function updateTemplate(template: ITemplate) {
+    if (template) {
+        //set width of the contrainers
+        const w = template.contentWidthPixels.value;
+        template.containers.forEach(container => {
+            container.calculatedWidthPixels = w;
+            //set width of the columns
+            container.columns.forEach((column, index) => {
+                column.calculatedWidthPixels = container.calculatedWidthPixels * container.columnsWidthsPercents.value[index] / 100;
+            });
+        });
+    }
+}
 export const emailsCurrentEmailSlice = createSlice({
     name: 'emailsCurrentEmail',
     initialState,
@@ -25,17 +92,19 @@ export const emailsCurrentEmailSlice = createSlice({
                 const template = JSON.parse(JSON.stringify(action.payload.template)) as ITemplate;
                 if (action.payload.updateIds) {
                     //re-generate id for template
-                    template.id = uuid.v4();
+                    regenerateIDsTemplate(template);
                 }
+
+                //TODO update exports
+                updateTemplate(template);
                 state.template = template;
-                //update text export
-                // updateExports(state.template.baseModule, state.template.baseModule);
+
             } else {
                 state.template = null;
                 //throw new Error("debuilderSaveSlice (setTemplate): NO email template provided!");
             }
-            state.selectedContainer = null;
-            state.selectedBlock = null;;
+            //clear selection
+            emailsCurrentEmailSlice.caseReducers.clearSelection(state);
         },
         saveTemplate: (state) => {
             if (state.template) {
@@ -46,22 +115,72 @@ export const emailsCurrentEmailSlice = createSlice({
         cancelSave: (state) => {
             state.saveIsRequired = false;
         },
-        updateModuleProperty: (state, action: PayloadAction<{ propertyIndex: number; value: string; }>) => {
+        updateTemplateProperty: (state, action: PayloadAction<{ propertyKey: string; value: string; }>) => {
             if (state.template) {
                 //if module exists - update value
-                switch ((Object.values(state.template)[action.payload.propertyIndex] as IPropertyBase).type) {
-                    case "color":
-                        (Object.values(state.template)[action.payload.propertyIndex] as IColorType).value = action.payload.value;
-                        break;
-                    case "size":
-                        (Object.values(state.template)[action.payload.propertyIndex] as ISizeType).value = Number(action.payload.value);
-                        break;
-                }
+                updateProperty(state.template, action.payload.propertyKey, action.payload.value);
+                updateTemplate(state.template);
             }
         },
         clearSelection: (state) => {
             state.selectedContainer = null;
             state.selectedBlock = null;
+        },
+        addContainer: (state, action: PayloadAction<{ container: IContainer; }>) => {
+            if (state.template) {
+                const container = JSON.parse(JSON.stringify(action.payload.container)) as IContainer;
+                regenerateIDsContainer(container, true, true);
+                container.id = uuid.v4();
+                state.template.containers.push(container);
+                updateTemplate(state.template);
+            }
+        },
+        duplicateContainer: (state, action: PayloadAction<{ containerId: string; }>) => {
+            if (state.template) {
+                const container = state.template.containers.find(container => container.id === action.payload.containerId);
+                const index = state.template.containers.findIndex(container => container.id === action.payload.containerId);
+                if (container) {
+                    const newContainer = JSON.parse(JSON.stringify(container)) as IContainer;
+                    regenerateIDsContainer(newContainer);
+                    state.template.containers.splice(index + 1, 0, ...[newContainer]);
+                    updateTemplate(state.template);
+                }
+            }
+        },
+        removeContainer: (state, action: PayloadAction<{ containerId: string; }>) => {
+            if (state.template) {
+                state.template.containers = state.template.containers.filter(container => container.id !== action.payload.containerId);
+                updateTemplate(state.template);
+                //clear selection
+                emailsCurrentEmailSlice.caseReducers.clearSelection(state);
+            }
+        },
+        selectContainer: (state, action: PayloadAction<{ container: IContainer; }>) => {
+            //clear selection
+            emailsCurrentEmailSlice.caseReducers.clearSelection(state);
+            //set selected container
+            state.selectedContainer = action.payload.container;
+        },
+        updateContainerProperty: (state, action: PayloadAction<{ containerId: string, propertyKey: string; value: string; }>) => {
+            if (state.template) {
+                const container = state.template.containers.find(container => container.id === action.payload.containerId);
+                if (container) {
+                    updateProperty(container, action.payload.propertyKey, action.payload.value);
+                }
+                updateTemplate(state.template);
+            }
+        },
+        updateColumnProperty: (state, action: PayloadAction<{ columnId: string, propertyKey: string; value: string; }>) => {
+            if (state.template) {
+                state.template.containers.forEach(container => {
+                    const column = container.columns.find(column => column.id === action.payload.columnId);
+                    if (column) {
+                        console.log(column.id);
+                        updateProperty(column, action.payload.propertyKey, action.payload.value);
+                    }
+                });
+                updateTemplate(state.template);
+            }
         },
     }
 });

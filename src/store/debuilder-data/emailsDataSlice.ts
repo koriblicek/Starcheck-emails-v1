@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { emptyContainer, emptyTemplate } from '../../data';
+import { baseColumn, baseContainer, emptyTemplate } from '../../data';
 import { IContainer, ITemplate } from '../../types';
 import * as uuid from 'uuid';
 import logo_container_1 from '../../assets/images/container_1.png';
@@ -31,15 +31,27 @@ export const emailsDataSlice = createSlice({
             state.builtinTemplates = [template];
         },
         initBuiltinContainers: (state) => {
-            const container_1 = JSON.parse(JSON.stringify(emptyContainer)) as IContainer;
-            container_1.id = uuid.v4();
+            const container_1 = JSON.parse(JSON.stringify(baseContainer)) as IContainer;
             container_1.logo = logo_container_1;
-            const container_1_1 = JSON.parse(JSON.stringify(emptyContainer)) as IContainer;
-            container_1_1.id = uuid.v4();
+            container_1.columns.push(baseColumn);
+            container_1.columnsWidthsPercents.value.push(100);
+            container_1.columnsWidthsPercents.defaultValue.push(100);
+
+            const container_1_1 = JSON.parse(JSON.stringify(baseContainer)) as IContainer;
             container_1_1.logo = logo_container_1_1;
-            const container_1_1_1 = JSON.parse(JSON.stringify(emptyContainer)) as IContainer;
-            container_1_1_1.id = uuid.v4();
+            for (let i = 0; i < 2; i++) {
+                container_1_1.columns.push(baseColumn);
+                container_1_1.columnsWidthsPercents.value.push((100 / 2));
+                container_1_1.columnsWidthsPercents.defaultValue.push(100 / 2);
+            }
+
+            const container_1_1_1 = JSON.parse(JSON.stringify(baseContainer)) as IContainer;
             container_1_1_1.logo = logo_container_1_1_1;
+            for (let i = 0; i < 3; i++) {
+                container_1_1_1.columns.push(baseColumn);
+                container_1_1_1.columnsWidthsPercents.value.push(100 / 3);
+                container_1_1_1.columnsWidthsPercents.defaultValue.push(100 / 3);
+            }
             state.builtinContainers = [container_1, container_1_1, container_1_1_1];
         },
     }
