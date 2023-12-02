@@ -13,6 +13,7 @@ interface IControlColorProps {
 }
 
 export function ControlColor({ propertyKey, data, handleUpdateProperty }: IControlColorProps) {
+
     const [value, setValue] = useState<string>(data.value);
 
     const { t } = useTranslation();

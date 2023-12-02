@@ -1,11 +1,11 @@
 import { Box, Grid, IconButton, Paper } from "@mui/material";
-import { useAppSelector } from "../../../../../store/hooks";
+import { useAppSelector } from "../../../../store/hooks";
 import { useEffect, useState } from "react";
-import { IContainer } from "../../../../../types";
+import { IContainer } from "../../../../types";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import { useDispatch } from "react-redux";
-import { emailsCurrentEmailActions } from "../../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { useTranslation } from "react-i18next";
 
 interface IContainerOverlayProps {
@@ -42,7 +42,7 @@ export function ContainerOverlay({ isOver, container }: IContainerOverlayProps) 
                 border: !selected ? '2px #0000ff80 dotted' : '2px #0000ff80 solid',
                 visibility: (isOver || selected) ? "visible" : "hidden",
                 pointerEvents: 'none',
-                minWidth: container.calculatedWidthPixels + "px"
+                minWidth: container.calculatedWidthPixels-4 + "px"
             }}
         >
             {selected &&

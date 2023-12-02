@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { baseColumn, baseContainer, emptyTemplate } from '../../data';
-import { IContainer, ITemplate } from '../../types';
+import { baseColumn, baseContainer, blockImage, emptyTemplate } from '../../data';
+import { IBlock, IContainer, ITemplate } from '../../types';
 import * as uuid from 'uuid';
 import logo_container_1 from '../../assets/images/container_1.png';
 import logo_container_1_1 from '../../assets/images/container_1-1.png';
@@ -10,12 +10,14 @@ interface IState {
     builtinTemplates: ITemplate[];
     customTemplates: ITemplate[];
     builtinContainers: IContainer[];
+    builtinBlocks: IBlock[];
 }
 
 const initialState: IState = {
     builtinTemplates: [],
     customTemplates: [],
-    builtinContainers: []
+    builtinContainers: [],
+    builtinBlocks: []
 } as IState;
 
 export const emailsDataSlice = createSlice({
@@ -54,6 +56,9 @@ export const emailsDataSlice = createSlice({
             }
             state.builtinContainers = [container_1, container_1_1, container_1_1_1];
         },
+        initBuiltinBlocks: (state) => {
+            state.builtinBlocks = [blockImage];
+        }
     }
 });
 

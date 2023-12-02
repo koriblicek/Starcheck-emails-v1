@@ -1,4 +1,4 @@
-import { IColumn, IContainer, ITemplate } from '../types';
+import { IBlockImage, IColumn, IContainer, ITemplate } from '../types';
 
 //MAIN email template
 export const emptyTemplate: ITemplate = {
@@ -115,8 +115,6 @@ export const baseContainer: IContainer = {
         required: true,
         label: "padding_bottom"
     },
-    htmlText: "",
-    exportedText: "",
     columnsWidthsPercents: {
         type: 'numberArray',
         value: [],
@@ -128,6 +126,8 @@ export const baseContainer: IContainer = {
         required: true,
         label: 'columns_width'
     },
+    htmlText: "",
+    exportedText: "",
     columns: []
 };
 
@@ -180,7 +180,7 @@ export const baseColumn: IColumn = {
         value: 'solid',
         defaultValue: 'solid',
         options: [{ key: "solid", label: "border_type_solid" }, { key: "dashed", label: "border_type_dashed" }, { key: "dotted", label: "border_type_dotted" }],
-        type: 'text',
+        type: 'selection',
         active: true,
         required: true,
         label: 'border_style'
@@ -188,4 +188,63 @@ export const baseColumn: IColumn = {
     htmlText: '',
     exportedText: '',
     blocks: []
+};
+
+//BLOCKS
+export const blockImage: IBlockImage = {
+    calculatedWidthPixels: 0,
+    id: '',
+    logo: '',
+    type: 'image',
+    imageSrc: {
+        type: "text",
+        value: "",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "image_source_url"
+    },
+    widthPercent: {
+        type: "size",
+        value: 100,
+        defaultValue: 100,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "%",
+        active: true,
+        required: true,
+        label: "image_width"
+    },
+    align: {
+        value: 'center',
+        defaultValue: 'center',
+        options: [{ key: "left", label: "align_type_left" }, { key: "center", label: "align_type_center" }, { key: "right", label: "align_type_right" }],
+        type: 'selection',
+        active: true,
+        required: true,
+        label: 'align_type'
+    },
+    alternateText: {
+        type: "text",
+        value: "",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "image_alternate_text"
+    },
+    padding: {
+        type: "size",
+        value: 10,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding"
+    },
+    htmlText: '',
+    exportedText: ''
 };

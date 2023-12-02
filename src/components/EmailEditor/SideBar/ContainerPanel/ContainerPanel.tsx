@@ -19,8 +19,9 @@ interface IContainerPanelProps {
 export function ContainerPanel({ container }: IContainerPanelProps) {
 
     const dispatch = useDispatch();
-
+    
     const [openGeneral, setOpenGeneral] = useState(true);
+
     const [openColumns, setOpenColumns] = useState(true);
 
     const { t } = useTranslation();
@@ -66,7 +67,7 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                 </ListItemButton>
                 <Collapse in={openColumns} timeout="auto" unmountOnExit>
                     <List component="div">
-                        <ColumnsListItem container={container} />
+                        <ColumnsListItem container={container}/>
                     </List>
                 </Collapse>
             </List>

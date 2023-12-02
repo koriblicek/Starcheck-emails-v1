@@ -4,7 +4,7 @@ import { IContainer } from "../../../../types";
 import { useDispatch } from "react-redux";
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { DesktopItemColumn } from "../DesktopItemColumn";
-import { ContainerOverlay } from "./ContainerOverlay";
+import { ContainerOverlay } from "../ContainerOverlay";
 
 interface IDesktopItemContainerProps {
     container: IContainer;

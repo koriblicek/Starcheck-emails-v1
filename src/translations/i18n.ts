@@ -57,6 +57,14 @@ i18next
                         border_type_dashed: 'Dashed',
                         border_type_dotted: 'Dotted',
                         columns_width: 'Columns width',
+                        image_source_url: 'Image source URL',
+                        image_width: 'Image width',
+                        align_type: 'Alignment',
+                        align_type_left: 'Left',
+                        align_type_center: 'Center',
+                        align_type_right:'Right',
+                        image_alternate_text:'Image alternate text',
+                        
                     },
                     templates: {
                         email_template_settings: 'Email template settings',
@@ -70,6 +78,11 @@ i18next
                         columns: 'Columns',
                         column: 'Column',
                     },
+                    blocks: {
+                        block_settings:'Block element settings',
+                        general: 'General',
+                    },
+
                 }
             },
             sk: {
@@ -124,6 +137,13 @@ i18next
                         border_type_dotted: 'Bodky',
                         content_width: 'Šírka obsahu',
                         columns_width: 'Šírka stĺpcov',
+                        image_source_url: 'URL cesta k obrázku',
+                        image_width: 'Šírka obrázka',
+                        align_type: 'Zarovnanie',
+                        align_type_left: 'Do ľava',
+                        align_type_center: 'Na stred',
+                        align_type_right:'Do prava',
+                        image_alternate_text:'Alternatívny text',
                     },
                     templates: {
                         email_template_settings: 'Nastavenia šablóny správy',
@@ -136,6 +156,10 @@ i18next
                         general: 'Všeobecné',
                         columns: 'Stĺpce',
                         column: 'Stĺpec',
+                    },
+                    blocks: {
+                        block_settings:'Nastavenia blokového prvku',
+                        general: 'Všeobecné',
                     },
                 }
             }

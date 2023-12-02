@@ -68,8 +68,18 @@ export interface IColumn extends ISharedProps, ISharedHtml {
 }
 //#endregion
 
+export interface IBlockImage extends IBlock {
+    imageSrc: ITextType;
+    widthPercent: ISizeType;
+    align: ISelectionType;
+    alternateText: ITextType;
+}
+
 //#region BLOCK
 export interface IBlock extends ISharedProps, ISharedHtml {
+    logo: string;
+    type: TBlockIdentifiers;
+    padding: ISizeType;
 }
 //#endregion
 
@@ -83,6 +93,8 @@ export interface ISharedHtml {
     exportedText: string;
 }
 //#endregion
+
+
 export interface INumberArrayType extends IPropertyBase {
     value: number[];
     defaultValue: number[];
@@ -126,6 +138,8 @@ export interface IPropertyBase {
     required: boolean; //is property required
     label: string; //property label
 };
+
+export type TBlockIdentifiers = "image";
 
 export type TPropertyIdentifiers = "color" | "size" | "text" | "selection" | "numberArray";
 export type TPropertyTypes = IColorType | ISizeType | ITextType | INumberArrayType | ISelectionType;

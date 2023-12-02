@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType } from '../../types';
+import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType } from '../../types';
 import * as uuid from 'uuid';
 
 interface IState {
@@ -53,7 +53,6 @@ function updateProperty(object: Object, propertyKey: string, value: string) {
     if (propertyIndex > 0) {
         switch ((Object.values(object)[propertyIndex] as IPropertyBase).type) {
             case "color":
-                console.log("color");
                 (Object.values(object)[propertyIndex] as IColorType).value = value;
                 break;
             case "size":
@@ -63,8 +62,10 @@ function updateProperty(object: Object, propertyKey: string, value: string) {
                 (Object.values(object)[propertyIndex] as ITextType).value = value;
                 break;
             case "numberArray":
-                console.log(value);
                 (Object.values(object)[propertyIndex] as INumberArrayType).value = value.split("|").map(item => Number(item));
+                break;
+            case 'selection':
+                (Object.values(object)[propertyIndex] as ISelectionType).value = value;
                 break;
         }
     }
@@ -79,6 +80,9 @@ function updateTemplate(template: ITemplate) {
             //set width of the columns
             container.columns.forEach((column, index) => {
                 column.calculatedWidthPixels = container.calculatedWidthPixels * container.columnsWidthsPercents.value[index] / 100;
+                column.blocks.forEach(block => {
+                    block.calculatedWidthPixels = column.calculatedWidthPixels - 2 * column.padding.value;
+                });
             });
         });
     }
@@ -158,8 +162,40 @@ export const emailsCurrentEmailSlice = createSlice({
         selectContainer: (state, action: PayloadAction<{ container: IContainer; }>) => {
             //clear selection
             emailsCurrentEmailSlice.caseReducers.clearSelection(state);
-            //set selected container
-            state.selectedContainer = action.payload.container;
+            if (state.template) {
+                const selContainer = state.template.containers.find(container => container.id === action.payload.container.id);
+                if (selContainer) {
+                    //set selected container
+                    state.selectedContainer = selContainer;
+                }
+            }
+        },
+        addBlock: (state, action: PayloadAction<{ columnId: string; block: string; }>) => {
+            if (state.template) {
+                state.template.containers.forEach((container, index) => {
+                    const column = container.columns.find(column => column.id === action.payload.columnId);
+                    if (column) {
+                        const newBlock = JSON.parse(action.payload.block) as IBlock;
+                        regenerateIDsBlock(newBlock);
+                        column.blocks = [...column.blocks, newBlock];
+                    }
+                });
+                updateTemplate(state.template);
+            }
+        },
+        selectBlock: (state, action: PayloadAction<{ block: IBlock; }>) => {
+            //clear selection
+            emailsCurrentEmailSlice.caseReducers.clearSelection(state);
+            if (state.template) {
+                state.template.containers.forEach((container, index) => {
+                    container.columns.forEach(column => {
+                        const block = column.blocks.find(block => block.id === action.payload.block.id);
+                        if (block) {
+                            state.selectedBlock = block;
+                        }
+                    });
+                });
+            }
         },
         updateContainerProperty: (state, action: PayloadAction<{ containerId: string, propertyKey: string; value: string; }>) => {
             if (state.template) {
@@ -172,10 +208,9 @@ export const emailsCurrentEmailSlice = createSlice({
         },
         updateColumnProperty: (state, action: PayloadAction<{ columnId: string, propertyKey: string; value: string; }>) => {
             if (state.template) {
-                state.template.containers.forEach(container => {
+                state.template.containers.forEach((container, index) => {
                     const column = container.columns.find(column => column.id === action.payload.columnId);
                     if (column) {
-                        console.log(column.id);
                         updateProperty(column, action.payload.propertyKey, action.payload.value);
                     }
                 });

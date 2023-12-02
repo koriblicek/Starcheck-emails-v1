@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import { useAppSelector } from "../../store/hooks";
 import { DesktopView } from "./DesktopView/DesktopView";
 import { SideBar } from "./SideBar";
+import { PanelSelection } from "./SideBar/PanelSelection";
 
 export function EmailEditor() {
 
@@ -20,6 +21,7 @@ export function EmailEditor() {
                 </Box>
             </Grid>
             <Grid item sx={{ width: "430px", overflow: 'auto', minHeight: 'calc(100vh - 115px)', maxHeight: 'calc(100vh - 115px)' }}>
+                <PanelSelection />
                 <SideBar />
             </Grid>
         </Grid>

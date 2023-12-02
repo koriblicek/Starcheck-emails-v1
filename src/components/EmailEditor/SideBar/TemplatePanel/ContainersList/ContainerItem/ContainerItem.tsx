@@ -1,9 +1,9 @@
-import { Box, Card, CardActions, Grid } from "@mui/material";
+import {  Card, CardActions, Grid } from "@mui/material";
 import { IContainer } from "../../../../../../types";
-import DragIndicatorOutlinedIcon from '@mui/icons-material/DragIndicatorOutlined';
 import { useDispatch } from "react-redux";
 import { emailsAppActions } from "../../../../../../store/debuilder-data/emailsAppSlice";
 import { emailsCurrentEmailActions } from "../../../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import DragIndicatorOutlinedIcon from '@mui/icons-material/DragIndicatorOutlined';
 
 interface IContainerItemProps {
     container: IContainer;
@@ -37,8 +37,8 @@ export function ContainerItem({ container }: IContainerItemProps) {
             onDragEnd={(e) => handleOnDragEnd(e)}
             onClick={(e) => handleOnClick(e)}
         >
-            <CardActions>
-                <Grid container alignItems='center' justifyContent='center' justifyItems='center'>
+            <CardActions sx={{ p: '5px' }}>
+                <Grid container alignItems='end'>
                     <Grid item>
                         <DragIndicatorOutlinedIcon sx={{ mr: 1 }} />
                     </Grid>
