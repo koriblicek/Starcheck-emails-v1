@@ -1,0 +1,1 @@
+export { ControlImage } from './ControlImage';

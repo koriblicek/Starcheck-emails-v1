@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { useTranslation } from "react-i18next";
 import { ControlSize } from "../shared/ControlSize";
-import { ControlSlider } from "../shared/ControlSlider";
 import { ColumnsListItem } from "./ColumnsListItem";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -19,7 +18,7 @@ interface IContainerPanelProps {
 export function ContainerPanel({ container }: IContainerPanelProps) {
 
     const dispatch = useDispatch();
-    
+
     const [openGeneral, setOpenGeneral] = useState(true);
 
     const [openColumns, setOpenColumns] = useState(true);
@@ -56,8 +55,8 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                         <Divider light sx={{ m: 1 }} />
                         <ControlSize propertyKey="paddingBottomPixels" data={container.paddingBottomPixels} handleUpdateProperty={updateKey} />
                         <Divider light sx={{ m: 1 }} />
-                        TODO BACKGROUND IMAGE
-                        <ControlSlider propertyKey="columnsWidthsPercents" data={container.columnsWidthsPercents} handleUpdateProperty={updateKey} />
+                        TODO PERCENTAGE SIZE
+                        {/* <ControlSlider propertyKey="columnsWidthsPercents" data={container.columnsWidthsPercents} handleUpdateProperty={updateKey} /> */}
                     </List>
                 </Collapse>
                 <ListItemButton onClick={() => setOpenColumns((state) => !state)} sx={{ pt: 0, pb: 0, backgroundColor: "lightgray" }}>
@@ -66,8 +65,8 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                     {openColumns ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={openColumns} timeout="auto" unmountOnExit>
-                    <List component="div">
-                        <ColumnsListItem container={container}/>
+                    <List component="div" >
+                        <ColumnsListItem columns={container.columns} />
                     </List>
                 </Collapse>
             </List>

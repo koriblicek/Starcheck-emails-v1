@@ -1,13 +1,13 @@
 import { AppBar, Tab, Tabs, useTheme } from "@mui/material";
-import { IContainer } from "../../../../../types";
+import { IColumn } from "../../../../../types";
 import { useTranslation } from "react-i18next";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { ColumnPanel } from "./ColumnPanel";
 
 interface IColumnsListItemProps {
-    container: IContainer;
+    columns: IColumn[];
 }
-export function ColumnsListItem({ container }: IColumnsListItemProps) {
+export function ColumnsListItem({ columns }: IColumnsListItemProps) {
 
     const { t } = useTranslation();
 
@@ -19,16 +19,22 @@ export function ColumnsListItem({ container }: IColumnsListItemProps) {
         setColumnId(newValue);
     };
 
+    const [columnPanel, setColumnPanel] = useState<JSX.Element | null>(null);
+
+    useEffect(() => {
+        setColumnPanel(<ColumnPanel column={columns[columnId]} key={columns[columnId].id} />);
+    }, [columnId, columns]);
+
     return (
         <Fragment>
             <AppBar position="static" sx={{ backgroundColor: theme.palette.grey[200] }}>
                 <Tabs variant="fullWidth" onChange={handleChange} value={columnId}>
-                    {container.columns.map((column, index) => {
+                    {columns.map((column, index) => {
                         return <Tab key={column.id} value={index} label={t('containers.column') + " " + (index + 1)} />;
                     })}
                 </Tabs>
             </AppBar>
-            <ColumnPanel column={container.columns[columnId]} />
+            {columnPanel}
         </Fragment>
 
     );

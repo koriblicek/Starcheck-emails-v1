@@ -3,13 +3,15 @@ import { Grid, IconButton, TextField, Typography, useTheme } from '@mui/material
 import { ITextType } from '../../../../../types';
 import { useTranslation } from 'react-i18next';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-interface IControlTextProps {
+import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
+
+interface IControlImageProps {
     propertyKey: string;
     data: ITextType;
     handleUpdateProperty: (propertyKey: string, value: string) => void;
 }
 
-export function ControlText({ propertyKey, data, handleUpdateProperty }: IControlTextProps) {
+export function ControlImage({ propertyKey, data, handleUpdateProperty }: IControlImageProps) {
     const [value, setValue] = useState<string>(data.value);
 
     const { t } = useTranslation();
@@ -40,7 +42,12 @@ export function ControlText({ propertyKey, data, handleUpdateProperty }: IContro
                 />
             </Grid>
             <Grid item>
-                <IconButton size="small" sx={{ color: theme.palette.error.light }} onClick={() => handleChange("")}  title={t('button.delete_value')}>
+                <IconButton size="small" sx={{ color: theme.palette.primary.main }} onClick={() => console.log("TODO")} title={t('button.browse_images')} >
+                    <MoreHorizOutlinedIcon />
+                </IconButton>
+            </Grid>
+            <Grid item>
+                <IconButton size="small" sx={{ color: theme.palette.error.light }} onClick={() => handleChange("")} title={t('button.delete_value')}>
                     <DeleteForeverOutlinedIcon />
                 </IconButton>
             </Grid>

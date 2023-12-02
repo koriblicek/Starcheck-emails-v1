@@ -48,7 +48,6 @@ export interface IContainer extends ISharedProps, ISharedHtml {
     logo: string;
     backgroundColor: IColorType;
     contentBackgroundColor: IColorType;
-    backgroundImage: string | null;
     paddingTopPixels: ISizeType;
     paddingBottomPixels: ISizeType;
     columnsWidthsPercents: INumberArrayType;
@@ -69,9 +68,9 @@ export interface IColumn extends ISharedProps, ISharedHtml {
 //#endregion
 
 export interface IBlockImage extends IBlock {
-    imageSrc: ITextType;
+    imageSrc: IImageType;
     widthPercent: ISizeType;
-    align: ISelectionType;
+    align: IHAlign;
     alternateText: ITextType;
 }
 
@@ -94,6 +93,15 @@ export interface ISharedHtml {
 }
 //#endregion
 
+export interface IHAlign extends IPropertyBase {
+    value: THAlign;
+    defaultValue: THAlign;
+}
+
+export interface IImageType extends IPropertyBase {
+    value: string;
+    defaultValue: string;
+};
 
 export interface INumberArrayType extends IPropertyBase {
     value: number[];
@@ -141,9 +149,9 @@ export interface IPropertyBase {
 
 export type TBlockIdentifiers = "image";
 
-export type TPropertyIdentifiers = "color" | "size" | "text" | "selection" | "numberArray";
-export type TPropertyTypes = IColorType | ISizeType | ITextType | INumberArrayType | ISelectionType;
-
+export type TPropertyIdentifiers = "color" | "size" | "text" | "selection" | "numberArray" | "image" | "hAlign";
+export type TPropertyTypes = IColorType | ISizeType | ITextType | INumberArrayType | ISelectionType | IImageType | IHAlign;
+export type THAlign = "left" | "center" | "right";
 export interface IProperty {
     [name: string]: TPropertyTypes;
 }

@@ -1,13 +1,16 @@
 import { useDispatch } from "react-redux";
-import { IBlock } from "../../../../types";
-import { useState } from "react";
+import { IBlock, IBlockImage } from "../../../../types";
+import { useEffect, useState } from "react";
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
-import { Box, Collapse, Divider, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Typography } from "@mui/material";
+import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { ControlSize } from "../shared/ControlSize";
+import { useAppSelector } from "../../../../store/hooks";
+import { ImageBlock } from "./ImageBlock";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import { ControlSize } from "../shared/ControlSize";
+import DatasetOutlinedIcon from '@mui/icons-material/DatasetOutlined';
 
 interface IBlockPanelProps {
     block: IBlock;
@@ -15,13 +18,27 @@ interface IBlockPanelProps {
 export function BlockPanel({ block }: IBlockPanelProps) {
     const dispatch = useDispatch();
 
+    const { selectedBlock } = useAppSelector(state => state.emailsCurrentEmail);
+
     const [openGeneral, setOpenGeneral] = useState(true);
+    const [openBlockProperties, setOpenBlockProperties] = useState(true);
+
+    const [blockPanel, setBlockPanel] = useState<JSX.Element | null>(null);
 
     const { t } = useTranslation();
 
     function updateKey(propertyKey: string, value: string) {
-        //dispatch(emailsCurrentEmailActions.updateBlockProperty({ blockId: block.id, propertyKey: propertyKey, value }));
+        dispatch(emailsCurrentEmailActions.updateBlockProperty({ blockId: block.id, propertyKey: propertyKey, value }));
     }
+
+    useEffect(() => {
+        if (selectedBlock)
+            switch (selectedBlock.type) {
+                case "image":
+                    setBlockPanel(<ImageBlock block={selectedBlock as IBlockImage} key={block.id} />);
+                    break;
+            }
+    }, [selectedBlock, block.id]);
 
     return (
         <Box sx={{ mt: 2 }}>
@@ -40,20 +57,20 @@ export function BlockPanel({ block }: IBlockPanelProps) {
                     {openGeneral ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={openGeneral} timeout="auto" unmountOnExit>
-                    <List component="div" sx={{ padding: 1 }}>
+                    <List component="div" sx={{ padding: 1 }} key={block.id}>
                         <ControlSize propertyKey="padding" data={block.padding} handleUpdateProperty={updateKey} />
                     </List>
                 </Collapse>
-                {/* <ListItemButton onClick={() => setOpenColumns((state) => !state)} sx={{ pt: 0, pb: 0, backgroundColor: "lightgray" }}>
-                    <ListItemIcon><ViewWeekOutlinedIcon /></ListItemIcon>
-                    <ListItemText primary={t('containers.columns').toUpperCase()} />
-                    {openColumns ? <ExpandLess /> : <ExpandMore />}
+                <ListItemButton onClick={() => setOpenBlockProperties((state) => !state)} sx={{ pt: 0, pb: 0, backgroundColor: "lightgray" }}>
+                    <ListItemIcon><DatasetOutlinedIcon /></ListItemIcon>
+                    <ListItemText primary={t('blocks.element').toUpperCase()} />
+                    {openBlockProperties ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
-                <Collapse in={openColumns} timeout="auto" unmountOnExit>
-                    <List component="div">
-                        <ColumnsListItem container={container} />
+                <Collapse in={openBlockProperties} timeout="auto" unmountOnExit>
+                    <List component="div" sx={{ padding: 1 }}>
+                        {blockPanel}
                     </List>
-                </Collapse> */}
+                </Collapse>
             </List>
         </Box>
     );

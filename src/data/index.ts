@@ -90,7 +90,6 @@ export const baseContainer: IContainer = {
         required: true,
         label: "content_background_color"
     },
-    backgroundImage: null,
     paddingTopPixels: {
         type: "size",
         value: 10,
@@ -197,7 +196,7 @@ export const blockImage: IBlockImage = {
     logo: '',
     type: 'image',
     imageSrc: {
-        type: "text",
+        type: "image",
         value: "",
         defaultValue: "",
         active: true,
@@ -219,8 +218,7 @@ export const blockImage: IBlockImage = {
     align: {
         value: 'center',
         defaultValue: 'center',
-        options: [{ key: "left", label: "align_type_left" }, { key: "center", label: "align_type_center" }, { key: "right", label: "align_type_right" }],
-        type: 'selection',
+        type: 'hAlign',
         active: true,
         required: true,
         label: 'align_type'

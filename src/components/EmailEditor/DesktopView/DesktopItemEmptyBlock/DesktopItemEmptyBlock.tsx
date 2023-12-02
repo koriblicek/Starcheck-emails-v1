@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { IColumn } from "../../../../types";
 import { blockImage } from "../../../../data";
+import { useTranslation } from "react-i18next";
 
 interface IDesktopItemEmptyBlockProps {
     column: IColumn;
@@ -10,7 +11,8 @@ interface IDesktopItemEmptyBlockProps {
 export function DesktopItemEmptyBlock({ column }: IDesktopItemEmptyBlockProps) {
 
     const dispatch = useDispatch();
-    
+
+    const { t } = useTranslation();
     return (
         <Grid container justifyContent='center' alignContent='center'>
             <Grid item>
@@ -20,7 +22,7 @@ export function DesktopItemEmptyBlock({ column }: IDesktopItemEmptyBlockProps) {
                         //TODO change from image to menu
                         dispatch(emailsCurrentEmailActions.addBlock({ columnId: column.id, block: JSON.stringify(blockImage) }));
                     }}
-                >Add Block</Button>
+                >{t('button.add_block')}</Button>
             </Grid>
         </Grid>
     );

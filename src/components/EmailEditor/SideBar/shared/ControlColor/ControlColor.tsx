@@ -38,11 +38,12 @@ export function ControlColor({ propertyKey, data, handleUpdateProperty }: IContr
                     value={value}
                     size="small"
                     color='info'
-                    onChange={debouncedOnChange} fullWidth
+                    onChange={debouncedOnChange}
+                    fullWidth
                 />
             </Grid>
             <Grid item>
-                <IconButton size="small" color="primary" onClick={() => handleChange(data.defaultValue)}>
+                <IconButton size="small" color="primary" onClick={() => handleChange(data.defaultValue)} title={t('button.default_value')}>
                     <RefreshOutlinedIcon />
                 </IconButton>
             </Grid>

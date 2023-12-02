@@ -18,6 +18,16 @@ i18next
                         mobile: 'Mobile',
                         delete: 'Delete',
                         duplicate: 'Duplicate',
+                        default_value: 'Default value',
+                        delete_value: 'Delete value',
+                        browse_images: 'Browse image',
+                        align_left: 'Align left',
+                        align_center: 'Align center',
+                        align_right: 'Align right',
+                        email: 'Email',
+                        block: 'Block',
+                        container: 'Container',
+                        add_block: 'Add block',
                     },
                     label: {
                         selectLanguage: 'Select Language:',
@@ -57,20 +67,21 @@ i18next
                         border_type_dashed: 'Dashed',
                         border_type_dotted: 'Dotted',
                         columns_width: 'Columns width',
-                        image_source_url: 'Image source URL',
+                        background_image_source_url: 'Background image URL',
+                        image_source_url: 'Image URL',
                         image_width: 'Image width',
                         align_type: 'Alignment',
                         align_type_left: 'Left',
                         align_type_center: 'Center',
-                        align_type_right:'Right',
-                        image_alternate_text:'Image alternate text',
-                        
+                        align_type_right: 'Right',
+                        image_alternate_text: 'Image alternate text',
+
                     },
                     templates: {
                         email_template_settings: 'Email template settings',
                         general: 'General',
                         containers: "Layout containers",
-                        template_header: 'Email header',
+                        template_header: 'Header',
                     },
                     containers: {
                         container_settings: 'Container settings',
@@ -79,10 +90,10 @@ i18next
                         column: 'Column',
                     },
                     blocks: {
-                        block_settings:'Block element settings',
+                        block_settings: 'Block element settings',
                         general: 'General',
+                        element: 'Element',
                     },
-
                 }
             },
             sk: {
@@ -97,6 +108,17 @@ i18next
                         mobile: 'Mobil',
                         delete: 'Vymazať',
                         duplicate: 'Duplikovať',
+                        default_value: 'Pôvodná hodnota',
+                        delete_value: 'Vymazať hodnotu',
+                        browse_images: 'Vyhľadaj obrázok',
+                        align_left: 'Zarovnať vľavo',
+                        align_center: 'Zarovnť na stred',
+                        align_right: 'Zarovnť do prava',
+                        email: 'Správa',
+                        block: 'Prvok',
+                        container: 'Obsah',
+                        add_block: 'Pridať prvok',
+
                     },
                     label: {
                         selectLanguage: 'Vyberte jazyk:',
@@ -137,19 +159,20 @@ i18next
                         border_type_dotted: 'Bodky',
                         content_width: 'Šírka obsahu',
                         columns_width: 'Šírka stĺpcov',
+                        background_image_source_url: 'URL cesta k pozadiu',
                         image_source_url: 'URL cesta k obrázku',
                         image_width: 'Šírka obrázka',
                         align_type: 'Zarovnanie',
                         align_type_left: 'Do ľava',
                         align_type_center: 'Na stred',
-                        align_type_right:'Do prava',
-                        image_alternate_text:'Alternatívny text',
+                        align_type_right: 'Do prava',
+                        image_alternate_text: 'Alternatívny text',
                     },
                     templates: {
                         email_template_settings: 'Nastavenia šablóny správy',
                         general: 'Všeobecné',
                         containers: "Rozloženie obsahu",
-                        template_header: 'Hlavička správy',
+                        template_header: 'Hlavička',
                     },
                     containers: {
                         container_settings: 'Nastavenia rozloženia obsahu',
@@ -158,8 +181,9 @@ i18next
                         column: 'Stĺpec',
                     },
                     blocks: {
-                        block_settings:'Nastavenia blokového prvku',
+                        block_settings: 'Nastavenia blokového prvku',
                         general: 'Všeobecné',
+                        element: 'Prvok',
                     },
                 }
             }

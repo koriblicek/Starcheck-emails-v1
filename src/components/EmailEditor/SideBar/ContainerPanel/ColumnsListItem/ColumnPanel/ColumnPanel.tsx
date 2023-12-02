@@ -13,13 +13,12 @@ export function ColumnPanel({ column}: IColumnPanelProps) {
     
     const dispatch = useDispatch();
     
-    
     function updateKey(propertyKey: string, value: string) {
         dispatch(emailsCurrentEmailActions.updateColumnProperty({ columnId: column.id, propertyKey: propertyKey, value }));
     }
     
     return (
-        <Box sx={{ p: 1 }} key={column.id}>
+        <Box sx={{ p: 1 }}>
             <ControlColor propertyKey="backgroundColor" data={column.backgroundColor} handleUpdateProperty={updateKey}/>
             <Divider light sx={{ m: 1 }} />
             <ControlSize propertyKey="padding" data={column.padding} handleUpdateProperty={updateKey} />

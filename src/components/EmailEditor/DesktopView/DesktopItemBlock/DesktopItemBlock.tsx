@@ -36,6 +36,8 @@ export function DesktopItemBlock({ block }: IDesktopItemBlockProps) {
           <tbody>
             <tr>
               <td style={{ overflowWrap: 'break-word', wordBreak: 'break-word', padding: block.padding.value + block.padding.sizeSuffix }} align="left">
+                {/* ID */}
+                {/* <Box sx={{ fontSize: '9px' }}>{block.id}</Box> */}
                 {blockElement}
               </td>
             </tr>

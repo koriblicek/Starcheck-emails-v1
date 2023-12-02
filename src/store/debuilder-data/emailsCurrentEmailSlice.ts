@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType } from '../../types';
+import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign } from '../../types';
 import * as uuid from 'uuid';
 
 interface IState {
@@ -66,6 +66,12 @@ function updateProperty(object: Object, propertyKey: string, value: string) {
                 break;
             case 'selection':
                 (Object.values(object)[propertyIndex] as ISelectionType).value = value;
+                break;
+            case 'image':
+                (Object.values(object)[propertyIndex] as IImageType).value = value;
+                break;
+            case 'hAlign':
+                (Object.values(object)[propertyIndex] as IHAlign).value = value as THAlign;
                 break;
         }
     }
@@ -183,6 +189,35 @@ export const emailsCurrentEmailSlice = createSlice({
                 updateTemplate(state.template);
             }
         },
+        duplicateBlock: (state, action: PayloadAction<{ blockId: string; }>) => {
+            if (state.template) {
+                state.template.containers.forEach(container => {
+                    container.columns.forEach(column => {
+                        const block = column.blocks.find(block => block.id === action.payload.blockId);
+                        const index = column.blocks.findIndex(block => block.id === action.payload.blockId);
+                        if (block) {
+                            const newBlock = JSON.parse(JSON.stringify(block)) as IBlock;
+                            regenerateIDsBlock(newBlock);
+                            column.blocks.splice(index + 1, 0, ...[newBlock]);
+                        }
+
+                    });
+                });
+                updateTemplate(state.template);
+            }
+        },
+        removeBlock: (state, action: PayloadAction<{ blockId: string; }>) => {
+            if (state.template) {
+                state.template.containers.forEach((container) => {
+                    container.columns.forEach(column => {
+                        column.blocks = column.blocks.filter(block => block.id !== action.payload.blockId);
+                    });
+                });
+                updateTemplate(state.template);
+                //clear selection
+                emailsCurrentEmailSlice.caseReducers.clearSelection(state);
+            }
+        },
         selectBlock: (state, action: PayloadAction<{ block: IBlock; }>) => {
             //clear selection
             emailsCurrentEmailSlice.caseReducers.clearSelection(state);
@@ -213,6 +248,19 @@ export const emailsCurrentEmailSlice = createSlice({
                     if (column) {
                         updateProperty(column, action.payload.propertyKey, action.payload.value);
                     }
+                });
+                updateTemplate(state.template);
+            }
+        },
+        updateBlockProperty: (state, action: PayloadAction<{ blockId: string, propertyKey: string; value: string; }>) => {
+            if (state.template) {
+                state.template.containers.forEach((container, index) => {
+                    container.columns.forEach(column => {
+                        const block = column.blocks.find(block => block.id === action.payload.blockId);
+                        if (block) {
+                            updateProperty(block, action.payload.propertyKey, action.payload.value);
+                        }
+                    });
                 });
                 updateTemplate(state.template);
             }

@@ -31,9 +31,11 @@ export function DesktopItemColumn({ column }: IDesktopItemColumnProps) {
             <div className={"u-col u-col-" + uid} style={{ maxWidth: '320px', minWidth: column.calculatedWidthPixels + "px", display: 'table-cell', verticalAlign: 'top' }} >
                 <div style={{ backgroundColor: column.backgroundColor.value, height: '100%', width: '100% !important', borderRadius: '0px', WebkitBorderRadius: '0px', MozBorderRadius: '0px' }}>
                     <div style={{ boxSizing: 'border-box', height: '100%', padding: column.padding.value + column.padding.sizeSuffix, border: column.borderWidthPixels.value + column.borderWidthPixels.sizeSuffix + " " + column.borderType.value + " " + column.borderColor.value, borderRadius: '0px', WebkitBorderRadius: '0px', MozBorderRadius: '0px' }}>
-                        <Box sx={{ fontSize: '9px' }}>{column.id}</Box>
-                        {column.blocks.length === 0 && emptyBlock}
+                        {/* ID */}
+                        {/* <Box sx={{ fontSize: '9px' }}>{column.id}</Box> */}
                         {blocks}
+                        {column.blocks.length === 0 && emptyBlock}
+                        {/* {emptyBlock} */}
                     </div>
                 </div>
             </div>

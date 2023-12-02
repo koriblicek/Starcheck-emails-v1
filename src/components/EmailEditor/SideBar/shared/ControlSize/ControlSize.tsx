@@ -66,7 +66,7 @@ export function ControlSize({ propertyKey, data, handleUpdateProperty }: IContro
                         ><Typography variant='body1'>+</Typography></Button>
                     </Grid>
                     <Grid item sx={{ pl: 1 }}>
-                        <IconButton size="small" color="primary" onClick={() => handleChange(data.defaultValue.toString())}>
+                        <IconButton size="small" color="primary" onClick={() => handleChange(data.defaultValue.toString())} title={t('button.default_value')}>
                             <RefreshOutlinedIcon />
                         </IconButton>
                     </Grid>

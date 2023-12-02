@@ -20,7 +20,7 @@ export function EmailEditor() {
                     }
                 </Box>
             </Grid>
-            <Grid item sx={{ width: "430px", overflow: 'auto', minHeight: 'calc(100vh - 115px)', maxHeight: 'calc(100vh - 115px)' }}>
+            <Grid item sx={{ width: "430px", overflowY: 'scroll', minHeight: 'calc(100vh - 115px)', maxHeight: 'calc(100vh - 115px)' }}>
                 <PanelSelection />
                 <SideBar />
             </Grid>

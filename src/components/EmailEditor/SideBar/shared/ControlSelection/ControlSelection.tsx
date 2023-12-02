@@ -40,7 +40,7 @@ export function ControlSelection({ propertyKey, data, handleUpdateProperty }: IC
                 </Select>
             </Grid>
             <Grid item>
-                <IconButton size="small" color="primary" onClick={() => handleChange(data.defaultValue)}>
+                <IconButton size="small" color="primary" onClick={() => handleChange(data.defaultValue)}  title={t('button.default_value')}>
                     <RefreshOutlinedIcon />
                 </IconButton>
             </Grid>

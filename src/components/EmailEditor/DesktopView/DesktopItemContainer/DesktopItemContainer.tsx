@@ -39,7 +39,8 @@ export function DesktopItemContainer({ container }: IDesktopItemContainerProps) 
                 </div>
                 {/* Overlay */}
                 <ContainerOverlay isOver={over} container={container} />
-                <Box sx={{ position: 'absolute', top: 0, left: 0, fontSize: '9px' }}>{container.id}</Box>
+                {/* ID */}
+                {/* <Box sx={{ position: 'absolute', top: 0, left: 0, fontSize: '9px' }}>{container.id}</Box> */}
             </Box>
         </Fragment >
 
