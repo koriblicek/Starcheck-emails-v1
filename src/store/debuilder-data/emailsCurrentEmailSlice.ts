@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign } from '../../types';
+import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign, ITAlign, TTAlign, IMultilineTextType } from '../../types';
 import * as uuid from 'uuid';
 
 interface IState {
@@ -61,6 +61,9 @@ function updateProperty(object: Object, propertyKey: string, value: string) {
             case "text":
                 (Object.values(object)[propertyIndex] as ITextType).value = value;
                 break;
+            case "multilineText":
+                (Object.values(object)[propertyIndex] as IMultilineTextType).value = value;
+                break;
             case "numberArray":
                 (Object.values(object)[propertyIndex] as INumberArrayType).value = value.split("|").map(item => Number(item));
                 break;
@@ -72,6 +75,9 @@ function updateProperty(object: Object, propertyKey: string, value: string) {
                 break;
             case 'hAlign':
                 (Object.values(object)[propertyIndex] as IHAlign).value = value as THAlign;
+                break;
+            case 'tAlign':
+                (Object.values(object)[propertyIndex] as ITAlign).value = value as TTAlign;
                 break;
         }
     }
@@ -140,8 +146,15 @@ export const emailsCurrentEmailSlice = createSlice({
             if (state.template) {
                 const container = JSON.parse(JSON.stringify(action.payload.container)) as IContainer;
                 regenerateIDsContainer(container, true, true);
-                container.id = uuid.v4();
-                state.template.containers.push(container);
+                state.template.containers = [...state.template.containers, container];
+                updateTemplate(state.template);
+            }
+        },
+        addContainerToIndex: (state, action: PayloadAction<{ container: IContainer; index: number; }>) => {
+            if (state.template) {
+                const container = JSON.parse(JSON.stringify(action.payload.container)) as IContainer;
+                regenerateIDsContainer(container, true, true);
+                state.template.containers.splice(action.payload.index, 0, container);
                 updateTemplate(state.template);
             }
         },
@@ -152,7 +165,7 @@ export const emailsCurrentEmailSlice = createSlice({
                 if (container) {
                     const newContainer = JSON.parse(JSON.stringify(container)) as IContainer;
                     regenerateIDsContainer(newContainer);
-                    state.template.containers.splice(index + 1, 0, ...[newContainer]);
+                    state.template.containers.splice(index + 1, 0, newContainer);
                     updateTemplate(state.template);
                 }
             }
@@ -234,33 +247,49 @@ export const emailsCurrentEmailSlice = createSlice({
         },
         updateContainerProperty: (state, action: PayloadAction<{ containerId: string, propertyKey: string; value: string; }>) => {
             if (state.template) {
-                const container = state.template.containers.find(container => container.id === action.payload.containerId);
-                if (container) {
-                    updateProperty(container, action.payload.propertyKey, action.payload.value);
-                }
+                state.template.containers = state.template.containers.map(container => {
+                    if (container.id === action.payload.containerId) {
+                        updateProperty(container, action.payload.propertyKey, action.payload.value);
+                    }
+                    return container;
+                });
                 updateTemplate(state.template);
             }
         },
         updateColumnProperty: (state, action: PayloadAction<{ columnId: string, propertyKey: string; value: string; }>) => {
             if (state.template) {
-                state.template.containers.forEach((container, index) => {
-                    const column = container.columns.find(column => column.id === action.payload.columnId);
-                    if (column) {
-                        updateProperty(column, action.payload.propertyKey, action.payload.value);
-                    }
+                state.template.containers = state.template.containers.map(container => {
+                    return {
+                        ...container,
+                        columns: container.columns.map((column) => {
+                            if (column.id === action.payload.columnId) {
+                                updateProperty(column, action.payload.propertyKey, action.payload.value);
+                            }
+                            return column;
+                        })
+                    };
+
                 });
                 updateTemplate(state.template);
             }
         },
         updateBlockProperty: (state, action: PayloadAction<{ blockId: string, propertyKey: string; value: string; }>) => {
             if (state.template) {
-                state.template.containers.forEach((container, index) => {
-                    container.columns.forEach(column => {
-                        const block = column.blocks.find(block => block.id === action.payload.blockId);
-                        if (block) {
-                            updateProperty(block, action.payload.propertyKey, action.payload.value);
-                        }
-                    });
+                state.template.containers = state.template.containers.map(container => {
+                    return {
+                        ...container,
+                        columns: container.columns.map(column => {
+                            return {
+                                ...column,
+                                blocks: column.blocks.map(block => {
+                                    if (block.id === action.payload.blockId) {
+                                        updateProperty(block, action.payload.propertyKey, action.payload.value);
+                                    }
+                                    return block;
+                                })
+                            };
+                        })
+                    };
                 });
                 updateTemplate(state.template);
             }

@@ -11,6 +11,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ViewWeekOutlinedIcon from '@mui/icons-material/ViewWeekOutlined';
+import DatasetOutlinedIcon from '@mui/icons-material/DatasetOutlined';
 
 interface IContainerPanelProps {
     container: IContainer;
@@ -19,8 +20,8 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
 
     const dispatch = useDispatch();
 
+    const [openBlocks, setOpenBlocks] = useState(true);
     const [openGeneral, setOpenGeneral] = useState(true);
-
     const [openColumns, setOpenColumns] = useState(true);
 
     const { t } = useTranslation();
@@ -40,21 +41,31 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                     </ListSubheader>
                 }
             >
+                <ListItemButton onClick={() => setOpenBlocks((state) => !state)} sx={{ pt: 0, pb: 0, backgroundColor: "lightgray" }}>
+                    <ListItemIcon><DatasetOutlinedIcon /></ListItemIcon>
+                    <ListItemText primary={t('containers.blocks').toUpperCase()} />
+                    {openBlocks ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={openBlocks} timeout="auto" unmountOnExit>
+                    <List component="div" sx={{ padding: 1 }}>
+                        {/* <ContainersList /> */}
+                    </List>
+                </Collapse>
                 <ListItemButton onClick={() => setOpenGeneral((state) => !state)} sx={{ pt: 0, pb: 0, backgroundColor: "lightgray" }}>
                     <ListItemIcon><SettingsOutlinedIcon /></ListItemIcon>
                     <ListItemText primary={t('containers.general').toUpperCase()} />
                     {openGeneral ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={openGeneral} timeout="auto" unmountOnExit>
-                    <List component="div" sx={{ padding: 1 }}>
+                    <List component="div" sx={{ padding: 1 }} key={container.id}>
                         <ControlColor propertyKey="backgroundColor" data={container.backgroundColor} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ m: 1 }} />
+                        <Divider light sx={{ mt: 1, mb: 1 }} />
                         <ControlColor propertyKey="contentBackgroundColor" data={container.contentBackgroundColor} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ m: 1 }} />
+                        <Divider light sx={{ mt: 1, mb: 1 }} />
                         <ControlSize propertyKey="paddingTopPixels" data={container.paddingTopPixels} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ m: 1 }} />
+                        <Divider light sx={{ mt: 1, mb: 1 }} />
                         <ControlSize propertyKey="paddingBottomPixels" data={container.paddingBottomPixels} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ m: 1 }} />
+                        <Divider light sx={{ mt: 1, mb: 1 }} />
                         TODO PERCENTAGE SIZE
                         {/* <ControlSlider propertyKey="columnsWidthsPercents" data={container.columnsWidthsPercents} handleUpdateProperty={updateKey} /> */}
                     </List>
@@ -66,7 +77,7 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                 </ListItemButton>
                 <Collapse in={openColumns} timeout="auto" unmountOnExit>
                     <List component="div" >
-                        <ColumnsListItem columns={container.columns} />
+                        <ColumnsListItem columns={container.columns} key={container.id} />
                     </List>
                 </Collapse>
             </List>

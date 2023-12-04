@@ -1,4 +1,4 @@
-import { IBlockImage, IColumn, IContainer, ITemplate } from '../types';
+import { IBlockHeading, IBlockImage, IBlockText, IColumn, IContainer, ITemplate } from '../types';
 
 //MAIN email template
 export const emptyTemplate: ITemplate = {
@@ -190,6 +190,199 @@ export const baseColumn: IColumn = {
 };
 
 //BLOCKS
+export const blockHeading: IBlockHeading = {
+    calculatedWidthPixels: 0,
+    id: '',
+    logo: '',
+    type: 'heading',
+    heading: {
+        type:"text",
+        value: "",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "heading"
+    },
+    fontFamily: {
+        type: "text",
+        value: "Segoe UI",
+        defaultValue: "Segoe UI",
+        active: true,
+        required: true,
+        label: "font_family"
+    },
+    fontSizePixels: {
+        type: "size",
+        value: 20,
+        defaultValue: 20,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "font_size"
+    },
+    lineHeightPercent: {
+        type: "size",
+        value: 140,
+        defaultValue: 100,
+        max: 1000,
+        min: 0,
+        step: 10,
+        sizeSuffix: "%",
+        active: true,
+        required: true,
+        label: "line_height"
+    },
+    fontWeight: {
+        value: '800',
+        defaultValue: '800',
+        options: [
+            { key: "100", label: "control_font_weight_100" },
+            { key: "200", label: "control_font_weight_200" },
+            { key: "300", label: "control_font_weight_300" },
+            { key: "400", label: "control_font_weight_400" },
+            { key: "500", label: "control_font_weight_500" },
+            { key: "600", label: "control_font_weight_600" },
+            { key: "700", label: "control_font_weight_700" },
+            { key: "800", label: "control_font_weight_800" },
+            { key: "900", label: "control_font_weight_900" },
+            { key: "950", label: "control_font_weight_950" },
+        ],
+        type: 'selection',
+        active: true,
+        required: true,
+        label: 'font_weight'
+    },
+    color: {
+        type: "color",
+        value: "rgba(0,0,0,255)",
+        defaultValue: "rgba(0,0,0,255)",
+        active: true,
+        required: true,
+        label: "text_color"
+    },
+    textAlign: {
+        value: 'left',
+        defaultValue: 'left',
+        type: 'tAlign',
+        active: true,
+        required: true,
+        label: 'text_align'
+    },
+    padding: {
+        type: "size",
+        value: 2,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding"
+    },
+    htmlText: '',
+    exportedText: ''
+};
+export const blockText: IBlockText = {
+    calculatedWidthPixels: 0,
+    id: '',
+    logo: '',
+    type: 'text',
+    text: {
+        type: "multilineText",
+        rows: 3,
+        value: "",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "text"
+    },
+    fontFamily: {
+        type: "text",
+        value: "Segoe UI",
+        defaultValue: "Segoe UI",
+        active: true,
+        required: true,
+        label: "font_family"
+    },
+    fontSizePixels: {
+        type: "size",
+        value: 12,
+        defaultValue: 12,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "font_size"
+    },
+    lineHeightPercent: {
+        type: "size",
+        value: 130,
+        defaultValue: 100,
+        max: 1000,
+        min: 0,
+        step: 10,
+        sizeSuffix: "%",
+        active: true,
+        required: true,
+        label: "line_height"
+    },
+    fontWeight: {
+        value: '400',
+        defaultValue: '400',
+        options: [
+            { key: "100", label: "control_font_weight_100" },
+            { key: "200", label: "control_font_weight_200" },
+            { key: "300", label: "control_font_weight_300" },
+            { key: "400", label: "control_font_weight_400" },
+            { key: "500", label: "control_font_weight_500" },
+            { key: "600", label: "control_font_weight_600" },
+            { key: "700", label: "control_font_weight_700" },
+            { key: "800", label: "control_font_weight_800" },
+            { key: "900", label: "control_font_weight_900" },
+            { key: "950", label: "control_font_weight_950" },
+        ],
+        type: 'selection',
+        active: true,
+        required: true,
+        label: 'font_weight'
+    },
+    color: {
+        type: "color",
+        value: "rgba(0,0,0,255)",
+        defaultValue: "rgba(0,0,0,255)",
+        active: true,
+        required: true,
+        label: "text_color"
+    },
+    textAlign: {
+        value: 'left',
+        defaultValue: 'left',
+        type: 'tAlign',
+        active: true,
+        required: true,
+        label: 'text_align'
+    },
+    padding: {
+        type: "size",
+        value: 2,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding"
+    },
+    htmlText: '',
+    exportedText: ''
+};
 export const blockImage: IBlockImage = {
     calculatedWidthPixels: 0,
     id: '',

@@ -1,10 +1,12 @@
 import { Fragment, useState } from "react";
-import { IBlock, IBlockImage } from "../../../../types";
+import { IBlock, IBlockHeading, IBlockImage, IBlockText } from "../../../../types";
 import { BlockImage } from "./BlockImage";
 import { Box } from "@mui/material";
 import { BlockOverlay } from "../BlockOverlay";
 import { useDispatch } from "react-redux";
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { BlockText } from "./BlockText";
+import { BlockHeading } from "./BlockHeading";
 
 interface IDesktopItemBlockProps {
   block: IBlock;
@@ -19,6 +21,12 @@ export function DesktopItemBlock({ block }: IDesktopItemBlockProps) {
   switch (block.type) {
     case "image":
       blockElement = <BlockImage block={block as IBlockImage} />;
+      break;
+    case "text":
+      blockElement = <BlockText block={block as IBlockText} />;
+      break;
+    case "heading":
+      blockElement = <BlockHeading block={block as IBlockHeading} />;
       break;
   }
 

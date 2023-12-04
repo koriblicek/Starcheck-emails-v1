@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { IBlock, IBlockImage } from "../../../../types";
+import { IBlock, IBlockHeading, IBlockImage, IBlockText } from "../../../../types";
 import { useEffect, useState } from "react";
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Typography } from "@mui/material";
@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import { ControlSize } from "../shared/ControlSize";
 import { useAppSelector } from "../../../../store/hooks";
 import { ImageBlock } from "./ImageBlock";
+import { TextBlock } from "./TextBlock";
+import { HeadingBlock } from "./HeadingBlock";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
@@ -36,6 +38,12 @@ export function BlockPanel({ block }: IBlockPanelProps) {
             switch (selectedBlock.type) {
                 case "image":
                     setBlockPanel(<ImageBlock block={selectedBlock as IBlockImage} key={block.id} />);
+                    break;
+                case "text":
+                    setBlockPanel(<TextBlock block={selectedBlock as IBlockText} key={block.id} />);
+                    break;
+                case "heading":
+                    setBlockPanel(<HeadingBlock block={selectedBlock as IBlockHeading} key={block.id} />);
                     break;
             }
     }, [selectedBlock, block.id]);

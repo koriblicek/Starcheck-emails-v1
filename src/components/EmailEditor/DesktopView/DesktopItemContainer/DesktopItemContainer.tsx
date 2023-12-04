@@ -1,24 +1,42 @@
 import { Box } from "@mui/material";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { IContainer } from "../../../../types";
 import { useDispatch } from "react-redux";
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { DesktopItemColumn } from "../DesktopItemColumn";
 import { ContainerOverlay } from "../ContainerOverlay";
+import { useAppSelector } from "../../../../store/hooks";
+import { DropAreaContainer } from "../DropAreaContainer";
 
 interface IDesktopItemContainerProps {
     container: IContainer;
+    index: number;
 }
 
-export function DesktopItemContainer({ container }: IDesktopItemContainerProps) {
+export function DesktopItemContainer({ container, index }: IDesktopItemContainerProps) {
     const dispatch = useDispatch();
 
     const [over, setOver] = useState<boolean>(false);
 
-    const items = container.columns.map((column, index) => {
-        return <DesktopItemColumn column={column} key={column.id} />;
-    });
+    const { selectedContainer } = useAppSelector(state => state.emailsCurrentEmail);
 
+    const [isSelected, setIsSelected] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (selectedContainer) {
+            if (selectedContainer.id === container.id) {
+                setIsSelected(true);
+            } else {
+                setIsSelected(false);
+            }
+        } else {
+            setIsSelected(false);
+        }
+    }, [selectedContainer, container.id]);
+
+    const items = container.columns.map(column => {
+        return <DesktopItemColumn column={column} isSelected={isSelected} key={column.id} />;
+    });
 
     return (
         <Fragment>
@@ -37,6 +55,7 @@ export function DesktopItemContainer({ container }: IDesktopItemContainerProps) 
                         </div>
                     </div>
                 </div>
+                <DropAreaContainer containerIndex={index + 1} />
                 {/* Overlay */}
                 <ContainerOverlay isOver={over} container={container} />
                 {/* ID */}

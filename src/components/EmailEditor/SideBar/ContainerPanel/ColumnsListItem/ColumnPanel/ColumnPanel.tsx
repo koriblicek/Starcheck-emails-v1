@@ -20,13 +20,13 @@ export function ColumnPanel({ column}: IColumnPanelProps) {
     return (
         <Box sx={{ p: 1 }}>
             <ControlColor propertyKey="backgroundColor" data={column.backgroundColor} handleUpdateProperty={updateKey}/>
-            <Divider light sx={{ m: 1 }} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlSize propertyKey="padding" data={column.padding} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ m: 1 }} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlSize propertyKey="borderWidthPixels" data={column.borderWidthPixels} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ m: 1 }} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlColor propertyKey="borderColor" data={column.borderColor} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ m: 1 }} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlSelection propertyKey="borderType" data={column.borderType} handleUpdateProperty={updateKey} />
         </Box>
 

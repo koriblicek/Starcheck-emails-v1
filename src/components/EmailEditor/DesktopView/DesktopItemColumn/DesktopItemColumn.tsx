@@ -1,14 +1,14 @@
 import { Fragment } from "react";
 import { IColumn } from "../../../../types";
 import { DesktopItemEmptyBlock } from "../DesktopItemEmptyBlock";
-import * as uuid from 'uuid';
-import { Box } from "@mui/material";
 import { DesktopItemBlock } from "../DesktopItemBlock";
+import * as uuid from 'uuid';
 
 interface IDesktopItemColumnProps {
     column: IColumn;
+    isSelected: boolean;
 }
-export function DesktopItemColumn({ column }: IDesktopItemColumnProps) {
+export function DesktopItemColumn({ column, isSelected }: IDesktopItemColumnProps) {
 
 
     const uid = uuid.v4();
@@ -23,8 +23,6 @@ export function DesktopItemColumn({ column }: IDesktopItemColumnProps) {
         return <DesktopItemBlock block={block} key={block.id} />;
     });
 
-    const emptyBlock = <DesktopItemEmptyBlock column={column} />;
-
     return (
         <Fragment >
             <style>{style}</style>
@@ -34,8 +32,8 @@ export function DesktopItemColumn({ column }: IDesktopItemColumnProps) {
                         {/* ID */}
                         {/* <Box sx={{ fontSize: '9px' }}>{column.id}</Box> */}
                         {blocks}
-                        {column.blocks.length === 0 && emptyBlock}
-                        {/* {emptyBlock} */}
+                        {(column.blocks.length === 0) && <DesktopItemEmptyBlock column={column} />}
+                        {/* {(column.blocks.length === 0 || isSelected) && <DesktopItemEmptyBlock column={column} />} */}
                     </div>
                 </div>
             </div>

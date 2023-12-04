@@ -36,8 +36,8 @@ export function PanelSelection() {
             <ToggleButton color="primary" value="email" onClick={() => {
                 dispatch(emailsCurrentEmailActions.clearSelection());
             }}><EmailOutlinedIcon sx={{ mr: 1 }} />{t('button.email')}</ToggleButton>
-            <ToggleButton color="secondary" value="block" disabled><DatasetOutlinedIcon sx={{ mr: 1 }} />{t('button.block')}</ToggleButton>
             <ToggleButton color="info" value="container" disabled><Inventory2OutlinedIcon sx={{ mr: 1 }} />{t('button.container')}</ToggleButton>
+            <ToggleButton color="secondary" value="block" disabled><DatasetOutlinedIcon sx={{ mr: 1 }} />{t('button.block')}</ToggleButton>
         </ToggleButtonGroup>
     );
 }

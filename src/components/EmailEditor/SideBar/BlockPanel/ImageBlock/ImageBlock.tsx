@@ -22,11 +22,11 @@ export function ImageBlock({ block }: IImageBlockProps) {
     return (
         <Fragment>
             <ControlImage propertyKey={"imageSrc"} data={block.imageSrc} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ m: 1 }} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlText propertyKey={"alternateText"} data={block.alternateText} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ m: 1 }} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlSlider propertyKey={"widthPercent"} data={block.widthPercent} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ m: 1 }} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlHAlign propertyKey={"align"} data={block.align} handleUpdateProperty={updateKey} />
         </Fragment>
     );

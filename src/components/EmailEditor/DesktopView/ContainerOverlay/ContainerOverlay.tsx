@@ -1,4 +1,4 @@
-import { Box, Button, Grid, IconButton, Paper, useTheme } from "@mui/material";
+import { Box,  Grid, IconButton, Paper, useTheme } from "@mui/material";
 import { useAppSelector } from "../../../../store/hooks";
 import { Fragment, useEffect, useState } from "react";
 import { IContainer } from "../../../../types";
@@ -7,7 +7,6 @@ import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emai
 import { useTranslation } from "react-i18next";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 
 interface IContainerOverlayProps {
     isOver: boolean;
@@ -42,16 +41,16 @@ export function ContainerOverlay({ isOver, container }: IContainerOverlayProps) 
                 right: 0,
                 top: 0,
                 bottom: 0,
-                border: !selected ? `2px ${theme.palette.info.main} dashed` : `2px ${theme.palette.info.main} solid`,
+                border: !selected ? `1px ${theme.palette.info.main} dashed` : `1px ${theme.palette.info.main} solid`,
                 visibility: (isOver || selected) ? "visible" : "hidden",
                 pointerEvents: 'none',
-                minWidth: container.calculatedWidthPixels - 4 + "px"
+                minWidth: container.calculatedWidthPixels - 2 + "px"
             }}
         >
             {selected &&
                 <Fragment>
-                    <Box sx={{ pointerEvents: 'auto', position: 'absolute', bottom: 0, right: 0, transform: 'translate(0,100%)',zIndex:10000 }} >
-                        <Paper sx={{ m: '2px' }}>
+                    <Box sx={{ pointerEvents: 'auto', position: 'absolute', bottom: 0, right: 0, transform: 'translate(0,100%)', zIndex: 10000 }} >
+                        <Paper sx={{ mr: '-1px', mt: '0px', border: 1, borderRadius: 0, borderBottomLeftRadius: 4, borderBottomRightRadius: 3, borderColor: theme.palette.info.main }} elevation={5}>
                             <Grid container columnGap={1}>
                                 <Grid item>
                                     <IconButton color="error" sx={{ borderRadius: 1 }} size="small" title={t('button.delete')}
@@ -59,7 +58,7 @@ export function ContainerOverlay({ isOver, container }: IContainerOverlayProps) 
                                             e.stopPropagation();
                                             dispatch(emailsCurrentEmailActions.removeContainer({ containerId: container.id }));
                                         }}
-                                    ><DeleteOutlinedIcon /></IconButton>
+                                    ><DeleteOutlinedIcon fontSize="small" /></IconButton>
                                 </Grid>
                                 <Grid item>
                                     <IconButton color="info" sx={{ borderRadius: 1 }} size="small" title={t('button.duplicate')}
@@ -67,7 +66,7 @@ export function ContainerOverlay({ isOver, container }: IContainerOverlayProps) 
                                             e.stopPropagation();
                                             dispatch(emailsCurrentEmailActions.duplicateContainer({ containerId: container.id }));
                                         }}
-                                    ><ContentCopyOutlinedIcon /></IconButton>
+                                    ><ContentCopyOutlinedIcon fontSize="small" /></IconButton>
                                 </Grid>
                             </Grid>
                         </Paper>

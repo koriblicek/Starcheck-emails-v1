@@ -8,6 +8,7 @@ import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emai
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import OpenWithOutlinedIcon from '@mui/icons-material/OpenWithOutlined';
 
 interface IBlockOverlayProps {
   isOver: boolean;
@@ -43,16 +44,16 @@ export function BlockOverlay({ isOver, block }: IBlockOverlayProps) {
         right: 0,
         top: 0,
         bottom: 0,
-        border: !selected ? `2px ${theme.palette.secondary.dark} dashed` : `2px ${theme.palette.secondary.dark} solid`,
+        border: !selected ? `1px ${theme.palette.secondary.main} dashed` : `1px ${theme.palette.secondary.main} solid`,
         visibility: (isOver || selected) ? "visible" : "hidden",
         pointerEvents: 'none',
-        minWidth: block.calculatedWidthPixels - block.padding.value * 2 - 4 + "px"
+        minWidth: block.calculatedWidthPixels - block.padding.value * 2 - 2 + "px"
       }}
     >
       {selected &&
         <Fragment>
           <Box sx={{ pointerEvents: 'auto', position: 'absolute', bottom: 0, right: 0, transform: 'translate(0,100%)', zIndex: 10000 }} >
-            <Paper sx={{ m: 1 }}>
+            <Paper sx={{ mr: '-1px', mt: '0px', border: 1, borderRadius: 0, borderBottomLeftRadius: 4, borderBottomRightRadius: 3, borderColor: theme.palette.secondary.main }} elevation={5}>
               <Grid container columnGap={1}>
                 <Grid item>
                   <IconButton color="error" sx={{ borderRadius: 1 }} size="small" title={t('button.delete')}
@@ -60,7 +61,7 @@ export function BlockOverlay({ isOver, block }: IBlockOverlayProps) {
                       e.stopPropagation();
                       dispatch(emailsCurrentEmailActions.removeBlock({ blockId: block.id }));
                     }}
-                  ><DeleteOutlinedIcon /></IconButton>
+                  ><DeleteOutlinedIcon fontSize="small" /></IconButton>
                 </Grid>
                 <Grid item>
                   <IconButton color="info" sx={{ borderRadius: 1 }} size="small" title={t('button.duplicate')}
@@ -68,21 +69,11 @@ export function BlockOverlay({ isOver, block }: IBlockOverlayProps) {
                       e.stopPropagation();
                       dispatch(emailsCurrentEmailActions.duplicateBlock({ blockId: block.id }));
                     }}
-                  ><ContentCopyOutlinedIcon/></IconButton>
+                  ><ContentCopyOutlinedIcon fontSize="small" /></IconButton>
                 </Grid>
               </Grid>
             </Paper>
           </Box>
-          {/* <Box sx={{ pointerEvents: 'auto', position: 'absolute', bottom: 0, left: '50%', transform: 'translate(-50%,100%)', zIndex: 10000 }} >
-            <Paper>
-              <IconButton color="secondary" sx={{ borderRadius: 1, p: 0 }} size="small" title={t('button.add_block')}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  dispatch(emailsCurrentEmailActions.duplicateBlock({ blockId: block.id }));
-                }}
-              ><AddBoxOutlinedIcon fontSize="small" /></IconButton>
-            </Paper>
-          </Box> */}
         </Fragment>
       }
     </Box >

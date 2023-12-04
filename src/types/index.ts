@@ -67,6 +67,27 @@ export interface IColumn extends ISharedProps, ISharedHtml {
 }
 //#endregion
 
+//#region BLOCK
+export interface IBlockHeading extends IBlock {
+    heading: ITextType;
+    fontFamily: ITextType;
+    fontSizePixels: ISizeType;
+    lineHeightPercent: ISizeType;
+    fontWeight: ISelectionType;
+    color: IColorType;
+    textAlign: ITAlign;
+}
+
+export interface IBlockText extends IBlock {
+    text: IMultilineTextType;
+    fontFamily: ITextType;
+    fontSizePixels: ISizeType;
+    lineHeightPercent: ISizeType;
+    fontWeight: ISelectionType;
+    color: IColorType;
+    textAlign: ITAlign;
+}
+
 export interface IBlockImage extends IBlock {
     imageSrc: IImageType;
     widthPercent: ISizeType;
@@ -74,7 +95,7 @@ export interface IBlockImage extends IBlock {
     alternateText: ITextType;
 }
 
-//#region BLOCK
+
 export interface IBlock extends ISharedProps, ISharedHtml {
     logo: string;
     type: TBlockIdentifiers;
@@ -92,6 +113,11 @@ export interface ISharedHtml {
     exportedText: string;
 }
 //#endregion
+
+export interface ITAlign extends IPropertyBase {
+    value: TTAlign;
+    defaultValue: TTAlign;
+}
 
 export interface IHAlign extends IPropertyBase {
     value: THAlign;
@@ -126,6 +152,12 @@ export interface ITextType extends IPropertyBase {
     defaultValue: string;
 };
 
+export interface IMultilineTextType extends IPropertyBase {
+    value: string;
+    rows: number;
+    defaultValue: string;
+};
+
 export interface IColorType extends IPropertyBase {
     value: string;
     defaultValue: string;
@@ -147,11 +179,12 @@ export interface IPropertyBase {
     label: string; //property label
 };
 
-export type TBlockIdentifiers = "image";
+export type TBlockIdentifiers = "image" | "heading" | "text";
 
-export type TPropertyIdentifiers = "color" | "size" | "text" | "selection" | "numberArray" | "image" | "hAlign";
-export type TPropertyTypes = IColorType | ISizeType | ITextType | INumberArrayType | ISelectionType | IImageType | IHAlign;
+export type TPropertyIdentifiers = "color" | "size" | "text" | "multilineText" | "selection" | "numberArray" | "image" | "hAlign" | "tAlign";
+export type TPropertyTypes = IColorType | ISizeType | ITextType | IMultilineTextType | INumberArrayType | ISelectionType | IImageType | IHAlign | ITAlign;
 export type THAlign = "left" | "center" | "right";
+export type TTAlign = "left" | "center" | "right" | "justify";
 export interface IProperty {
     [name: string]: TPropertyTypes;
 }

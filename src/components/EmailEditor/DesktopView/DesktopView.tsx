@@ -1,14 +1,21 @@
-import { Box } from "@mui/material";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { useAppSelector } from "../../../store/hooks";
 import { DesktopItemContainer } from "./DesktopItemContainer";
 import { useDispatch } from "react-redux";
 import { emailsCurrentEmailActions } from "../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { DesktopItemEmptyContainer } from "./DesktopItemEmptyContainer";
+import { useTranslation } from "react-i18next";
 import transparency_background from "../../../assets/images/transparency_background.png";
+import { DropAreaContainer } from "./DropAreaContainer";
+import { Fragment } from "react";
 
 export function DesktopView() {
 
     const dispatch = useDispatch();
+
+    const theme = useTheme();
+
+    const { t, i18n } = useTranslation();
 
     const { template } = useAppSelector(state => state.emailsCurrentEmail);
 
@@ -32,14 +39,33 @@ export function DesktopView() {
         }
     `;
 
-    const items = template.containers.map((container) => {
-        return <DesktopItemContainer container={container} key={container.id} />;
+    const items = template.containers.map((container, index) => {
+        return <DesktopItemContainer container={container} key={container.id} index={index} />;
     });
 
     return (
         <Box sx={{ minWidth: (template.contentWidthPixels.value + 60) + template.contentWidthPixels.sizeSuffix, margin: '0px', padding: '30px', background: `url(${transparency_background})` }}
             onClick={() => dispatch(emailsCurrentEmailActions.clearSelection())}
         >
+            <Box sx={{ border: '1px gray dotted', borderLeft: `3px ${theme.palette.primary.main} solid`, backgroundColor: 'white' }}>
+                <Grid container p={1}>
+                    <Grid item xs={12}>
+                        <Typography variant="h6" color="GrayText">{t('templates.sender_adress')}</Typography>
+                    </Grid>
+                    <Grid item xs>
+                        <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }} color={theme.palette.primary.main}>{template.subjectLine.value !== "" ? template.subjectLine.value : " "}</Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }} color={theme.palette.primary.main}>{new Date(template.modificationDate).toLocaleString(i18n.language)}</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="subtitle2" color="GrayText">{template.previewLine1.value}</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="subtitle2" color="GrayText">{template.previewLine2.value}</Typography>
+                    </Grid>
+                </Grid>
+            </Box>
             <Box sx={{ margin: '0px', padding: '0px', backgroundColor: template.backgroundColor.value, color: template.textColor.value }}>
                 <style>
                     {css}
@@ -49,6 +75,10 @@ export function DesktopView() {
                         <tr style={{ verticalAlign: 'top' }}>
                             <td style={{ borderCollapse: 'collapse', verticalAlign: 'top' }}>
                                 {/* if no items in container */}
+
+                                <div style={{ position: 'relative' }}>
+                                    <DropAreaContainer containerIndex={0} />
+                                </div>
                                 {template.containers.length === 0
                                     ?
                                     <DesktopItemEmptyContainer />
