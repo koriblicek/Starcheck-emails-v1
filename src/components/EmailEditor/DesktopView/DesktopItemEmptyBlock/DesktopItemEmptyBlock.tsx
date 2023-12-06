@@ -1,9 +1,9 @@
-import { Button, Grid } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { Grid, IconButton } from "@mui/material";
 import { IColumn } from "../../../../types";
 import { useTranslation } from "react-i18next";
 import { Fragment, useState } from "react";
 import { AddBlockMenu } from "../AddBlockMenu";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
 interface IDesktopItemEmptyBlockProps {
     column: IColumn;
@@ -29,12 +29,15 @@ export function DesktopItemEmptyBlock({ column }: IDesktopItemEmptyBlockProps) {
         <Fragment>
             <Grid container justifyContent='center' alignContent='center'>
                 <Grid item>
-                    <Button size="small" variant="outlined" sx={{ m: 1 }}
+                    <IconButton color="primary"
                         onClick={(e) => {
                             e.stopPropagation();
                             handleClick(e);
                         }}
-                    >{t('button.add_block')}</Button>
+                        title={t('button.add_block')}
+                    >
+                        <AddCircleOutlineOutlinedIcon fontSize="small" />
+                    </IconButton>
                 </Grid>
             </Grid>
             <AddBlockMenu anchorEl={anchorEl} column={column} handleAnchorClear={clearAnchorEl} />

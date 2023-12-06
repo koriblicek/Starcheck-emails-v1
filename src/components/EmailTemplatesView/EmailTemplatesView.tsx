@@ -14,7 +14,7 @@ export function EmailTemplatesView() {
 
     const { urls } = useAppSelector(state => state.emailsSettings);
 
-    const { data, error, isLoading } = useGetFromAPI<ITemplate[]>(urls.dataURL + "customTemplates");
+    const { data, error, isLoading } = useGetFromAPI<ITemplate[]>(urls.dataURL + "/customTemplates");
 
     useEffect(() => {
         if (data) {
@@ -29,9 +29,12 @@ export function EmailTemplatesView() {
     const bt = builtinTemplates.map((template) => {
         return (<Grid item key={template.id}><EmailTemplateItem template={template} isCustomTemplate={false} /></Grid>);
     });
-    const ct = customTemplates.map((template) => {
-        return (<Grid item key={template.id}><EmailTemplateItem template={template} isCustomTemplate={true} /></Grid>);
+    const ct = Object.values(customTemplates).map((value) => {
+        return (<Grid item key={value.id}><EmailTemplateItem template={value} isCustomTemplate={true} /></Grid>);
     });
+    // const ct = customTemplates.map((template) => {
+    //     return (<Grid item key={template.id}><EmailTemplateItem template={template} isCustomTemplate={true} /></Grid>);
+    // });
 
     return (
         <Grid container rowSpacing={2} spacing={2} justifyContent="center" pt={1}>

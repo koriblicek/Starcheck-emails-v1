@@ -22,12 +22,13 @@ export function ColumnPanel({ column}: IColumnPanelProps) {
             <ControlColor propertyKey="backgroundColor" data={column.backgroundColor} handleUpdateProperty={updateKey}/>
             <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlSize propertyKey="padding" data={column.padding} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb:1 }} />
+            {/* Border removed as it makes unexpected results on Outlook */}
+            {/* <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlSize propertyKey="borderWidthPixels" data={column.borderWidthPixels} handleUpdateProperty={updateKey} />
             <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlColor propertyKey="borderColor" data={column.borderColor} handleUpdateProperty={updateKey} />
             <Divider light sx={{ mt: 1, mb:1 }} />
-            <ControlSelection propertyKey="borderType" data={column.borderType} handleUpdateProperty={updateKey} />
+            <ControlSelection propertyKey="borderType" data={column.borderType} handleUpdateProperty={updateKey} /> */}
         </Box>
 
     );

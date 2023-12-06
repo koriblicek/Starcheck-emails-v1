@@ -10,10 +10,10 @@ import { DropAreaContainer } from "../DropAreaContainer";
 
 interface IDesktopItemContainerProps {
     container: IContainer;
-    index: number;
+    containerIndex: number;
 }
 
-export function DesktopItemContainer({ container, index }: IDesktopItemContainerProps) {
+export function DesktopItemContainer({ container, containerIndex }: IDesktopItemContainerProps) {
     const dispatch = useDispatch();
 
     const [over, setOver] = useState<boolean>(false);
@@ -34,8 +34,8 @@ export function DesktopItemContainer({ container, index }: IDesktopItemContainer
         }
     }, [selectedContainer, container.id]);
 
-    const items = container.columns.map(column => {
-        return <DesktopItemColumn column={column} isSelected={isSelected} key={column.id} />;
+    const items = container.columns.map((column, index) => {
+        return <DesktopItemColumn column={column} isContainerSelected={isSelected} containerIndex={containerIndex} columnIndex={index} key={column.id} />;
     });
 
     return (
@@ -48,14 +48,14 @@ export function DesktopItemContainer({ container, index }: IDesktopItemContainer
                     dispatch(emailsCurrentEmailActions.selectContainer({ container: container }));
                 }}
             >
-                <div className="u-row-container" style={{ paddingTop: container.paddingTopPixels.value + container.paddingTopPixels.sizeSuffix, paddingBottom: container.paddingBottomPixels.value + container.paddingBottomPixels.sizeSuffix, backgroundColor: container.backgroundColor.value }}>
-                    <div className="u-row" style={{ margin: '0 auto', minWidth: '320px', maxWidth: container.calculatedWidthPixels + "px", overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word', backgroundColor: container.contentBackgroundColor.value }}>
+                <div className="u-row-container" style={{ paddingTop: container.paddingTopPixels.value + container.paddingTopPixels.sizeSuffix, paddingBottom: container.paddingBottomPixels.value + container.paddingBottomPixels.sizeSuffix,...(container.backgroundColor.value !== "transparent" ? { backgroundColor: container.backgroundColor.value } : {  }) }}>
+                    <div className="u-row" style={{ margin: '0 auto', minWidth: '320px', maxWidth: container.calculatedWidthPixels + "px", overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word', ...(container.contentBackgroundColor.value !== "transparent" ? { backgroundColor: container.contentBackgroundColor.value } : {  }) }}>
                         <div style={{ borderCollapse: 'collapse', display: 'table', width: '100%', height: '100%', backgroundColor: 'transparent' }}>
                             {items}
                         </div>
                     </div>
                 </div>
-                <DropAreaContainer containerIndex={index + 1} />
+                <DropAreaContainer containerIndex={containerIndex + 1} />
                 {/* Overlay */}
                 <ContainerOverlay isOver={over} container={container} />
                 {/* ID */}

@@ -4,12 +4,14 @@ interface IState {
     language: string;
     editorMobileView: boolean;
     containerDrag: boolean;
+    blockDrag: boolean;
 }
 
 const initialState = {
     language: "en",
     editorMobileView: false,
-    containerDrag: false
+    containerDrag: false,
+    blockDrag: false
 } as IState;
 
 export const emailsAppSlice = createSlice({
@@ -21,6 +23,9 @@ export const emailsAppSlice = createSlice({
         },
         setContainerDrag: (state, action: PayloadAction<{ status: boolean; }>) => {
             state.containerDrag = action.payload.status;
+        },
+        setBlockDrag: (state, action: PayloadAction<{ status: boolean; }>) => {
+            state.blockDrag = action.payload.status;
         },
     }
 });

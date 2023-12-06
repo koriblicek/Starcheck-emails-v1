@@ -14,7 +14,7 @@ export function SaveEmailBackdrop() {
 
     const { template, saveIsRequired } = useAppSelector(state => state.emailsCurrentEmail);
 
-    const { isUploading, isCompleted, error, handleSubmit } = usePutToAPI<ITemplate>(urls.dataURL + "customTemplates/" + template?.id);
+    const { isUploading, isCompleted, error, handleSubmit } = usePutToAPI<ITemplate>(urls.dataURL + "/customTemplates/" + template?.id);
 
     console.log("isUploading: ", isUploading, "isCompleted: ", isCompleted, "error: ", error);
 
@@ -23,6 +23,7 @@ export function SaveEmailBackdrop() {
     useEffect(() => {
         if (saveIsRequired) {
             if (template) {
+                console.log(template)
                 handleSubmit(template);
                 setOpen(true);
                 dispatch(emailsCurrentEmailActions.cancelSave());

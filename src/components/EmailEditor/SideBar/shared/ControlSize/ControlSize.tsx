@@ -37,6 +37,11 @@ export function ControlSize({ propertyKey, data, handleUpdateProperty }: IContro
         handleUpdateProperty(propertyKey, val.toString());
     }
 
+    function handleReset() {
+        setValue(data.defaultValue);
+        handleUpdateProperty(propertyKey, data.defaultValue.toString());
+    }
+
     return (
         <Grid container columnGap={1} alignItems='center'>
             <Grid item xs={5}>
@@ -102,7 +107,7 @@ export function ControlSize({ propertyKey, data, handleUpdateProperty }: IContro
                         </IconButton>
                     </Grid>
                     <Grid item sx={{ pl: 1 }}>
-                        <IconButton size="small" color="primary" onClick={() => handleChange(data.defaultValue.toString())} title={t('button.default_value')}>
+                        <IconButton size="small" color="primary" onClick={() => handleReset()} title={t('button.default_value')}>
                             <RefreshOutlinedIcon />
                         </IconButton>
                     </Grid>

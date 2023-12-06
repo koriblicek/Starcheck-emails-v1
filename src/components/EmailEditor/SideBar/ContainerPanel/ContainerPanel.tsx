@@ -12,6 +12,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ViewWeekOutlinedIcon from '@mui/icons-material/ViewWeekOutlined';
 import DatasetOutlinedIcon from '@mui/icons-material/DatasetOutlined';
+import { BlocksList } from "./BlocksList";
 
 interface IContainerPanelProps {
     container: IContainer;
@@ -48,7 +49,7 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                 </ListItemButton>
                 <Collapse in={openBlocks} timeout="auto" unmountOnExit>
                     <List component="div" sx={{ padding: 1 }}>
-                        {/* <ContainersList /> */}
+                        <BlocksList />
                     </List>
                 </Collapse>
                 <ListItemButton onClick={() => setOpenGeneral((state) => !state)} sx={{ pt: 0, pb: 0, backgroundColor: "lightgray" }}>

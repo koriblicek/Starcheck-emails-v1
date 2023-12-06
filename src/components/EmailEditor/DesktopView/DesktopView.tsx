@@ -1,13 +1,13 @@
-import { Box, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Grid, TextField, Typography, useTheme } from "@mui/material";
 import { useAppSelector } from "../../../store/hooks";
 import { DesktopItemContainer } from "./DesktopItemContainer";
 import { useDispatch } from "react-redux";
 import { emailsCurrentEmailActions } from "../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { DesktopItemEmptyContainer } from "./DesktopItemEmptyContainer";
 import { useTranslation } from "react-i18next";
-import transparency_background from "../../../assets/images/transparency_background.png";
 import { DropAreaContainer } from "./DropAreaContainer";
-import { Fragment } from "react";
+import { SendPreviewMail } from "./SendPreviewMail";
+import transparency_background from "../../../assets/images/transparency_background.png";
 
 export function DesktopView() {
 
@@ -24,7 +24,10 @@ export function DesktopView() {
 
     //all containers
     const css = `
-    
+            p {
+                margin: 0;
+            }
+
             .u-row {
             width: ${template.contentWidthPixels.value + template.contentWidthPixels.sizeSuffix} !important;
             }
@@ -40,7 +43,7 @@ export function DesktopView() {
     `;
 
     const items = template.containers.map((container, index) => {
-        return <DesktopItemContainer container={container} key={container.id} index={index} />;
+        return <DesktopItemContainer container={container} key={container.id} containerIndex={index} />;
     });
 
     return (
@@ -64,13 +67,17 @@ export function DesktopView() {
                     <Grid item xs={12}>
                         <Typography variant="subtitle2" color="GrayText">{template.previewLine2.value}</Typography>
                     </Grid>
+                    <Grid item xs={12}>
+                        <SendPreviewMail />
+                        <TextField fullWidth value={template.exportedText} multiline rows={8} sx={{ fontSize: 6 }}></TextField>
+                    </Grid>
                 </Grid>
             </Box>
-            <Box sx={{ margin: '0px', padding: '0px', backgroundColor: template.backgroundColor.value, color: template.textColor.value }}>
+            <Box sx={{ margin: '0px', padding: '0px', backgroundColor: template.backgroundColor.value, ...(template.textColor.value !== "transparent" ? { color: template.textColor.value } : {}) }}>
                 <style>
                     {css}
                 </style>
-                <table cellSpacing={0} cellPadding={0} style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed', borderSpacing: 0, verticalAlign: 'top', minWidth: '320px', margin: '0 auto', backgroundColor: template.backgroundColor.value }}>
+                <table cellSpacing={0} cellPadding={0} style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed', borderSpacing: 0, verticalAlign: 'top', minWidth: '320px', margin: '0 auto', ...(template.backgroundColor.value !== "transparent" ? { backgroundColor: template.backgroundColor.value } : { backgroundColor: '#ffffff' }) }}>
                     <tbody>
                         <tr style={{ verticalAlign: 'top' }}>
                             <td style={{ borderCollapse: 'collapse', verticalAlign: 'top' }}>

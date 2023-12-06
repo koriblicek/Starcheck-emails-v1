@@ -7,8 +7,6 @@ import { Box, Grid, IconButton, Paper, useTheme } from "@mui/material";
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import OpenWithOutlinedIcon from '@mui/icons-material/OpenWithOutlined';
 
 interface IBlockOverlayProps {
   isOver: boolean;

@@ -19,8 +19,8 @@ interface IAppProps {
 function App({ inputData }: IAppProps) {
   const dispatch = useDispatch();
 
-  // const { error, data } = useGetFromAPI<IAppData>(inputData.dataApiLink + inputData.dataId + "/" + inputData.dataModule + "/" + inputData.dataVersion + "/settings");
-  const { error, data } = useGetFromAPI<IAppData>("http://localhost:5000/settings");
+  const { error, data } = useGetFromAPI<IAppData>(inputData.dataApiLink + inputData.dataId + "/" + inputData.dataModule + "/" + inputData.dataVersion + "/settings");
+  //const { error, data } = useGetFromAPI<IAppData>("http://localhost:5000/settings");
 
   const [proceed, setProceed] = useState<boolean>(false);
 
@@ -29,8 +29,9 @@ function App({ inputData }: IAppProps) {
       //initialize loaded urls
       dispatch(emailsSettingsActions.initialize({ urls: data }));
       //initialize data
-      dispatch(emailsDataActions.initiBuiltinTemplates())
-      dispatch(emailsDataActions.initBuiltinContainers())
+      dispatch(emailsDataActions.initiBuiltinTemplates());
+      dispatch(emailsDataActions.initBuiltinContainers());
+      dispatch(emailsDataActions.initBuiltinBlocks());
       setProceed(true);
     }
     if (error) {
@@ -55,3 +56,4 @@ function App({ inputData }: IAppProps) {
 }
 
 export default App;
+

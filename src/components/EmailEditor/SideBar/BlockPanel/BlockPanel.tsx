@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { IBlock, IBlockHeading, IBlockImage, IBlockText } from "../../../../types";
+import { IBlock, IBlockHeading, IBlockHtml, IBlockImage, IBlockText } from "../../../../types";
 import { useEffect, useState } from "react";
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Typography } from "@mui/material";
@@ -13,6 +13,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import DatasetOutlinedIcon from '@mui/icons-material/DatasetOutlined';
+import { HtmlBlock } from "./HtmlBlock";
 
 interface IBlockPanelProps {
     block: IBlock;
@@ -44,6 +45,9 @@ export function BlockPanel({ block }: IBlockPanelProps) {
                     break;
                 case "heading":
                     setBlockPanel(<HeadingBlock block={selectedBlock as IBlockHeading} key={block.id} />);
+                    break;
+                case "html":
+                    setBlockPanel(<HtmlBlock block={selectedBlock as IBlockHtml} key={block.id} />);
                     break;
             }
     }, [selectedBlock, block.id]);

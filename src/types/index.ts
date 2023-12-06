@@ -68,6 +68,15 @@ export interface IColumn extends ISharedProps, ISharedHtml {
 //#endregion
 
 //#region BLOCK
+export interface IBlockHtml extends IBlock {
+    html: IMultilineTextType;
+    fontFamily: ITextType;
+    fontSizePixels: ISizeType;
+    fontWeight: ISelectionType;
+    color: IColorType;
+    textAlign: ITAlign;
+}
+
 export interface IBlockHeading extends IBlock {
     heading: ITextType;
     fontFamily: ITextType;
@@ -179,7 +188,7 @@ export interface IPropertyBase {
     label: string; //property label
 };
 
-export type TBlockIdentifiers = "image" | "heading" | "text";
+export type TBlockIdentifiers = "image" | "heading" | "text" | "html";
 
 export type TPropertyIdentifiers = "color" | "size" | "text" | "multilineText" | "selection" | "numberArray" | "image" | "hAlign" | "tAlign";
 export type TPropertyTypes = IColorType | ISizeType | ITextType | IMultilineTextType | INumberArrayType | ISelectionType | IImageType | IHAlign | ITAlign;

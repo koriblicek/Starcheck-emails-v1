@@ -39,6 +39,9 @@ export function ControlSlider({ propertyKey, data, handleUpdateProperty }: ICont
                 <Slider
                     size="small"
                     value={value}
+                    step={data.step}
+                    min={data.min}
+                    max={data.max}
                     valueLabelDisplay="auto"
                     marks={[{ value: data.min, label: valueLabel(data.min) }, { value: data.max, label: valueLabel(data.max) }]}
                     onChange={handleChange}

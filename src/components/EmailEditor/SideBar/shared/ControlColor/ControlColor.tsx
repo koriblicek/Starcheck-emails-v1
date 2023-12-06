@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Grid, IconButton, Typography } from '@mui/material';
+import { Checkbox, Grid, IconButton, TextField, Typography } from '@mui/material';
 import { IColorType } from '../../../../../types';
 import { debounce } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { MuiColorInput } from 'mui-color-input';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 
 interface IControlColorProps {
@@ -21,9 +20,23 @@ export function ControlColor({ propertyKey, data, handleUpdateProperty }: IContr
     const label = t("controls." + data.label);
 
     function handleChange(propertyValue: string) {
-        setValue(propertyValue);
-        handleUpdateProperty(propertyKey, propertyValue);
+        if (checked) {
+            setValue(propertyValue);
+            handleUpdateProperty(propertyKey, propertyValue);
+        }
     }
+
+    const [checked, setChecked] = useState<boolean>(value !== "transparent");
+
+    function handleCheckClick(event: React.ChangeEvent<HTMLInputElement>) {
+        setChecked(event.target.checked);
+        if (event.target.checked) {
+            setValue(data.defaultValue);
+            handleUpdateProperty(propertyKey, data.defaultValue);
+        } else {
+            handleUpdateProperty(propertyKey, "transparent");
+        }
+    };
 
     const debouncedOnChange = debounce(handleChange, 50);
 
@@ -33,13 +46,40 @@ export function ControlColor({ propertyKey, data, handleUpdateProperty }: IContr
                 <Typography variant='caption' color="GrayText">{label}</Typography>
             </Grid>
             <Grid item xs>
-                <MuiColorInput
-                    name={propertyKey}
-                    value={value}
-                    size="small"
-                    color='info'
-                    onChange={debouncedOnChange}
-                    fullWidth
+                {checked
+                    ?
+                    <TextField
+                        name={propertyKey}
+                        value={value}
+                        type="color"
+                        size="small"
+                        color='info'
+                        onChange={(e) => debouncedOnChange(e.currentTarget.value)}
+                        fullWidth
+                    >
+                    </TextField>
+                    :
+                    <TextField
+                        name={propertyKey}
+                        value={t('controls.not_set')}
+                        type="text"
+                        size="small"
+                        color='info'
+                        InputProps={{
+                            inputProps: {
+                                style: { textAlign: 'center' },
+                            }
+                        }}
+                        disabled
+                        fullWidth
+                    >
+                    </TextField>
+                }
+            </Grid>
+            <Grid item>
+                <Checkbox
+                    checked={checked}
+                    onChange={handleCheckClick}
                 />
             </Grid>
             <Grid item>

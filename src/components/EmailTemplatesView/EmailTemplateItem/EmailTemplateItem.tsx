@@ -29,7 +29,7 @@ export function EmailTemplateItem({ template, isCustomTemplate }: IEmailTemplate
                 elevation={cursorOver ? 6 : 1}
                 onPointerEnter={() => setCursorOver(true)}
                 onPointerLeave={() => setCursorOver(false)}
-                sx={{ width: '300px' }}
+                // sx={{ width: '300px' }}
             >
                 <CardHeader title={template.name.value} subheader={template.id} subheaderTypographyProps={{ variant: "subtitle2" }} />
                 <CardContent sx={{ p: 1 }}>

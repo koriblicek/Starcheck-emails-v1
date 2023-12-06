@@ -41,7 +41,7 @@ export function DropAreaContainer({ containerIndex }: IDropAreaContainerProps) {
     return (
         <Fragment>
             <Box sx={{ position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translate(0,50%)', zIndex: 8000, visibility: containerDrag ? 'visible' : 'hidden' }}>
-                <Box sx={{ border: `2px ${theme.palette.info.light} solid`, opacity: over ? 1 : 0.3, transition: 'opacity 0.2s' }}>
+                <Box sx={{ border: `.5px ${theme.palette.info.light} dashed`, opacity: over ? 1 : 0.0, transition: 'opacity 0.2s' }}>
                 </Box>
             </Box>
             <div style={{ position: 'absolute', width: '100%', transform: 'translate(0,50%)', height: '20px', bottom: 0, left: 0, zIndex: 8002, visibility: containerDrag ? 'visible' : 'hidden' }}

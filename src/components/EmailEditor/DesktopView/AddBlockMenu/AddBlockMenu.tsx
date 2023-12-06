@@ -1,12 +1,13 @@
 import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
-import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
-import ShortTextOutlinedIcon from '@mui/icons-material/ShortTextOutlined';
-import HMobiledataOutlinedIcon from '@mui/icons-material/HMobiledataOutlined';
 import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { useDispatch } from "react-redux";
-import { blockHeading, blockImage, blockText } from "../../../../data";
+import { blockHeading, blockHtml, blockImage, blockText } from "../../../../data";
 import { IColumn } from "../../../../types";
 import { useTranslation } from "react-i18next";
+import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
+import ShortTextOutlinedIcon from '@mui/icons-material/ShortTextOutlined';
+import CodeIcon from '@mui/icons-material/Code';
+import HMobiledataOutlinedIcon from '@mui/icons-material/HMobiledataOutlined';
 
 interface IAddBlockMenuProps {
     anchorEl: null | HTMLElement;
@@ -14,7 +15,7 @@ interface IAddBlockMenuProps {
     handleAnchorClear: () => void;
 }
 export function AddBlockMenu({ anchorEl, column, handleAnchorClear }: IAddBlockMenuProps) {
-    
+
     const dispatch = useDispatch();
 
     const { t } = useTranslation();
@@ -29,6 +30,9 @@ export function AddBlockMenu({ anchorEl, column, handleAnchorClear }: IAddBlockM
                 break;
             case "text":
                 dispatch(emailsCurrentEmailActions.addBlock({ columnId: column.id, block: JSON.stringify(blockText) }));
+                break;
+            case "html":
+                dispatch(emailsCurrentEmailActions.addBlock({ columnId: column.id, block: JSON.stringify(blockHtml) }));
                 break;
         }
         handleAnchorClear();
@@ -58,6 +62,10 @@ export function AddBlockMenu({ anchorEl, column, handleAnchorClear }: IAddBlockM
             <MenuItem onClick={() => handleSelectMenu("text")}>
                 <ListItemIcon><ShortTextOutlinedIcon /></ListItemIcon>
                 <ListItemText>{t('button.text')}</ListItemText>
+            </MenuItem>
+            <MenuItem onClick={() => handleSelectMenu("html")}>
+                <ListItemIcon><CodeIcon /></ListItemIcon>
+                <ListItemText>{t('button.html')}</ListItemText>
             </MenuItem>
         </Menu>
     );
