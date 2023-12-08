@@ -29,6 +29,9 @@ export interface IErrorObject {
 
 
 //#region TEMPLATE
+export interface ICustomTemplates{ 
+    [id: string]: ITemplate;
+}
 export interface ITemplate extends ISharedHtml {
     id: string;
     modificationDate: number;
@@ -144,6 +147,7 @@ export interface INumberArrayType extends IPropertyBase {
     max: number;
     min: number;
     step: number;
+    typeSuffix: string;
 }
 
 export interface ISelectionType extends IPropertyBase {

@@ -4,7 +4,6 @@ import { ControlColor } from "../../../shared/ControlColor";
 import { useDispatch } from "react-redux";
 import { ControlSize } from "../../../shared/ControlSize";
 import { emailsCurrentEmailActions } from "../../../../../../store/debuilder-data/emailsCurrentEmailSlice";
-import { ControlSelection } from "../../../shared/ControlSelection";
 
 interface IColumnPanelProps {
     column: IColumn;

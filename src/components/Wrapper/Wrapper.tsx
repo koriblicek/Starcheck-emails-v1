@@ -1,14 +1,13 @@
 import { Box } from "@mui/material";
-import { EmailTemplatesView } from "../EmailTemplatesView";
 import { useAppSelector } from "../../store/hooks";
 import { EmailEditor } from "../EmailEditor";
 import { APP_MIN_WIDTH } from "../../types";
 import { EmailAppBar } from "../EmailAppBar";
-
+import { EmailTemplatesView } from "../EmailTemplatesView";
 
 export function Wrapper() {
 
-    const { template } = useAppSelector(state => state.emailsCurrentEmail);
+    const template = useAppSelector(state => state.emailsCurrentEmail.template);
 
     console.log("Wrapper");
     return (

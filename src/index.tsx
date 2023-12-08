@@ -37,11 +37,11 @@ if (rootElement) {
     console.log(`(Starcheck-emails): ${errorMessage}`);
   }
   root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
       <Provider store={store}>
         {inputData && <App inputData={inputData}/>}
       </Provider>
-    </React.StrictMode>
+    // </React.StrictMode>
   );
 } else {
   // error = true;

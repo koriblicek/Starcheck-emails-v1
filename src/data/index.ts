@@ -247,6 +247,7 @@ export const baseContainer: IContainer = {
         step: 1,
         active: true,
         required: true,
+        typeSuffix: '%',
         label: 'columns_width'
     },
     htmlText: baseContainerHtmlText,

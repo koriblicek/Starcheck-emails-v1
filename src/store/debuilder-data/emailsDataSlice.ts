@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { baseColumn, baseContainer, blockHeading, blockHtml, blockImage, blockText, emptyTemplate } from '../../data';
-import { IBlock, IContainer, ITemplate } from '../../types';
+import { IBlock, IContainer, ICustomTemplates, ITemplate } from '../../types';
 import * as uuid from 'uuid';
 import logo_container_1 from '../../assets/images/container_1.png';
 import logo_container_1_1 from '../../assets/images/container_1-1.png';
@@ -30,8 +30,10 @@ export const emailsDataSlice = createSlice({
     name: 'emailsData',
     initialState,
     reducers: {
-        initCustomTemplates: (state, action: PayloadAction<{ templates: ITemplate[]; }>) => {
-            state.customTemplates = action.payload.templates;
+        initCustomTemplates: (state, action: PayloadAction<{ templates: ICustomTemplates; }>) => {
+            state.customTemplates = Object.values(action.payload.templates).map((template) => {
+                return template;
+            });
         },
         initiBuiltinTemplates: (state) => {
             const template = JSON.parse(JSON.stringify(emptyTemplate)) as ITemplate;

@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../store/hooks";
-import { EmailTemplateItem } from "./EmailTemplateItem";
 import { Alert, Chip, CircularProgress, Divider, Grid } from "@mui/material";
-import { ITemplate } from "../../types";
-import { useEffect } from "react";
+import { ICustomTemplates } from "../../types";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { emailsDataActions } from "../../store/debuilder-data/emailsDataSlice";
 import useGetFromAPI from "../../hooks/useGetFromAPI";
+import { EmailTemplatesCategory } from "./EmailTemplatesCategory";
 
 export function EmailTemplatesView() {
 
@@ -14,48 +14,49 @@ export function EmailTemplatesView() {
 
     const { urls } = useAppSelector(state => state.emailsSettings);
 
-    const { data, error, isLoading } = useGetFromAPI<ITemplate[]>(urls.dataURL + "/customTemplates");
+    const { data, error, isLoading } = useGetFromAPI<ICustomTemplates>(urls.dataURL + "/customTemplates");
+
+    const [showCustomTemplates, setShowCustomTemplates] = useState<boolean>(false);
+
+    const { builtinTemplates, customTemplates } = useAppSelector(state => state.emailsData);
 
     useEffect(() => {
         if (data) {
             dispatch(emailsDataActions.initCustomTemplates({ templates: data }));
+            setShowCustomTemplates(true);
         }
     }, [data, dispatch]);
 
-    const { builtinTemplates, customTemplates } = useAppSelector(state => state.emailsData);
-
     const { t } = useTranslation();
-
-    const bt = builtinTemplates.map((template) => {
-        return (<Grid item key={template.id}><EmailTemplateItem template={template} isCustomTemplate={false} /></Grid>);
-    });
-    const ct = Object.values(customTemplates).map((value) => {
-        return (<Grid item key={value.id}><EmailTemplateItem template={value} isCustomTemplate={true} /></Grid>);
-    });
-    // const ct = customTemplates.map((template) => {
-    //     return (<Grid item key={template.id}><EmailTemplateItem template={template} isCustomTemplate={true} /></Grid>);
-    // });
 
     return (
         <Grid container rowSpacing={2} spacing={2} justifyContent="center" pt={1}>
             <Grid item xs={12} >
-                <Divider ><Chip label={t('title.builtinTemplates')} size="small" /></Divider>
+                <Divider><Chip label={t('title.builtinTemplates')} size="small" /></Divider>
             </Grid>
-            {(bt.length !== 0) ? bt : <Grid item><Alert variant="standard" color="info">{t('message.noBuiltinTemplates')}</Alert></Grid>}
+            <EmailTemplatesCategory templates={builtinTemplates} isCustomTemplate={false} errorMessage={t('message.noBuiltinTemplates')} />
             <Grid item xs={12} >
-                <Divider ><Chip label={t('title.customTemplates')} size="small" /></Divider>
+                <Divider><Chip label={t('title.customTemplates')} size="small" /></Divider>
             </Grid>
-            {isLoading
+            {/* is loading or data and error is null - to prevent showing no custom templates message*/}
+            {(isLoading || (data === null && error === null))
                 ?
-                <Grid item><CircularProgress /></Grid>
+                // loading progress 
+                <Grid item>
+                    <CircularProgress />
+                </Grid>
                 :
+                // is error?
                 error
                     ?
-                    <Grid item><Alert variant="standard" color="error">{t('message.customTemplatesLoadingError')}</Alert></Grid>
+                    //error
+                    <Grid item>
+                        <Alert variant="standard" color="error">{t('message.customTemplatesLoadingError')}</Alert>
+                    </Grid>
                     :
-                    (ct.length !== 0) ? ct : <Grid item><Alert variant="standard" color="info">{t('message.noCustomTemplates')}</Alert></Grid>
+                    // something loaded?
+                    showCustomTemplates && <EmailTemplatesCategory templates={customTemplates} isCustomTemplate={true} errorMessage={t('message.noCustomTemplates')} />
             }
-
         </Grid>
     );
 }

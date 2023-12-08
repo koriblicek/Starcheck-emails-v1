@@ -1,0 +1,1 @@
+export { ControlMultiSlider } from './ControlMultiSlider';

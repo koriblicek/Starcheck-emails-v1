@@ -14,7 +14,6 @@ interface IEmailTemplateItemProps {
     template: ITemplate;
     isCustomTemplate: boolean;
 }
-
 export function EmailTemplateItem({ template, isCustomTemplate }: IEmailTemplateItemProps) {
 
     const dispatch = useDispatch();
@@ -29,11 +28,11 @@ export function EmailTemplateItem({ template, isCustomTemplate }: IEmailTemplate
                 elevation={cursorOver ? 6 : 1}
                 onPointerEnter={() => setCursorOver(true)}
                 onPointerLeave={() => setCursorOver(false)}
-                // sx={{ width: '300px' }}
+            // sx={{ width: '300px' }}
             >
-                <CardHeader title={template.name.value} subheader={template.id} subheaderTypographyProps={{ variant: "subtitle2" }} />
+                <CardHeader title={template.name.value} /*subheader={template.id} subheaderTypographyProps={{ variant: "subtitle2" }} */ />
                 <CardContent sx={{ p: 1 }}>
-                    <Grid container justifyContent='space-evenly'>
+                    <Grid container justifyContent='space-evenly' columnGap={2}>
                         <Grid item>
                             <Grid container spacing={1}>
                                 <Grid item><CalendarMonthOutlinedIcon fontSize="small" /></Grid><Grid item><Typography variant="body1">{(new Date(template.modificationDate)).toLocaleDateString('sk')}</Typography></Grid>
@@ -46,29 +45,24 @@ export function EmailTemplateItem({ template, isCustomTemplate }: IEmailTemplate
                         </Grid>
                     </Grid>
                 </CardContent>
-
                 {
                     isCustomTemplate ?
-                        <Fade in={cursorOver} timeout={300}>
-                            <CardActions sx={{ p: 0, pb: 1, justifyContent: "center" }}>
-                                <Button size="small" color="info" variant="contained" startIcon={<EditNoteOutlinedIcon />}
-                                    onClick={() => dispatch(emailsCurrentEmailActions.setTemplate({ template: template, updateIds: false }))}
-                                >
-                                    {t('button.editTemplate')}</Button>
-                                <Button size="small" color="error" variant="contained" startIcon={<DeleteOutlineOutlinedIcon />}
-                                    onClick={() => console.log("TODO")}
-                                >
-                                    {t('button.removeTemplate')}</Button>
-                            </CardActions>
-                        </Fade>
+                        <CardActions sx={{ p: 0, pb: 1, justifyContent: "center" }}>
+                            <Button size="small" color="info" variant="contained" startIcon={<EditNoteOutlinedIcon />}
+                                onClick={() => dispatch(emailsCurrentEmailActions.setTemplate({ template: template, updateIds: false }))}
+                            >
+                                {t('button.editTemplate')}</Button>
+                            <Button size="small" color="error" variant="contained" startIcon={<DeleteOutlineOutlinedIcon />}
+                                onClick={() => console.log("TODO")}
+                            >
+                                {t('button.removeTemplate')}</Button>
+                        </CardActions>
                         :
-                        <Fade in={cursorOver} timeout={300}>
-                            <CardActions sx={{ p: 1, justifyContent: "center" }}>
-                                <Button size="small" color="primary" variant="contained" startIcon={<AddCircleOutlineOutlinedIcon />}
-                                    onClick={() => dispatch(emailsCurrentEmailActions.setTemplate({ template: template, updateIds: true }))}
-                                >{t('button.createCopyTemplate')}</Button>
-                            </CardActions>
-                        </Fade>
+                        <CardActions sx={{ p: 1, justifyContent: "center" }}>
+                            <Button size="small" color="primary" variant="contained" startIcon={<AddCircleOutlineOutlinedIcon />}
+                                onClick={() => dispatch(emailsCurrentEmailActions.setTemplate({ template: template, updateIds: true }))}
+                            >{t('button.createCopyTemplate')}</Button>
+                        </CardActions>
                 }
             </Card >
         </Fade>

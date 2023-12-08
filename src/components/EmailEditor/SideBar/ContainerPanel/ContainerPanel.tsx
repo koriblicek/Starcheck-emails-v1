@@ -13,6 +13,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ViewWeekOutlinedIcon from '@mui/icons-material/ViewWeekOutlined';
 import DatasetOutlinedIcon from '@mui/icons-material/DatasetOutlined';
 import { BlocksList } from "./BlocksList";
+import { ControlMultiSlider } from "../shared/ControlMultiSlider";
 
 interface IContainerPanelProps {
     container: IContainer;
@@ -68,7 +69,7 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                         <ControlSize propertyKey="paddingBottomPixels" data={container.paddingBottomPixels} handleUpdateProperty={updateKey} />
                         <Divider light sx={{ mt: 1, mb: 1 }} />
                         TODO PERCENTAGE SIZE
-                        {/* <ControlSlider propertyKey="columnsWidthsPercents" data={container.columnsWidthsPercents} handleUpdateProperty={updateKey} /> */}
+                        <ControlMultiSlider propertyKey="columnsWidthsPercents" data={container.columnsWidthsPercents} handleUpdateProperty={updateKey} />
                     </List>
                 </Collapse>
                 <ListItemButton onClick={() => setOpenColumns((state) => !state)} sx={{ pt: 0, pb: 0, backgroundColor: "lightgray" }}>

@@ -93,7 +93,7 @@ export function ControlSize({ propertyKey, data, handleUpdateProperty }: IContro
                     </Grid>
                     <Grid item>
                         <Typography sx={{
-                            p: '6px 5px',
+                            p: '7px 5px',
                             border: `1px ${theme.palette.grey[400]} solid`,
                             backgroundColor: theme.palette.grey[200],
                             color: theme.palette.grey[500],

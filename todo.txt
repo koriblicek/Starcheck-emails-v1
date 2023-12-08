@@ -1,5 +1,7 @@
 done - find out how to not add background-color attribute into styles
+add slider for column percentage settings
+add ... functionality to browse for images
 do not duplicate css styles when creating exported text
 add anchor to image block as new attribute
-add ... functionality to browse for images
-there is message text after preview line 2 - fix somehow
+there is message text in preview line 2 - fix somehow (add extra td?)
+add delete template functionality
