@@ -1,7 +1,9 @@
 import { Backdrop, Button, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../store/hooks";
+import { useTranslation } from "react-i18next";
 import usePutToAPI from "../../../../hooks/usePutToAPI";
+import SendIcon from '@mui/icons-material/Send';
 
 export function SendPreviewMail() {
 
@@ -9,6 +11,7 @@ export function SendPreviewMail() {
 
     const { template } = useAppSelector(state => state.emailsCurrentEmail);
 
+    const { t } = useTranslation();
 
     const { isUploading, isCompleted, handleSubmit } = usePutToAPI<Object>(urls.outputURL);
 
@@ -28,10 +31,13 @@ export function SendPreviewMail() {
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
-            <Button fullWidth disabled={isUploading} variant="contained" onClick={() => {
+            <Button size="small" disabled={isUploading} variant="contained"
+                startIcon={<SendIcon/>}
+                onClick={() => {
                 setOpen(true);
                 handleSubmit({ emailTo: "koriblik@gmail.com", emailBody: template!.exportedText, subjectLine: template!.subjectLine.value });
-            }}>DEV: Poslať preview mail</Button>
+                
+            }}>{t('button.send_preview_mail')}</Button>
         </>
     );
 }

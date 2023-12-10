@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { Checkbox, Grid, IconButton, TextField, Typography } from '@mui/material';
+import { useCallback,  useMemo, useState } from 'react';
+import { Checkbox, Grid, IconButton, TextField, Typography, debounce } from '@mui/material';
 import { IColorType } from '../../../../../types';
-import { debounce } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 
@@ -17,16 +16,9 @@ export function ControlColor({ propertyKey, data, handleUpdateProperty }: IContr
 
     const { t } = useTranslation();
 
-    const label = t("controls." + data.label);
-
-    function handleChange(propertyValue: string) {
-        if (checked) {
-            setValue(propertyValue);
-            handleUpdateProperty(propertyKey, propertyValue);
-        }
-    }
-
     const [checked, setChecked] = useState<boolean>(value !== "transparent");
+
+    const label = t("controls." + data.label);
 
     function handleCheckClick(event: React.ChangeEvent<HTMLInputElement>) {
         setChecked(event.target.checked);
@@ -38,7 +30,23 @@ export function ControlColor({ propertyKey, data, handleUpdateProperty }: IContr
         }
     };
 
-    const debouncedOnChange = debounce(handleChange, 50);
+    const debouncedUpdate = useMemo(
+        () =>
+            debounce((value) => {
+                handleUpdateProperty(propertyKey, value);
+            }, 200),
+        [handleUpdateProperty, propertyKey]
+    );
+
+    const handleChange = useCallback(
+        (propertyValue: string) => {
+            if (checked) {
+                setValue(propertyValue);
+                debouncedUpdate(propertyValue);
+            }
+        },
+        [debouncedUpdate, checked]
+    );
 
     return (
         <Grid container columnGap={1} alignItems='center'>
@@ -54,7 +62,7 @@ export function ControlColor({ propertyKey, data, handleUpdateProperty }: IContr
                         type="color"
                         size="small"
                         color='info'
-                        onChange={(e) => debouncedOnChange(e.currentTarget.value)}
+                        onChange={(e) => handleChange(e.currentTarget.value)}
                         fullWidth
                     >
                     </TextField>

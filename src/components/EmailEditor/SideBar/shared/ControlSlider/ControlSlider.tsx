@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Grid, IconButton, Slider, Typography } from '@mui/material';
+import { useCallback, useMemo, useState } from 'react';
+import { Grid, IconButton, Slider, Typography, debounce } from '@mui/material';
 import { ISizeType } from '../../../../../types';
 import { useTranslation } from 'react-i18next';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
@@ -20,16 +20,28 @@ export function ControlSlider({ propertyKey, data, handleUpdateProperty }: ICont
     function valueLabel(value: number) {
         return `${value}${data.sizeSuffix}`;
     }
-
-    function handleChange(event: Event, propertyValue: number | number[]) {
-        setValue(propertyValue as number);
-        handleUpdateProperty(propertyKey, propertyValue.toString());
-    }
-
+    
     function reset(propertyValue: number | number[]) {
         setValue(propertyValue as number);
         handleUpdateProperty(propertyKey, propertyValue.toString());
     }
+
+    const debouncedUpdate = useMemo(
+        () =>
+            debounce((value) => {
+                handleUpdateProperty(propertyKey, value);
+            }, 50),
+        [handleUpdateProperty, propertyKey]
+    );
+
+    const handleChange = useCallback(
+        (event: Event, propertyValue: number | number[]) => {
+            setValue(propertyValue as number);
+            debouncedUpdate(propertyValue.toString());
+        },
+        [debouncedUpdate]
+    );
+
     return (
         <Grid container columnGap={1} alignItems='center'>
             <Grid item xs={5}>

@@ -1,4 +1,4 @@
-import { IBlockHeading, IBlockHtml, IBlockImage, IBlockText, IColumn, IContainer, ITemplate } from '../types';
+import { IBlockDivider, IBlockHeading, IBlockHtml, IBlockImage, IBlockText, IColumn, IContainer, ITemplate } from '../types';
 
 //MAIN email template
 const baseTemplateHtmlText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -21,11 +21,11 @@ const baseTemplateHtmlText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Trans
     <title>{{subjectLine}}</title>
     <style type="text/css">
         @media (min-width: {{contentWidthPixelsWithPadding}}px) {
-            .u-row {
+            .sc-container {
                 width: {{contentWidthPixels}}px !important;
             }
         
-            .u-row .u-col {
+            .sc-container .sc-column {
                 vertical-align: top;
             }
         
@@ -33,23 +33,25 @@ const baseTemplateHtmlText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Trans
         }
 
         @media (max-width: {{contentWidthPixelsWithPadding}}px) {
-            .u-row-container {
+            {{imageStyles}}
+
+            .sc-container-parent {
                 max-width: 100% !important;
                 padding-left: 0px !important;
                 padding-right: 0px !important;
             }
-            .u-row .u-col {
+            .sc-container .sc-column {
                 min-width: 320px !important;
                 max-width: 100% !important;
                 display: block !important;
             }
-            .u-row {
+            .sc-container {
                 width: 100% !important;
             }
-            .u-col {
+            .sc-column {
                 width: 100% !important;
             }
-            .u-col > div {
+            .sc-column > div {
                 margin: 0 auto;
             }
         }
@@ -183,8 +185,8 @@ export const emptyTemplate: ITemplate = {
 //CONTAINER to be is used as base for all types of containers in app
 //remove  style="{{backgroundColor}}" from line 1 <td>
 const baseContainerHtmlText = `<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center"><![endif]-->
-    <div class="u-row-container" style="padding-top: {{paddingTopPixels}}{{paddingTopPixelsSuffix}};padding-bottom: {{paddingBottomPixels}}{{paddingBottomPixelsSuffix}};{{backgroundColor}}">
-        <div class="u-row" style="margin: 0 auto;min-width: 320px;max-width: {{calculatedWidthPixels}}px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;{{contentBackgroundColor}}">
+    <div class="sc-container-parent" style="padding-top: {{paddingTopPixels}}{{paddingTopPixelsSuffix}};padding-bottom: {{paddingBottomPixels}}{{paddingBottomPixelsSuffix}};{{backgroundColor}}">
+        <div class="sc-container" style="margin: 0 auto;min-width: 320px;max-width: {{calculatedWidthPixels}}px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;{{contentBackgroundColor}}">
             <div style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;">
                 <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-top: {{paddingTopPixels}}{{paddingTopPixelsSuffix}};padding-bottom: {{paddingBottomPixels}}{{paddingBottomPixelsSuffix}};{{backgroundColor}}" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:{{calculatedWidthPixels}}px;"><tr style="{{contentBackgroundColor}}"><![endif]-->
                     <!-- COLUMNS -->    
@@ -258,7 +260,7 @@ export const baseContainer: IContainer = {
 //COLUMN to be used as base for all columns in app
 const baseColumnHtmlText = `
 <!--[if (mso)|(IE)]><td align="center" width="{{calculatedWidthPixels}}" style="{{backgroundColor}}width: {{calculatedWidthPixels}}px;padding: {{padding}}{{paddingSuffix}};border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
-    <div class="u-col u-col-{{calculatedWidthPixelsToFixedString}}" style="max-width: 320px;min-width: {{calculatedWidthPixels}}px;display: table-cell;vertical-align: top;">
+    <div class="sc-column sc-column-{{calculatedWidthPixelsToFixedString}}" style="max-width: 320px;min-width: {{calculatedWidthPixels}}px;display: table-cell;vertical-align: top;">
         <div style="{{backgroundColor}}height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
         <!--[if (!mso)&(!IE)]><!--><div style="box-sizing: border-box; height: 100%; padding: {{padding}}{{paddingSuffix}}; border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"><!--<![endif]-->
             <!-- BLOCKS -->
@@ -270,7 +272,7 @@ const baseColumnHtmlText = `
 `;
 // const baseColumnHtmlText = `
 // <!--[if (mso)|(IE)]><td align="center" width="{{calculatedWidthPixels}}" style="{{backgroundColor}}width: {{calculatedWidthPixels}}px;padding: {{padding}}{{paddingSuffix}};border: {{borderWidthPixels}}{{borderWidthPixelsSuffix}} {{borderType}} {{borderColor}};border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
-//     <div class="u-col u-col-{{calculatedWidthPixelsToFixedString}}" style="max-width: 320px;min-width: {{calculatedWidthPixels}}px;display: table-cell;vertical-align: top;">
+//     <div class="sc-column sc-column-{{calculatedWidthPixelsToFixedString}}" style="max-width: 320px;min-width: {{calculatedWidthPixels}}px;display: table-cell;vertical-align: top;">
 //         <div style="{{backgroundColor}}height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
 //         <!--[if (!mso)&(!IE)]><!--><div style="box-sizing: border-box; height: 100%; padding: {{padding}}{{paddingSuffix}};border: {{borderWidthPixels}}{{borderWidthPixelsSuffix}} {{borderType}} {{borderColor}}; border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"><!--<![endif]-->
 //             <!-- BLOCKS -->
@@ -452,7 +454,8 @@ export const blockHeading: IBlockHeading = {
     logo: '',
     type: 'heading',
     heading: {
-        type: "text",
+        type: "multilineText",
+        rows: 3,
         value: "",
         defaultValue: "",
         active: true,
@@ -648,7 +651,7 @@ const blockImageHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" 
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td style="padding-right: 0px;padding-left: 0px;font-size: 0px;" align="{{align}}">
-                            <img align="{{align}}" border="0" src="{{imageSrc}}" alt="{{alternateText}}" title="{{alternateText}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: {{widthPercent}}{{widthPercentSuffix}};max-width: {{widthPixels}}px;" width="{{widthPixels}}" />
+                        {{anchorStart}}<img align="{{align}}" border="0" src="{{imageSrc}}" alt="{{alternateText}}" title="{{alternateText}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: {{widthPercent}}{{widthPercentSuffix}};max-width: {{widthPixels}}px;" width="{{widthPixels}}" class="{{classMobile}}" />{{anchorEnd}}
                         </td>
                     </tr>
                 </table>
@@ -682,6 +685,18 @@ export const blockImage: IBlockImage = {
         required: true,
         label: "image_width"
     },
+    widthMobilePercent: {
+        type: "size",
+        value: 100,
+        defaultValue: 100,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "%",
+        active: true,
+        required: true,
+        label: "mobile_image_width"
+    },
     align: {
         value: 'center',
         defaultValue: 'center',
@@ -698,6 +713,26 @@ export const blockImage: IBlockImage = {
         required: true,
         label: "image_alternate_text"
     },
+    anchor: {
+        type: "text",
+        value: "",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "image_anchor"
+    },
+    target: {
+        value: '_blank',
+        defaultValue: '_blank',
+        options: [
+            { key: "_blank", label: "control_a_target_blank" },
+            { key: "_self", label: "control_a_target_self" },
+        ],
+        type: 'selection',
+        active: true,
+        required: true,
+        label: 'image_anchor_target'
+    },
     padding: {
         type: "size",
         value: 10,
@@ -712,4 +747,93 @@ export const blockImage: IBlockImage = {
     },
     htmlText: blockImageHtmlText,
     exportedText: ''
+};
+const blockDividerHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+    <tbody>
+        <tr>
+            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{padding}}{{paddingSuffix}}" align="left">
+        
+                <table height="0px" align="{{align}}" border="0" cellpadding="0" cellspacing="0" width="{{widthPercent}}{{widthPercentSuffix}}" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: {{lineWidthPixels}}{{lineWidthPixelsSuffix}} {{lineType}} {{lineColor}};-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                    <tbody>
+                        <tr style="vertical-align: top">
+                            <td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
+                                <span>&#160;</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+`;
+export const blockDivider: IBlockDivider = {
+    calculatedWidthPixels: 0,
+    id: '',
+    logo: '',
+    type: 'divider',
+    widthPercent: {
+        type: "size",
+        value: 100,
+        defaultValue: 100,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "%",
+        active: true,
+        required: true,
+        label: "divider_width"
+    },
+    lineWidthPixels: {
+        type: "size",
+        value: 1,
+        defaultValue: 1,
+        max: 20,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "line_width"
+    },
+    lineColor: {
+        type: "color",
+        value: "#000000",
+        defaultValue: "#000000",
+        active: true,
+        required: true,
+        label: "line_color"
+    },
+    lineType: {
+        value: 'solid',
+        defaultValue: 'solid',
+        options: [{ key: "solid", label: "border_type_solid" }, { key: "dashed", label: "border_type_dashed" }, { key: "dotted", label: "border_type_dotted" }],
+        type: 'selection',
+        active: true,
+        required: true,
+        label: 'line_style'
+    },
+    align: {
+        type: 'hAlign',
+        value: 'center',
+        defaultValue: 'center',
+        active: true,
+        required: true,
+        label: 'align_type'
+    },
+    padding: {
+        type: "size",
+        value: 10,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding"
+    },
+    htmlText: blockDividerHtmlText,
+    exportedText: '',
 };

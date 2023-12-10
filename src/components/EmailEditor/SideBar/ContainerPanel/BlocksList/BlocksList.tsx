@@ -11,12 +11,12 @@ export function BlocksList() {
     const { t } = useTranslation();
 
     const items = builtinBlocks.map((block, index) => {
-        return <Grid item key={block.id + "_" + index} xs><BlockItem block={block} /></Grid>;
+        return <Grid item key={block.id + "_" + index} xs={3}><BlockItem block={block} /></Grid>;
     });
 
     return (
         <Fragment>
-            <Grid container columnGap={1} rowGap={1}>
+            <Grid container spacing={1} >
                 {items}
             </Grid>
             {items.length === 0 &&

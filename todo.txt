@@ -1,7 +1,14 @@
+not possible to fix - there is message text in preview line 2 - fix somehow (add extra td?)
 done - find out how to not add background-color attribute into styles
-add slider for column percentage settings
-add ... functionality to browse for images
-do not duplicate css styles when creating exported text
-add anchor to image block as new attribute
-there is message text in preview line 2 - fix somehow (add extra td?)
+done - add slider for column percentage settings
+done - add image size on mobile (100% by default)
+done - delete export text from template before save to save place
+done - add anchor link to image block as new attribute
+done - do not duplicate css styles when creating exported text
+done - implement debounce into ControlColor, ControlText, ControlSlider and ControlMultiSlider based on ControlMultilineText
+add divider as new block
 add delete template functionality
+add visual representation of the table
+add ... functionality to browse for images
+think about adding global font - and add check box to font to activate/deactivate it
+add button as new block

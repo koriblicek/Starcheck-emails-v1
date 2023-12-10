@@ -1,1 +1,0 @@
-export { EmailTemplatesCustomCategory } from './EmailTemplatesCustomCategory';

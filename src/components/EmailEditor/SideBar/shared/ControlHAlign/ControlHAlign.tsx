@@ -22,8 +22,10 @@ export function ControlHAlign({ propertyKey, data, handleUpdateProperty }: ICont
     const label = t("controls." + data.label);
 
     function handleChange(event: React.MouseEvent<HTMLElement>, propertyValue: string) {
-        setValue(propertyValue);
-        handleUpdateProperty(propertyKey, propertyValue);
+        if (propertyValue !== null) {
+            setValue(propertyValue);
+            handleUpdateProperty(propertyKey, propertyValue);
+        }
     }
 
     return (

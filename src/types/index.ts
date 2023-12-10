@@ -81,7 +81,7 @@ export interface IBlockHtml extends IBlock {
 }
 
 export interface IBlockHeading extends IBlock {
-    heading: ITextType;
+    heading: IMultilineTextType;
     fontFamily: ITextType;
     fontSizePixels: ISizeType;
     lineHeightPercent: ISizeType;
@@ -103,10 +103,20 @@ export interface IBlockText extends IBlock {
 export interface IBlockImage extends IBlock {
     imageSrc: IImageType;
     widthPercent: ISizeType;
+    widthMobilePercent: ISizeType;
+    anchor: ITextType;
+    target: ISelectionType;
     align: IHAlign;
     alternateText: ITextType;
 }
 
+export interface IBlockDivider extends IBlock {
+    widthPercent: ISizeType;
+    lineWidthPixels: ISizeType;
+    lineColor: IColorType;
+    lineType: ISelectionType;
+    align: IHAlign;
+}
 
 export interface IBlock extends ISharedProps, ISharedHtml {
     logo: string;
@@ -192,7 +202,7 @@ export interface IPropertyBase {
     label: string; //property label
 };
 
-export type TBlockIdentifiers = "image" | "heading" | "text" | "html";
+export type TBlockIdentifiers = "image" | "heading" | "text" | "html" | "divider";
 
 export type TPropertyIdentifiers = "color" | "size" | "text" | "multilineText" | "selection" | "numberArray" | "image" | "hAlign" | "tAlign";
 export type TPropertyTypes = IColorType | ISizeType | ITextType | IMultilineTextType | INumberArrayType | ISelectionType | IImageType | IHAlign | ITAlign;

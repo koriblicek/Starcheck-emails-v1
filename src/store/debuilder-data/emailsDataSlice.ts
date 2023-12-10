@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { baseColumn, baseContainer, blockHeading, blockHtml, blockImage, blockText, emptyTemplate } from '../../data';
+import { baseColumn, baseContainer, blockDivider, blockHeading, blockHtml, blockImage, blockText, emptyTemplate } from '../../data';
 import { IBlock, IContainer, ICustomTemplates, ITemplate } from '../../types';
 import * as uuid from 'uuid';
 import logo_container_1 from '../../assets/images/container_1.png';
@@ -11,6 +11,7 @@ import logo_block_image from '../../assets/images/block_image.png';
 import logo_block_text from '../../assets/images/block_text.png';
 import logo_block_heading from '../../assets/images/block_heading.png';
 import logo_block_html from '../../assets/images/block_html.png';
+import logo_block_divider from '../../assets/images/block_divider.png';
 
 interface IState {
     builtinTemplates: ITemplate[];
@@ -44,40 +45,66 @@ export const emailsDataSlice = createSlice({
             const container_1 = JSON.parse(JSON.stringify(baseContainer)) as IContainer;
             container_1.logo = logo_container_1;
             container_1.columns.push(baseColumn);
+            container_1.columnsWidthsPercents.value.push(0);
+            container_1.columnsWidthsPercents.defaultValue.push(0);
             container_1.columnsWidthsPercents.value.push(100);
             container_1.columnsWidthsPercents.defaultValue.push(100);
 
             const container_1_1 = JSON.parse(JSON.stringify(baseContainer)) as IContainer;
             container_1_1.logo = logo_container_1_1;
+            container_1_1.columnsWidthsPercents.value.push(0);
+            container_1_1.columnsWidthsPercents.defaultValue.push(0);
             for (let i = 0; i < 2; i++) {
                 container_1_1.columns.push(baseColumn);
-                container_1_1.columnsWidthsPercents.value.push((100 / 2));
-                container_1_1.columnsWidthsPercents.defaultValue.push(100 / 2);
+                if (i !== 0) {
+                    container_1_1.columnsWidthsPercents.value.push(i * (100 / 2));
+                    container_1_1.columnsWidthsPercents.defaultValue.push(i * (100 / 2));
+                }
             }
+            container_1_1.columnsWidthsPercents.value.push(100);
+            container_1_1.columnsWidthsPercents.defaultValue.push(100);
 
             const container_1_2 = JSON.parse(JSON.stringify(baseContainer)) as IContainer;
             container_1_2.logo = logo_container_1_2;
+            container_1_2.columnsWidthsPercents.value.push(0);
+            container_1_2.columnsWidthsPercents.defaultValue.push(0);
             for (let i = 0; i < 2; i++) {
                 container_1_2.columns.push(baseColumn);
-                container_1_2.columnsWidthsPercents.value.push(33 + i * (34));
-                container_1_2.columnsWidthsPercents.defaultValue.push(33 + i * (34));
+                if (i !== 0) {
+                    container_1_2.columnsWidthsPercents.value.push(i * 33);
+                    container_1_2.columnsWidthsPercents.defaultValue.push(i * 33);
+                }
             }
+            container_1_2.columnsWidthsPercents.value.push(100);
+            container_1_2.columnsWidthsPercents.defaultValue.push(100);
 
             const container_2_1 = JSON.parse(JSON.stringify(baseContainer)) as IContainer;
             container_2_1.logo = logo_container_2_1;
+            container_2_1.columnsWidthsPercents.value.push(0);
+            container_2_1.columnsWidthsPercents.defaultValue.push(0);
             for (let i = 0; i < 2; i++) {
                 container_2_1.columns.push(baseColumn);
-                container_2_1.columnsWidthsPercents.value.push(67 - i * (34));
-                container_2_1.columnsWidthsPercents.defaultValue.push(67 - i * (34));
+                if (i !== 0) {
+                    container_2_1.columnsWidthsPercents.value.push(i * 67);
+                    container_2_1.columnsWidthsPercents.defaultValue.push(i * 67);
+                }
             }
+            container_2_1.columnsWidthsPercents.value.push(100);
+            container_2_1.columnsWidthsPercents.defaultValue.push(100);
 
             const container_1_1_1 = JSON.parse(JSON.stringify(baseContainer)) as IContainer;
             container_1_1_1.logo = logo_container_1_1_1;
+            container_1_1_1.columnsWidthsPercents.value.push(0);
+            container_1_1_1.columnsWidthsPercents.defaultValue.push(0);
             for (let i = 0; i < 3; i++) {
                 container_1_1_1.columns.push(baseColumn);
-                container_1_1_1.columnsWidthsPercents.value.push(100 / 3);
-                container_1_1_1.columnsWidthsPercents.defaultValue.push(100 / 3);
+                if (i !== 0) {
+                    container_1_1_1.columnsWidthsPercents.value.push(i * (100 / 3));
+                    container_1_1_1.columnsWidthsPercents.defaultValue.push(i * (100 / 3));
+                }
             }
+            container_1_1_1.columnsWidthsPercents.value.push(100);
+            container_1_1_1.columnsWidthsPercents.defaultValue.push(100);
 
             state.builtinContainers = [container_1, container_1_1, container_1_2, container_2_1, container_1_1_1];
         },
@@ -90,7 +117,9 @@ export const emailsDataSlice = createSlice({
             block_text.logo = logo_block_text;
             const block_html = JSON.parse(JSON.stringify(blockHtml)) as IBlock;
             block_html.logo = logo_block_html;
-            state.builtinBlocks = [block_image, block_heading, block_text, block_html];
+            const block_divider = JSON.parse(JSON.stringify(blockDivider)) as IBlock;
+            block_divider.logo = logo_block_divider;
+            state.builtinBlocks = [block_image, block_heading, block_text, block_html, block_divider];
         }
     }
 });

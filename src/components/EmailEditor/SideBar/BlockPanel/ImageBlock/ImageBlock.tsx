@@ -7,6 +7,7 @@ import { ControlSlider } from "../../shared/ControlSlider";
 import { ControlHAlign } from "../../shared/ControlHAlign";
 import { emailsCurrentEmailActions } from "../../../../../store/debuilder-data/emailsCurrentEmailSlice";
 import { useDispatch } from "react-redux";
+import { ControlSelection } from "../../shared/ControlSelection";
 
 interface IImageBlockProps {
     block: IBlockImage;
@@ -26,6 +27,12 @@ export function ImageBlock({ block }: IImageBlockProps) {
             <ControlText propertyKey={"alternateText"} data={block.alternateText} handleUpdateProperty={updateKey} />
             <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlSlider propertyKey={"widthPercent"} data={block.widthPercent} handleUpdateProperty={updateKey} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
+            <ControlSlider propertyKey={"widthMobilePercent"} data={block.widthMobilePercent} handleUpdateProperty={updateKey} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
+            <ControlText propertyKey={"anchor"} data={block.anchor} handleUpdateProperty={updateKey} />
+            <Divider light sx={{ mt: 1, mb:1 }} />
+            <ControlSelection propertyKey={"target"} data={block.target} handleUpdateProperty={updateKey} />
             <Divider light sx={{ mt: 1, mb:1 }} />
             <ControlHAlign propertyKey={"align"} data={block.align} handleUpdateProperty={updateKey} />
         </Fragment>

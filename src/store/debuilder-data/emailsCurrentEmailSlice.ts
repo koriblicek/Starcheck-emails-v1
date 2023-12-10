@@ -93,7 +93,7 @@ function updateTemplate(template: ITemplate) {
 
             container.columns.forEach((column, index) => {
                 //set width of all columns - based on column width percentage
-                column.calculatedWidthPixels = container.calculatedWidthPixels * container.columnsWidthsPercents.value[index] / 100;
+                column.calculatedWidthPixels = container.calculatedWidthPixels * (container.columnsWidthsPercents.value[index + 1] - container.columnsWidthsPercents.value[index]) / 100;
 
                 column.blocks.forEach(block => {
                     //set width of all columns - based on column width - column padding * 2
@@ -128,18 +128,53 @@ function exportTemplateText(template: ITemplate): string {
     //width + padding value: 20
     exportedText = exportedText.replaceAll('{{contentWidthPixelsWithPadding}}', (template.contentWidthPixels.value + 20).toString());
     exportedText = exportedText.replaceAll('{{containers}}', template.containers.reduce((containersExportedText, container) => containersExportedText + container.exportedText, ""));
-    //calculate css
 
+    //calculate css for columns
     let exportedCss: string = "";
+    let widthsList: string[] = [];
     template.containers.forEach(container => {
         container.columns.forEach((column) => {
-            exportedCss = `${exportedCss}
-                .u-row .u-col-${column.calculatedWidthPixels.toFixed(2).replace(".", "_")} {
-                    width: ${column.calculatedWidthPixels}px !important;
-                  }`;
+            const widthString = column.calculatedWidthPixels.toFixed(2).replace(".", "_");
+            if (!widthsList.includes(widthString)) {
+                widthsList.push(widthString);
+                exportedCss = `${exportedCss}
+            .sc-container .sc-column-${column.calculatedWidthPixels.toFixed(2).replace(".", "_")} {
+                width: ${column.calculatedWidthPixels}px !important;
+            }`;
+            }
         });
     });
     exportedText = exportedText.replaceAll('{{columnStyles}}', exportedCss);
+
+
+    //calculate css for images
+    exportedCss = "";
+    template.containers.forEach(container => {
+        container.columns.forEach((column) => {
+            column.blocks.forEach((block) => {
+                if (block.type === "image") {
+                    exportedCss = `${exportedCss}
+                    .sc-image-${block.id} {
+                        width: ${(block as IBlockImage).widthMobilePercent.value === 100 ? "100%" : "auto"} !important;
+                        max-width: ${(block as IBlockImage).widthMobilePercent.value + (block as IBlockImage).widthMobilePercent.sizeSuffix} !important;
+                    }
+                    `;
+                }
+            });
+        });
+    });
+    exportedText = exportedText.replaceAll('{{imageStyles}}', exportedCss);
+
+    // cleanup all exports
+    template.containers.forEach(container => {
+        container.columns.forEach((column) => {
+            column.blocks.forEach((block) => {
+                block.exportedText = "";
+            });
+            column.exportedText = "";
+        });
+        container.exportedText = "";
+    });
     return exportedText;
 }
 
@@ -216,7 +251,17 @@ function exportBlockText(block: IBlock): string {
             exportedText = exportedText.replaceAll('{{alternateText}}', blockImage.alternateText.value);
             exportedText = exportedText.replaceAll('{{widthPercent}}', blockImage.widthPercent.value.toString());
             exportedText = exportedText.replaceAll('{{widthPercentSuffix}}', blockImage.widthPercent.sizeSuffix);
-            exportedText = exportedText.replaceAll('{{widthPixels}}', ((blockImage.calculatedWidthPixels-2*blockImage.padding.value) * blockImage.widthPercent.value / 100).toString());
+            if (blockImage.anchor.value !== "") {
+                exportedText = exportedText.replaceAll('{{anchorStart}}', `<a href="${blockImage.anchor.value}" target="${blockImage.target.value}">`);
+                exportedText = exportedText.replaceAll('{{anchorEnd}}', "</a>");
+
+            } else {
+                exportedText = exportedText.replaceAll('{{anchorStart}}', "");
+                exportedText = exportedText.replaceAll('{{anchorEnd}}', "");
+            }
+            exportedText = exportedText.replaceAll('{{anchorStart}}', blockImage.widthPercent.sizeSuffix);
+            exportedText = exportedText.replaceAll('{{widthPixels}}', ((blockImage.calculatedWidthPixels - 2 * blockImage.padding.value) * blockImage.widthPercent.value / 100).toString());
+            exportedText = exportedText.replaceAll('{{classMobile}}', `sc-image-${blockImage.id}`);
             break;
         case "html":
             const blockHtml = block as IBlockHtml;

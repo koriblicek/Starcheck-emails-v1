@@ -1,10 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ITemplate } from '../../types';
 
 interface IState {
     language: string;
     editorMobileView: boolean;
     containerDrag: boolean;
     blockDrag: boolean;
+    templateToDelete: ITemplate | null;
 }
 
 const initialState = {

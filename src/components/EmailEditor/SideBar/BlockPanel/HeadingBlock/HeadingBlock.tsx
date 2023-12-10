@@ -8,6 +8,7 @@ import { ControlSize } from "../../shared/ControlSize";
 import { ControlSelection } from "../../shared/ControlSelection";
 import { ControlColor } from "../../shared/ControlColor";
 import { ControlTAlign } from "../../shared/ControlTAlign";
+import { ControlMultilineText } from "../../shared/ControlMultilineText";
 
 interface IHeadingBlockProps {
     block: IBlockHeading;
@@ -22,7 +23,7 @@ export function HeadingBlock({ block }: IHeadingBlockProps) {
 
     return (
         <Fragment>
-            <ControlText propertyKey={"heading"} data={block.heading} handleUpdateProperty={updateKey} />
+            <ControlMultilineText propertyKey={"heading"} data={block.heading} handleUpdateProperty={updateKey} />
             <Divider light sx={{ mt: 1, mb: 1 }} />
             <ControlText propertyKey={"fontFamily"} data={block.fontFamily} handleUpdateProperty={updateKey} />
             <Divider light sx={{ mt: 1, mb: 1 }} />

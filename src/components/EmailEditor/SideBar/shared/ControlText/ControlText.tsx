@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Grid, IconButton, TextField, Typography, useTheme } from '@mui/material';
+import { useCallback, useMemo, useState } from 'react';
+import { Grid, IconButton, TextField, Typography, debounce, useTheme } from '@mui/material';
 import { ITextType } from '../../../../../types';
 import { useTranslation } from 'react-i18next';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
@@ -18,10 +18,26 @@ export function ControlText({ propertyKey, data, handleUpdateProperty }: IContro
 
     const theme = useTheme();
 
-    function handleChange(propertyValue: string) {
+    /*function handleChange(propertyValue: string) {
         setValue(propertyValue);
         handleUpdateProperty(propertyKey, propertyValue);
-    }
+    }*/
+
+    const debouncedUpdate = useMemo(
+        () =>
+            debounce((value) => {
+                handleUpdateProperty(propertyKey, value);
+            }, 200),
+        [handleUpdateProperty, propertyKey]
+    );
+
+    const handleChange = useCallback(
+        (propertyValue: string) => {
+            setValue(propertyValue);
+            debouncedUpdate(propertyValue);
+        },
+        [debouncedUpdate]
+    );
 
     return (
         <Grid container columnGap={1} alignItems='center'>
@@ -40,7 +56,7 @@ export function ControlText({ propertyKey, data, handleUpdateProperty }: IContro
                 />
             </Grid>
             <Grid item>
-                <IconButton size="small" sx={{ color: theme.palette.error.light }} onClick={() => handleChange("")}  title={t('button.delete_value')}>
+                <IconButton size="small" sx={{ color: theme.palette.error.light }} onClick={() => handleChange("")} title={t('button.delete_value')}>
                     <DeleteForeverOutlinedIcon />
                 </IconButton>
             </Grid>

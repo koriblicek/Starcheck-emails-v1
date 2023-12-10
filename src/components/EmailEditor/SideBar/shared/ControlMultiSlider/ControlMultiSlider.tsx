@@ -1,10 +1,8 @@
-import { useState } from 'react';
-import { Grid, IconButton, Slider, Typography } from '@mui/material';
-import { INumberArrayType, ISizeType } from '../../../../../types';
+import { useCallback, useMemo, useState } from 'react';
+import { Grid, IconButton, Slider, Typography, debounce } from '@mui/material';
+import { INumberArrayType } from '../../../../../types';
 import { useTranslation } from 'react-i18next';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
-
-const minDistance = 10;
 
 interface IControlMultiSliderProps {
     propertyKey: string;
@@ -22,33 +20,71 @@ export function ControlMultiSlider({ propertyKey, data, handleUpdateProperty }: 
     function valueLabel(value: number) {
         return `${value}${data.typeSuffix}`;
     }
-
-    function handleChange(event: Event, propertyValue: number | number[], activeThumb: number) {
-        if (!Array.isArray(propertyValue)) {
-            return;
-        }
-        let val = propertyValue[activeThumb];
-        //if first handle
-
-        if (activeThumb === 0) {
-            // if just only one handle
-            if (data.value.length === 1) {
-                console.log(val);
-                val = Math.max(data.min + minDistance, Math.min(val, data.max - minDistance));
-            } else {
-                val = Math.max(data.min + minDistance, Math.min(val, propertyValue[activeThumb + 1] - minDistance));
+    /*
+        function handleChange(event: Event, propertyValue: number | number[], activeThumb: number) {
+            if (!Array.isArray(propertyValue)) {
+                return;
             }
-
+            let val = propertyValue[activeThumb];
+            let array = propertyValue as number[];
+            //if first handle
+    
+            // if  the most left handle - it should be only min
+            if (activeThumb === 0) {
+                //val = data.min;
+                val = data.min;
+            } else {
+                //if the most right handle - it should be only max
+                if (activeThumb === propertyValue.length - 1) {
+                    val = data.max;
+                } else {
+                    //val = Math.max(propertyValue[activeThumb - 1] + minDistance, Math.min(val, propertyValue[activeThumb + 1] - minDistance));
+                    //console.log(activeThumb, val);
+                }
+            }
+            array.splice(activeThumb, 1, val);
+            setValue(array);
+            handleUpdateProperty(propertyKey, array.join("|"));
         }
-        console.log((propertyValue as number[]).splice(activeThumb, 1, val));
-        setValue((propertyValue as number[]).splice(activeThumb, 1, val));
-        handleUpdateProperty(propertyKey, (propertyValue as number[]).splice(activeThumb, 1, val).join("|"));
-    }
-
+    */
     function reset(propertyValue: number | number[]) {
         setValue(propertyValue as number[]);
         handleUpdateProperty(propertyKey, (propertyValue as number[]).join("|"));
     }
+
+    const debouncedUpdate = useMemo(
+        () =>
+            debounce((value) => {
+                handleUpdateProperty(propertyKey, value);
+            }, 50),
+        [handleUpdateProperty, propertyKey]
+    );
+
+    const handleChange = useCallback(
+        (event: Event, propertyValue: number | number[], activeThumb: number) => {
+            if (!Array.isArray(propertyValue)) {
+                return;
+            }
+            let val = propertyValue[activeThumb];
+            let array = propertyValue as number[];
+            // if  the most left handle - it should be only min
+            if (activeThumb === 0) {
+                val = data.min;
+            } else {
+                //if the most right handle - it should be only max
+                if (activeThumb === propertyValue.length - 1) {
+                    val = data.max;
+                } else {
+                    //no calculations needed - there is no restriction
+                }
+            }
+            array.splice(activeThumb, 1, val);
+            setValue(array);
+            debouncedUpdate(array.join("|"));
+        },
+        [debouncedUpdate, data]
+    );
+
     return (
         <Grid container columnGap={1} alignItems='center'>
             <Grid item xs={5}>

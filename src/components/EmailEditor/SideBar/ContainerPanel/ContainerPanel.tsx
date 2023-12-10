@@ -68,7 +68,6 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                         <Divider light sx={{ mt: 1, mb: 1 }} />
                         <ControlSize propertyKey="paddingBottomPixels" data={container.paddingBottomPixels} handleUpdateProperty={updateKey} />
                         <Divider light sx={{ mt: 1, mb: 1 }} />
-                        TODO PERCENTAGE SIZE
                         <ControlMultiSlider propertyKey="columnsWidthsPercents" data={container.columnsWidthsPercents} handleUpdateProperty={updateKey} />
                     </List>
                 </Collapse>

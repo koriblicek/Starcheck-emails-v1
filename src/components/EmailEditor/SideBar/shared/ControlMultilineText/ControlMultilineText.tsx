@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { Grid, IconButton, TextField, Typography, useTheme } from '@mui/material';
+import { useCallback, useMemo, useState } from 'react';
+import { Grid, IconButton, TextField, Typography, useTheme, debounce } from '@mui/material';
 import { IMultilineTextType } from '../../../../../types';
 import { useTranslation } from 'react-i18next';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+
+
 interface IControlMultilineTextProps {
     propertyKey: string;
     data: IMultilineTextType;
@@ -18,10 +20,21 @@ export function ControlMultilineText({ propertyKey, data, handleUpdateProperty }
 
     const theme = useTheme();
 
-    function handleChange(propertyValue: string) {
-        setValue(propertyValue);
-        handleUpdateProperty(propertyKey, propertyValue);
-    }
+    const debouncedUpdate = useMemo(
+        () =>
+            debounce((value) => {
+                handleUpdateProperty(propertyKey, value);
+            }, 200),
+        [handleUpdateProperty, propertyKey]
+    );
+
+    const handleChange = useCallback(
+        (propertyValue: string) => {
+            setValue(propertyValue);
+            debouncedUpdate(propertyValue);
+        },
+        [debouncedUpdate]
+    );
 
     return (
         <Grid container columnGap={1} alignItems='center'>

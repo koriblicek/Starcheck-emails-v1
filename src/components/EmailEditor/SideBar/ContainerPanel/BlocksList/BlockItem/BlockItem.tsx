@@ -30,11 +30,11 @@ export function BlockItem({ block }: IBlockItemProps) {
             onDragEnd={(e) => handleOnDragEnd(e)}
         >
             <CardActions sx={{ p: '5px' }}>
-                <Grid container alignItems='center'>
+                <Grid container alignItems='center' wrap="nowrap">
                     <Grid item>
                         <DragIndicatorOutlinedIcon sx={{ mr: 1 }} />
                     </Grid>
-                    <Grid item xs >
+                    <Grid item xs>
                         <Grid container rowGap={1} justifyContent='center'>
                             <Grid item>
                                 <img src={block.logo} alt='' style={{ display: 'block' }} />

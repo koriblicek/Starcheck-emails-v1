@@ -5,8 +5,8 @@ import { ICustomTemplates } from "../../types";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { emailsDataActions } from "../../store/debuilder-data/emailsDataSlice";
-import useGetFromAPI from "../../hooks/useGetFromAPI";
 import { EmailTemplatesCategory } from "./EmailTemplatesCategory";
+import useGetFromAPI from "../../hooks/useGetFromAPI";
 
 export function EmailTemplatesView() {
 
