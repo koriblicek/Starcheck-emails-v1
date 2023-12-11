@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import { useTranslation } from 'react-i18next';
 
 interface IModalDialog {
     title: string;
@@ -17,6 +18,8 @@ interface IModalDialog {
 export function ModalDialog({ title, onClose, fullWidth = true, open = false, maxWidth = 'md', disabledConfirm = false, closeButton = true, ...props }: PropsWithChildren<IModalDialog>) {
 
     const theme = useTheme();
+
+    const { t } = useTranslation();
 
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -52,8 +55,8 @@ export function ModalDialog({ title, onClose, fullWidth = true, open = false, ma
             </DialogContent>
             {closeButton &&
                 <DialogActions sx={{ borderTop: '1px lightgray solid' }}>
-                    <Button size="small" color="error" onClick={() => onClose(false)} variant='outlined' startIcon={<ClearOutlinedIcon />}>Zrušiť</Button>
-                    <Button size="small" color="success" onClick={() => onClose(true)} variant='contained' disabled={disabledConfirm} autoFocus startIcon={<CheckOutlinedIcon />}>Potvrdiť</Button>
+                    <Button size="small" color="error" onClick={() => onClose(false)} variant='outlined' startIcon={<ClearOutlinedIcon />}>{t('button.discard')}</Button>
+                    <Button size="small" color="success" onClick={() => onClose(true)} variant='contained' disabled={disabledConfirm} autoFocus startIcon={<CheckOutlinedIcon />}>{t('button.confirm')}</Button>
                 </DialogActions>
             }
         </Dialog>

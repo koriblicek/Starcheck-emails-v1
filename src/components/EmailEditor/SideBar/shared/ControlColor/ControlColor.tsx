@@ -57,7 +57,7 @@ export function ControlColor({ propertyKey, data, handleUpdateProperty }: IContr
                 {checked
                     ?
                     <TextField
-                        name={propertyKey}
+                        name={propertyKey+"color"}
                         value={value}
                         type="color"
                         size="small"
@@ -68,7 +68,7 @@ export function ControlColor({ propertyKey, data, handleUpdateProperty }: IContr
                     </TextField>
                     :
                     <TextField
-                        name={propertyKey}
+                        name={propertyKey+"text"}
                         value={t('controls.not_set')}
                         type="text"
                         size="small"
@@ -86,6 +86,7 @@ export function ControlColor({ propertyKey, data, handleUpdateProperty }: IContr
             </Grid>
             <Grid item>
                 <Checkbox
+                    name={propertyKey+"check"}
                     checked={checked}
                     onChange={handleCheckClick}
                 />

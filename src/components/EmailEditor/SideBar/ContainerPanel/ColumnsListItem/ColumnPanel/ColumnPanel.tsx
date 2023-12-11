@@ -3,7 +3,7 @@ import { IColumn } from "../../../../../../types";
 import { ControlColor } from "../../../shared/ControlColor";
 import { useDispatch } from "react-redux";
 import { ControlSize } from "../../../shared/ControlSize";
-import { emailsCurrentEmailActions } from "../../../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../../../store/emails-data/emailsCurrentEmailSlice";
 
 interface IColumnPanelProps {
     column: IColumn;

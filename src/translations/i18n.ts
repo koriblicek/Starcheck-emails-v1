@@ -34,7 +34,9 @@ i18next
                         image: 'Image',
                         heading: 'Heading',
                         send_preview_mail: 'Send preview email',
-                        divider:'Divider',
+                        divider: 'Divider',
+                        confirm: 'Confirm',
+                        discard: 'Discard',
                     },
                     label: {
                         selectLanguage: 'Select Language:',
@@ -56,6 +58,7 @@ i18next
                     title: {
                         customTemplates: 'Custom templates',
                         builtinTemplates: 'Built-in templates',
+                        selectImage: 'Select image',
                     },
                     languages: {
                         sk: 'Slovak',
@@ -117,7 +120,7 @@ i18next
                         divider_width: 'Divider width',
                         line_width: 'Line width',
                         line_color: 'Line color',
-                        line_style:'Line style',
+                        line_style: 'Line style',
                     },
                     templates: {
                         email_template_settings: 'Email template settings',
@@ -168,7 +171,9 @@ i18next
                         image: 'Obrázok',
                         heading: 'Hlavička',
                         send_preview_mail: 'Odoslať skúšobný email',
-                        divider:'Oddelovač',
+                        divider: 'Oddelovač',
+                        confirm: 'Potvrdiť',
+                        discard: 'Zrušiť',
                     },
                     label: {
                         selectLanguage: 'Vyberte jazyk:',
@@ -190,6 +195,7 @@ i18next
                     title: {
                         customTemplates: 'Uživatelské šablóny',
                         builtinTemplates: 'Vstavané šablóny',
+                        selectImage: 'Vyberte obrázok',
                     },
                     languages: {
                         sk: 'Slovensky',
@@ -251,7 +257,7 @@ i18next
                         divider_width: 'Šírka oddelovača',
                         line_width: 'Šírka čiary',
                         line_color: 'Farba čiary',
-                        line_style:'Typ čiary',
+                        line_style: 'Typ čiary',
                     },
                     templates: {
                         email_template_settings: 'Nastavenia šablóny správy',

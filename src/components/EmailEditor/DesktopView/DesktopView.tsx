@@ -2,7 +2,7 @@ import { Box, Grid, TextField, ToggleButton, ToggleButtonGroup, Typography, useT
 import { useAppSelector } from "../../../store/hooks";
 import { DesktopItemContainer } from "./DesktopItemContainer";
 import { useDispatch } from "react-redux";
-import { emailsCurrentEmailActions } from "../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../store/emails-data/emailsCurrentEmailSlice";
 import { DesktopItemEmptyContainer } from "./DesktopItemEmptyContainer";
 import { useTranslation } from "react-i18next";
 import { DropAreaContainer } from "./DropAreaContainer";
@@ -35,18 +35,13 @@ export function DesktopView() {
                 margin: 0;
             }
 
-            .u-row {
-            width: ${template.contentWidthPixels.value + template.contentWidthPixels.sizeSuffix} !important;
+            .sc-container {
+                width: ${template.contentWidthPixels.value + template.contentWidthPixels.sizeSuffix} !important;
             }
 
-            .u-row .u-col {
-            vertical-align: top;
+            .sc-container .sc-column {
+                vertical-align: top;
             }
-
-            .u-row .u-col-100 {
-            width: ${template.contentWidthPixels.value + template.contentWidthPixels.sizeSuffix} !important;
-            }
-        }
     `;
 
     const items = template.containers.map((container, index) => {

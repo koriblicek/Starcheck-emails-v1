@@ -4,7 +4,7 @@ import { Alert, Chip, CircularProgress, Divider, Grid } from "@mui/material";
 import { ICustomTemplates } from "../../types";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { emailsDataActions } from "../../store/debuilder-data/emailsDataSlice";
+import { emailsDataActions } from "../../store/emails-data/emailsDataSlice";
 import { EmailTemplatesCategory } from "./EmailTemplatesCategory";
 import useGetFromAPI from "../../hooks/useGetFromAPI";
 
@@ -18,7 +18,8 @@ export function EmailTemplatesView() {
 
     const [showCustomTemplates, setShowCustomTemplates] = useState<boolean>(false);
 
-    const { builtinTemplates, customTemplates } = useAppSelector(state => state.emailsData);
+    const builtinTemplates = useAppSelector(state => state.emailsData.builtinTemplates);
+    const customTemplates = useAppSelector(state => state.emailsData.customTemplates);
 
     useEffect(() => {
         if (data) {

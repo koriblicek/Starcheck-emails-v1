@@ -1,14 +1,15 @@
 import { Fragment, useState } from "react";
-import { IBlock, IBlockHeading, IBlockHtml, IBlockImage, IBlockText } from "../../../../types";
+import { IBlock, IBlockDivider, IBlockHeading, IBlockHtml, IBlockImage, IBlockText } from "../../../../types";
 import { BlockImage } from "./BlockImage";
 import { Box } from "@mui/material";
 import { BlockOverlay } from "../BlockOverlay";
 import { useDispatch } from "react-redux";
-import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
 import { BlockText } from "./BlockText";
 import { BlockHeading } from "./BlockHeading";
 import { DropAreaBlock } from "../DropAreaBlock";
 import { BlockHtml } from "./BlockHtml";
+import { BlockDivider } from "./BlockDivider";
 
 interface IDesktopItemBlockProps {
   block: IBlock;
@@ -36,6 +37,9 @@ export function DesktopItemBlock({ block, containerIndex, columnIndex, blockInde
       break;
     case "html":
       blockElement = <BlockHtml block={block as IBlockHtml} />;
+      break;
+    case "divider":
+      blockElement = <BlockDivider block={block as IBlockDivider} />;
       break;
   }
 

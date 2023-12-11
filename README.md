@@ -47,10 +47,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 # New Block definition
-    1. src\types\index.ts - add new type to `TBlockIdentifiers`
-    2. src\types\index.ts - declare new interface  extending `IBlock`
-    3. src\data\index.ts - add new base block definition (html string, image) 
-    4. src\store\debuilder-data\emailsDataSlice.ts - add initialization initBuiltinBlocks
+1. src\types\index.ts - add new type to `TBlockIdentifiers`
+2. src\types\index.ts - declare new interface  extending `IBlock`
+3. src\data\index.ts - add new base block definition (html string, image) 
+4. src\store\debuilder-data\emailsDataSlice.ts - add initialization initBuiltinBlocks
 5. src\components\EmailEditor\DesktopView\DesktopItemBlock - create new component to display new block type
 6. src\components\EmailEditor\DesktopView\DesktopItemBlock\DesktopItemBlock.tsx - add new case to display new block
 7. src\components\EmailEditor\SideBar\BlockPanel - add new panel component to display properties inSideBar

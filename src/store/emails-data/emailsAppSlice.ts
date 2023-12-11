@@ -13,7 +13,8 @@ const initialState = {
     language: "en",
     editorMobileView: false,
     containerDrag: false,
-    blockDrag: false
+    blockDrag: false,
+    templateToDelete: null
 } as IState;
 
 export const emailsAppSlice = createSlice({
@@ -28,6 +29,9 @@ export const emailsAppSlice = createSlice({
         },
         setBlockDrag: (state, action: PayloadAction<{ status: boolean; }>) => {
             state.blockDrag = action.payload.status;
+        },
+        setTemplateToDelete: (state, action: PayloadAction<{ template: ITemplate | null; }>) => {
+            state.templateToDelete = action.payload.template;
         },
     }
 });

@@ -6,9 +6,13 @@ done - delete export text from template before save to save place
 done - add anchor link to image block as new attribute
 done - do not duplicate css styles when creating exported text
 done - implement debounce into ControlColor, ControlText, ControlSlider and ControlMultiSlider based on ControlMultilineText
-add divider as new block
-add delete template functionality
-add visual representation of the table
-add ... functionality to browse for images
-think about adding global font - and add check box to font to activate/deactivate it
+done - add divider as new block
+done - add delete template functionality
+done - add ... functionality to browse for images
+done - fix save template to follow delete pattern
+add mobile view
 add button as new block
+add notifications: delete (fail, ok), save (fail, ok)
+think about adding global font - and add check box to font to activate/deactivate it
+add visual representation of the table
+fix send preview to follow save template pattern

@@ -1,13 +1,14 @@
 import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
-import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
 import { useDispatch } from "react-redux";
-import { blockHeading, blockHtml, blockImage, blockText } from "../../../../data";
+import { blockDivider, blockHeading, blockHtml, blockImage, blockText } from "../../../../data";
 import { IColumn } from "../../../../types";
 import { useTranslation } from "react-i18next";
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
 import ShortTextOutlinedIcon from '@mui/icons-material/ShortTextOutlined';
 import CodeIcon from '@mui/icons-material/Code';
 import HMobiledataOutlinedIcon from '@mui/icons-material/HMobiledataOutlined';
+import CommitOutlinedIcon from '@mui/icons-material/CommitOutlined';
 
 interface IAddBlockMenuProps {
     anchorEl: null | HTMLElement;
@@ -33,6 +34,9 @@ export function AddBlockMenu({ anchorEl, column, handleAnchorClear }: IAddBlockM
                 break;
             case "html":
                 dispatch(emailsCurrentEmailActions.addBlock({ columnId: column.id, block: JSON.stringify(blockHtml) }));
+                break;
+            case "divider":
+                dispatch(emailsCurrentEmailActions.addBlock({ columnId: column.id, block: JSON.stringify(blockDivider) }));
                 break;
         }
         handleAnchorClear();
@@ -66,6 +70,10 @@ export function AddBlockMenu({ anchorEl, column, handleAnchorClear }: IAddBlockM
             <MenuItem onClick={() => handleSelectMenu("html")}>
                 <ListItemIcon><CodeIcon /></ListItemIcon>
                 <ListItemText>{t('button.html')}</ListItemText>
+            </MenuItem>
+            <MenuItem onClick={() => handleSelectMenu("divider")}>
+                <ListItemIcon><CommitOutlinedIcon /></ListItemIcon>
+                <ListItemText>{t('button.divider')}</ListItemText>
             </MenuItem>
         </Menu>
     );

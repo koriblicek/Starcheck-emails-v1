@@ -1,8 +1,8 @@
 import {  Card, CardActions, Grid } from "@mui/material";
 import { IContainer } from "../../../../../../types";
 import { useDispatch } from "react-redux";
-import { emailsAppActions } from "../../../../../../store/debuilder-data/emailsAppSlice";
-import { emailsCurrentEmailActions } from "../../../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsAppActions } from "../../../../../../store/emails-data/emailsAppSlice";
+import { emailsCurrentEmailActions } from "../../../../../../store/emails-data/emailsCurrentEmailSlice";
 import DragIndicatorOutlinedIcon from '@mui/icons-material/DragIndicatorOutlined';
 
 interface IContainerItemProps {

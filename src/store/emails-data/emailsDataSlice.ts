@@ -108,6 +108,10 @@ export const emailsDataSlice = createSlice({
 
             state.builtinContainers = [container_1, container_1_1, container_1_2, container_2_1, container_1_1_1];
         },
+        deleteCustomTemplate: (state, action: PayloadAction<{ template: ITemplate; }>) => {
+            const index = state.customTemplates.findIndex((template) => template.id === action.payload.template.id);
+            state.customTemplates.splice(index, 1);
+        },
         initBuiltinBlocks: (state) => {
             const block_image = JSON.parse(JSON.stringify(blockImage)) as IBlock;
             block_image.logo = logo_block_image;
@@ -121,6 +125,7 @@ export const emailsDataSlice = createSlice({
             block_divider.logo = logo_block_divider;
             state.builtinBlocks = [block_image, block_heading, block_text, block_html, block_divider];
         }
+
     }
 });
 

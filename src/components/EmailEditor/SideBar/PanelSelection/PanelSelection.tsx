@@ -2,7 +2,7 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../store/hooks";
 import { useDispatch } from "react-redux";
-import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
 import { useTranslation } from "react-i18next";
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import DatasetOutlinedIcon from '@mui/icons-material/DatasetOutlined';

@@ -2,7 +2,7 @@ import { Box, Paper, Typography, useTheme } from "@mui/material";
 import { useAppSelector } from "../../../../store/hooks";
 import { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
-import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
 import { IContainer } from "../../../../types";
 import { useTranslation } from "react-i18next";
 

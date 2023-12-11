@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { emailsAppReducer } from './debuilder-data/emailsAppSlice';
-import { emailsCurrentEmailReducer } from './debuilder-data/emailsCurrentEmailSlice';
-import { emailsSettingsReducer } from './debuilder-data/emailsSettingsSlice';
-import { emailsDataReducer } from './debuilder-data/emailsDataSlice';
+import { emailsAppReducer } from './emails-data/emailsAppSlice';
+import { emailsCurrentEmailReducer } from './emails-data/emailsCurrentEmailSlice';
+import { emailsSettingsReducer } from './emails-data/emailsSettingsSlice';
+import { emailsDataReducer } from './emails-data/emailsDataSlice';
 
 export const store = configureStore({
   reducer: {

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../../../store/hooks";
 import { Fragment, useEffect, useState } from "react";
 import { Box, Grid, IconButton, Paper, useTheme } from "@mui/material";
-import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 
@@ -50,7 +50,7 @@ export function BlockOverlay({ isOver, block }: IBlockOverlayProps) {
     >
       {selected &&
         <Fragment>
-          <Box sx={{ pointerEvents: 'auto', position: 'absolute', bottom: 0, right: 0, transform: 'translate(0,100%)', zIndex: 10000 }} >
+          <Box sx={{ pointerEvents: 'auto', position: 'absolute', bottom: 0, right: 0, transform: 'translate(0,100%)', zIndex: 1300 }} >
             <Paper sx={{ mr: '-1px', mt: '0px', border: 1, borderRadius: 0, borderBottomLeftRadius: 4, borderBottomRightRadius: 3, borderColor: theme.palette.secondary.main }} elevation={5}>
               <Grid container columnGap={1}>
                 <Grid item>

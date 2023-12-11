@@ -5,7 +5,7 @@ import { Divider } from "@mui/material";
 import { ControlText } from "../../shared/ControlText";
 import { ControlSlider } from "../../shared/ControlSlider";
 import { ControlHAlign } from "../../shared/ControlHAlign";
-import { emailsCurrentEmailActions } from "../../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../../store/emails-data/emailsCurrentEmailSlice";
 import { useDispatch } from "react-redux";
 import { ControlSelection } from "../../shared/ControlSelection";
 

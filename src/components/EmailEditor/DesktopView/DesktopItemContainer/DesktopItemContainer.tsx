@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import { IContainer } from "../../../../types";
 import { useDispatch } from "react-redux";
-import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
 import { DesktopItemColumn } from "../DesktopItemColumn";
 import { ContainerOverlay } from "../ContainerOverlay";
 import { useAppSelector } from "../../../../store/hooks";
@@ -48,8 +48,8 @@ export function DesktopItemContainer({ container, containerIndex }: IDesktopItem
                     dispatch(emailsCurrentEmailActions.selectContainer({ container: container }));
                 }}
             >
-                <div className="u-row-container" style={{ paddingTop: container.paddingTopPixels.value + container.paddingTopPixels.sizeSuffix, paddingBottom: container.paddingBottomPixels.value + container.paddingBottomPixels.sizeSuffix,...(container.backgroundColor.value !== "transparent" ? { backgroundColor: container.backgroundColor.value } : {  }) }}>
-                    <div className="u-row" style={{ margin: '0 auto', minWidth: '320px', maxWidth: container.calculatedWidthPixels + "px", overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word', ...(container.contentBackgroundColor.value !== "transparent" ? { backgroundColor: container.contentBackgroundColor.value } : {  }) }}>
+                <div className="sc-container-parent" style={{ paddingTop: container.paddingTopPixels.value + container.paddingTopPixels.sizeSuffix, paddingBottom: container.paddingBottomPixels.value + container.paddingBottomPixels.sizeSuffix,...(container.backgroundColor.value !== "transparent" ? { backgroundColor: container.backgroundColor.value } : {  }) }}>
+                    <div className="sc-container" style={{ margin: '0 auto', minWidth: '320px', maxWidth: container.calculatedWidthPixels + "px", overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word', ...(container.contentBackgroundColor.value !== "transparent" ? { backgroundColor: container.contentBackgroundColor.value } : {  }) }}>
                         <div style={{ borderCollapse: 'collapse', display: 'table', width: '100%', height: '100%', backgroundColor: 'transparent' }}>
                             {items}
                         </div>

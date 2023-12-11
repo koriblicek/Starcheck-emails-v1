@@ -3,7 +3,7 @@ import { IContainer } from "../../../../types";
 import { useState } from "react";
 import { ControlColor } from "../shared/ControlColor";
 import { useDispatch } from "react-redux";
-import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
 import { useTranslation } from "react-i18next";
 import { ControlSize } from "../shared/ControlSize";
 import { ColumnsListItem } from "./ColumnsListItem";

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign, ITAlign, TTAlign, IMultilineTextType, IBlockHeading, IBlockText, IBlockImage, IBlockHtml } from '../../types';
+import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign, ITAlign, TTAlign, IMultilineTextType, IBlockHeading, IBlockText, IBlockImage, IBlockHtml, IBlockDivider } from '../../types';
 import * as uuid from 'uuid';
 
 interface IState {
@@ -85,6 +85,8 @@ function updateProperty(object: Object, propertyKey: string, value: string) {
 
 function updateTemplate(template: ITemplate) {
     if (template) {
+        //update modification time
+        template.modificationDate = Date.now();
         //get template width
         const w = template.contentWidthPixels.value;
         template.containers.forEach(container => {
@@ -274,6 +276,16 @@ function exportBlockText(block: IBlock): string {
                 blockHtml.color.value === "transparent" ? "" : `color: ${blockHtml.color.value};`);
             exportedText = exportedText.replaceAll('{{textAlign}}', blockHtml.textAlign.value);
             break;
+        case "divider":
+            const blockDivider = block as IBlockDivider;
+            exportedText = exportedText.replaceAll('{{align}}', blockDivider.align.value);
+            exportedText = exportedText.replaceAll('{{widthPercent}}', blockDivider.widthPercent.value.toString());
+            exportedText = exportedText.replaceAll('{{widthPercentSuffix}}', blockDivider.widthPercent.sizeSuffix);
+            exportedText = exportedText.replaceAll('{{lineWidthPixels}}', blockDivider.lineWidthPixels.value.toString());
+            exportedText = exportedText.replaceAll('{{lineWidthPixelsSuffix}}', blockDivider.lineWidthPixels.sizeSuffix);
+            exportedText = exportedText.replaceAll('{{lineType}}', blockDivider.lineType.value);
+            exportedText = exportedText.replaceAll('{{lineColor}}', blockDivider.lineColor.value);
+            break;
     }
     return exportedText;
 }
@@ -300,15 +312,6 @@ export const emailsCurrentEmailSlice = createSlice({
             }
             //clear selection
             emailsCurrentEmailSlice.caseReducers.clearSelection(state);
-        },
-        saveTemplate: (state) => {
-            if (state.template) {
-                state.template.modificationDate = Date.now();
-            }
-            state.saveIsRequired = true;
-        },
-        cancelSave: (state) => {
-            state.saveIsRequired = false;
         },
         updateTemplateProperty: (state, action: PayloadAction<{ propertyKey: string; value: string; }>) => {
             if (state.template) {

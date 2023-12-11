@@ -1,11 +1,11 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { IAppData, IAppInputData } from "./types";
-import { emailsSettingsActions } from "./store/debuilder-data/emailsSettingsSlice";
+import { emailsSettingsActions } from "./store/emails-data/emailsSettingsSlice";
 import { Alert, AlertTitle, Typography } from "@mui/material";
 import { Wrapper } from "./components/Wrapper";
 import useGetFromAPI from "./hooks/useGetFromAPI";
-import { emailsDataActions } from "./store/debuilder-data/emailsDataSlice";
+import { emailsDataActions } from "./store/emails-data/emailsDataSlice";
 
 interface IAppProps {
   inputData: IAppInputData;

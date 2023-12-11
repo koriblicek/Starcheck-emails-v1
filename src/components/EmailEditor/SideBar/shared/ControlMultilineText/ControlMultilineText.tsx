@@ -48,7 +48,7 @@ export function ControlMultilineText({ propertyKey, data, handleUpdateProperty }
             </Grid>
             <Grid item xs={12}>
                 <TextField
-                    name={propertyKey}
+                    name={propertyKey+"multiline"}
                     type="text"
                     color='info'
                     multiline

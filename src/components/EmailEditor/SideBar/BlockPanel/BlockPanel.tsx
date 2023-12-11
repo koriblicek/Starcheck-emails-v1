@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { IBlock, IBlockHeading, IBlockHtml, IBlockImage, IBlockText } from "../../../../types";
+import { IBlock, IBlockDivider, IBlockHeading, IBlockHtml, IBlockImage, IBlockText } from "../../../../types";
 import { useEffect, useState } from "react";
-import { emailsCurrentEmailActions } from "../../../../store/debuilder-data/emailsCurrentEmailSlice";
+import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
 import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ControlSize } from "../shared/ControlSize";
@@ -14,6 +14,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import DatasetOutlinedIcon from '@mui/icons-material/DatasetOutlined';
 import { HtmlBlock } from "./HtmlBlock";
+import { DividerBlock } from "./DividerBlock";
 
 interface IBlockPanelProps {
     block: IBlock;
@@ -48,6 +49,9 @@ export function BlockPanel({ block }: IBlockPanelProps) {
                     break;
                 case "html":
                     setBlockPanel(<HtmlBlock block={selectedBlock as IBlockHtml} key={block.id} />);
+                    break;
+                case "divider":
+                    setBlockPanel(<DividerBlock block={selectedBlock as IBlockDivider} key={block.id} />);
                     break;
             }
     }, [selectedBlock, block.id]);
