@@ -1,4 +1,4 @@
-import { Box,  Grid, IconButton, Paper, useTheme } from "@mui/material";
+import { Box, Grid, IconButton, Paper, Typography, useTheme } from "@mui/material";
 import { useAppSelector } from "../../../../store/hooks";
 import { Fragment, useEffect, useState } from "react";
 import { IContainer } from "../../../../types";
@@ -7,6 +7,8 @@ import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsC
 import { useTranslation } from "react-i18next";
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
+import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 
 interface IContainerOverlayProps {
     isOver: boolean;
@@ -23,6 +25,10 @@ export function ContainerOverlay({ isOver, container }: IContainerOverlayProps) 
     const { selectedContainer } = useAppSelector(state => state.emailsCurrentEmail);
 
     const [selected, setSelected] = useState<boolean>(false);
+
+    const { editorMobileView } = useAppSelector(state => state.emailsApp);
+
+    const containerWidth = editorMobileView ? 320 : container.calculatedWidthPixels;
 
     useEffect(() => {
         if (selectedContainer) {
@@ -44,14 +50,39 @@ export function ContainerOverlay({ isOver, container }: IContainerOverlayProps) 
                 border: !selected ? `1px ${theme.palette.info.main} dashed` : `1px ${theme.palette.info.main} solid`,
                 visibility: (isOver || selected) ? "visible" : "hidden",
                 pointerEvents: 'none',
-                minWidth: container.calculatedWidthPixels - 2 + "px"
+                minWidth: containerWidth - 2 + "px"
             }}
         >
+            {(isOver && !selected) &&
+                <Fragment>
+                    <Box sx={{ pointerEvents: 'auto', position: 'absolute', bottom: 0, left: 0, transform: 'translate(0,100%)', zIndex: 1300 }} >
+                        <Paper sx={{ pl: 1, pr: 1, mr: '-1px', mt: '0px', borderRadius: 0, borderBottomLeftRadius: 4, borderBottomRightRadius: 4, backgroundColor: theme.palette.info.main, color: 'white' }}>
+                            <Typography variant="subtitle2">Container</Typography>
+                        </Paper>
+                    </Box>
+                </Fragment>
+            }
             {selected &&
                 <Fragment>
                     <Box sx={{ pointerEvents: 'auto', position: 'absolute', bottom: 0, right: 0, transform: 'translate(0,100%)', zIndex: 1300 }} >
-                        <Paper sx={{ mr: '-1px', mt: '0px', border: 1, borderRadius: 0, borderBottomLeftRadius: 4, borderBottomRightRadius: 3, borderColor: theme.palette.info.main }} elevation={5}>
+                        <Paper sx={{ mr: '-1px', mt: '0px', border: 1, borderRadius: 0, borderBottomLeftRadius: 4, borderBottomRightRadius: 4, borderColor: theme.palette.info.main }} elevation={5}>
                             <Grid container columnGap={1}>
+                                <Grid item>
+                                    <IconButton color="primary" sx={{ borderRadius: 1 }} size="small" title={t('button.move_up')}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            dispatch(emailsCurrentEmailActions.moveContainer({ containerId: container.id, moveBy: -1 }));
+                                        }}
+                                    ><ExpandLessOutlinedIcon fontSize="small" /></IconButton>
+                                </Grid>
+                                <Grid item>
+                                    <IconButton color="primary" sx={{ borderRadius: 1 }} size="small" title={t('button.move_down')}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            dispatch(emailsCurrentEmailActions.moveContainer({ containerId: container.id, moveBy: 1 }));
+                                        }}
+                                    ><ExpandMoreOutlinedIcon fontSize="small" /></IconButton>
+                                </Grid>
                                 <Grid item>
                                     <IconButton color="error" sx={{ borderRadius: 1 }} size="small" title={t('button.delete')}
                                         onClick={(e) => {
@@ -71,26 +102,6 @@ export function ContainerOverlay({ isOver, container }: IContainerOverlayProps) 
                             </Grid>
                         </Paper>
                     </Box>
-                    {/* <Box sx={{ pointerEvents: 'auto', position: 'absolute', top: 0, left: '50%', transform: 'translate(0,-100%)', zIndex: 10000 }} >
-                        <Paper>
-                            <Button variant="contained" sx={{ borderRadius: 0, p: 0 }} size="small" title={t('button.add_container')}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    dispatch(emailsCurrentEmailActions.duplicateBlock({ blockId: block.id }));
-                                }}
-                            ><AddBoxOutlinedIcon fontSize="small" /></Button>
-                        </Paper>
-                    </Box>
-                    <Box sx={{ pointerEvents: 'auto', position: 'absolute', bottom: 0, left: '50%', transform: 'translate(-50%,100%)', zIndex: 10000 }} >
-                        <Paper>
-                            <Button variant="contained" sx={{ borderRadius: 0, p: 0 }} size="small" title={t('button.add_container')}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    dispatch(emailsCurrentEmailActions.duplicateBlock({ blockId: block.id }));
-                                }}
-                            ><AddBoxOutlinedIcon fontSize="small" /></Button>
-                        </Paper>
-                    </Box> */}
                 </Fragment>
             }
         </Box>

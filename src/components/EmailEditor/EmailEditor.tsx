@@ -6,18 +6,11 @@ import { PanelSelection } from "./SideBar/PanelSelection";
 
 export function EmailEditor() {
 
-    const { editorMobileView } = useAppSelector(state => state.emailsApp);
-
     return (
         <Grid container sx={{}}>
             <Grid item xs style={{ overflow: 'auto', minHeight: 'calc(100vh - 115px)', maxHeight: 'calc(100vh - 115px)' }}>
                 <Box style={{ minWidth: '460px' }}>
-                    {editorMobileView
-                        ?
-                        'Mobile todo'
-                        :
-                        <DesktopView />
-                    }
+                    <DesktopView />
                 </Box>
             </Grid>
             <Grid item sx={{ width: "430px", overflowY: 'scroll', minHeight: 'calc(100vh - 115px)', maxHeight: 'calc(100vh - 115px)' }}>

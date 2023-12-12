@@ -17,8 +17,9 @@ interface IDesktopItemBlockProps {
   columnIndex: number;
   blockIndex: number;
   isContainerSelected: boolean;
+  columnPadding: number;
 }
-export function DesktopItemBlock({ block, containerIndex, columnIndex, blockIndex, isContainerSelected }: IDesktopItemBlockProps) {
+export function DesktopItemBlock({ block, containerIndex, columnIndex, blockIndex, isContainerSelected, columnPadding }: IDesktopItemBlockProps) {
 
   const dispatch = useDispatch();
 
@@ -44,10 +45,16 @@ export function DesktopItemBlock({ block, containerIndex, columnIndex, blockInde
   }
 
   return (
-    <Fragment >
+    <Fragment>
       <Box sx={{ position: 'relative' }}
-        onPointerEnter={() => setOver(true)}
-        onPointerLeave={() => setOver(false)}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          setOver(true);
+        }}
+        onPointerOut={(e) => {
+          e.stopPropagation();
+          setOver(false);
+        }}
         onClick={(e) => {
           e.stopPropagation();
           dispatch(emailsCurrentEmailActions.selectBlock({ block: block }));
@@ -69,7 +76,7 @@ export function DesktopItemBlock({ block, containerIndex, columnIndex, blockInde
           {isContainerSelected && <DropAreaBlock containerIndex={containerIndex} columnIndex={columnIndex} blockIndex={blockIndex} />}
         </div>
         {/* Overlay */}
-        <BlockOverlay isOver={over} block={block} />
+        <BlockOverlay isOver={over} block={block} columnPadding={columnPadding} />
       </Box>
     </Fragment>
 

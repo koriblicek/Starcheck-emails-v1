@@ -371,6 +371,17 @@ export const emailsCurrentEmailSlice = createSlice({
                 }
             }
         },
+        moveContainer: (state, action: PayloadAction<{ containerId: string; moveBy: number; }>) => {
+            if (state.template) {
+                const index = state.template.containers.findIndex(container => container.id === action.payload.containerId);
+                const newIndex = index + action.payload.moveBy;
+                // if new index position is within length 
+                if (newIndex >= 0 && newIndex < state.template.containers.length) {
+                    const deletedContainer = state.template.containers.splice(index, 1)[0];
+                    state.template.containers.splice(newIndex, 0, deletedContainer);
+                }
+            }
+        },
         addBlock: (state, action: PayloadAction<{ columnId: string; block: string; }>) => {
             if (state.template) {
                 state.template.containers.forEach((container, index) => {

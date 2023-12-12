@@ -11,6 +11,7 @@ import transparency_background from "../../../assets/images/transparency_backgro
 import HtmlIcon from '@mui/icons-material/Html';
 import { useState } from "react";
 
+const mobileWidth: number = 320;
 export function DesktopView() {
 
     const dispatch = useDispatch();
@@ -21,27 +22,33 @@ export function DesktopView() {
 
     const { template } = useAppSelector(state => state.emailsCurrentEmail);
 
+    const { editorMobileView } = useAppSelector(state => state.emailsApp);
+
     const [toggle, setToggle] = useState<string[]>([]);
 
     function handleToggle(event: React.MouseEvent<HTMLElement>, newData: string[]) {
         setToggle(newData);
     };
+
     if (!template)
         return null;
 
+    const templateWidth = editorMobileView ? mobileWidth : template.contentWidthPixels.value;
+    const innerBoxWidth = editorMobileView ? { width: '320px' } : {};
     //all containers
-    const css = `
-            p {
-                margin: 0;
-            }
-
-            .sc-container {
-                width: ${template.contentWidthPixels.value + template.contentWidthPixels.sizeSuffix} !important;
-            }
-
-            .sc-container .sc-column {
-                vertical-align: top;
-            }
+    const css = editorMobileView ?
+        `
+        .sc-container-parent { max-width: 100% !important; padding-left: 0px !important; padding-right: 0px !important; }
+        .sc-container .sc-column { min-width: 320px !important; max-width: 100% !important; display: block !important; }
+        .sc-container { width: 100% !important; }
+        .sc-column { width: 100% !important; }
+        .sc-column > div { margin: 0 auto; }
+        p { margin: 0; }
+    `
+        : `
+        p { margin: 0; }
+        .sc-container { width: ${templateWidth + template.contentWidthPixels.sizeSuffix} !important; }
+        .sc-container .sc-column { vertical-align: top; }
     `;
 
     const items = template.containers.map((container, index) => {
@@ -49,10 +56,10 @@ export function DesktopView() {
     });
 
     return (
-        <Box sx={{ minWidth: (template.contentWidthPixels.value + 60) + template.contentWidthPixels.sizeSuffix, margin: '0px', padding: '30px', background: `url(${transparency_background})` }}
+        <Box sx={{ minWidth: (templateWidth + 60) + template.contentWidthPixels.sizeSuffix, margin: '0px', padding: '30px', background: `url(${transparency_background})` }}
             onClick={() => dispatch(emailsCurrentEmailActions.clearSelection())}
         >
-            <Box sx={{ backgroundColor: 'white', p: 2 }}>
+            <Box sx={{ backgroundColor: 'white', m: 2, margin: 'auto auto', ...innerBoxWidth }}>
                 <Box sx={{ border: '1px gray dotted', borderLeft: `3px ${theme.palette.primary.main} solid`, backgroundColor: 'white' }}>
                     <Grid container p={1}>
                         <Grid item xs={12}>
@@ -77,20 +84,24 @@ export function DesktopView() {
                         </Grid>
                     </Grid>
                 </Box>
-                <Grid container sx={{ pt: 1 }} justifyContent='end' alignItems='center' rowGap={1} columnGap={1}>
+                <Grid container sx={{ p: 1 }} justifyContent='end' alignItems='center' rowGap={1} columnGap={1}>
                     <Grid item >
                         <SendPreviewMail />
                     </Grid>
-                    <Grid item>
-                        <ToggleButtonGroup size="small" value={toggle} color="secondary" onChange={handleToggle}>
-                            <ToggleButton value="html" size="small" ><HtmlIcon fontSize="small" /></ToggleButton>
-                        </ToggleButtonGroup>
+                    {!editorMobileView &&
+                        <Grid item>
+                            <ToggleButtonGroup size="small" value={toggle} color="secondary" onChange={handleToggle}>
+                                <ToggleButton value="html" size="small" ><HtmlIcon fontSize="small" /></ToggleButton>
+                            </ToggleButtonGroup>
+                        </Grid>
 
-                    </Grid>
-                    {toggle[0] === "html" && <Grid item xs={12}><TextField fullWidth value={template.exportedText} multiline rows={8} sx={{ fontSize: 6 }}></TextField></Grid>}
+                    }
+                    {(!editorMobileView && toggle[0] === "html") &&
+                        <Grid item xs={12}><TextField fullWidth value={template.exportedText} multiline rows={8} sx={{ fontSize: 6 }}></TextField></Grid>
+                    }
                 </Grid>
             </Box>
-            <Box sx={{ borderTop: '1px gray dotted', margin: '0px', padding: '0px', backgroundColor: template.backgroundColor.value, ...(template.textColor.value !== "transparent" ? { color: template.textColor.value } : {}) }}>
+            <Box sx={{ borderTop: '1px gray dotted', margin: 'auto', padding: '0px', backgroundColor: template.backgroundColor.value, ...(template.textColor.value !== "transparent" ? { color: template.textColor.value } : {}), ...innerBoxWidth }}>
                 <style>
                     {css}
                 </style>
@@ -114,7 +125,7 @@ export function DesktopView() {
                     </tbody>
                 </table>
             </Box>
-        </Box>
+        </Box >
     );
 
 }

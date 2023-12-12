@@ -10,9 +10,13 @@ done - add divider as new block
 done - add delete template functionality
 done - add ... functionality to browse for images
 done - fix save template to follow delete pattern
-add mobile view
+done - move container up and down
+done - add mobile view
 add button as new block
-add notifications: delete (fail, ok), save (fail, ok)
 think about adding global font - and add check box to font to activate/deactivate it
-add visual representation of the table
+
+USER EXPERIENCE FUNCTIONS
 fix send preview to follow save template pattern
+add notifications: delete (fail, ok), save (fail, ok)
+add visual representation of the table
+containers movement with drag and drop

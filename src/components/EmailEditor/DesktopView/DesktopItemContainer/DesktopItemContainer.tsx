@@ -22,6 +22,10 @@ export function DesktopItemContainer({ container, containerIndex }: IDesktopItem
 
     const [isSelected, setIsSelected] = useState<boolean>(false);
 
+    const { editorMobileView } = useAppSelector(state => state.emailsApp);
+
+    const containerWidth = editorMobileView ? 320 : container.calculatedWidthPixels;
+
     useEffect(() => {
         if (selectedContainer) {
             if (selectedContainer.id === container.id) {
@@ -41,15 +45,21 @@ export function DesktopItemContainer({ container, containerIndex }: IDesktopItem
     return (
         <Fragment>
             <Box sx={{ position: 'relative' }}
-                onPointerEnter={() => setOver(true)}
-                onPointerLeave={() => setOver(false)}
+                onPointerOver={(e) => {
+                    e.stopPropagation();
+                    setOver(true);
+                }}
+                onPointerOut={(e) => {
+                    e.stopPropagation();
+                    setOver(false);
+                }}
                 onClick={(e) => {
                     e.stopPropagation();
                     dispatch(emailsCurrentEmailActions.selectContainer({ container: container }));
                 }}
             >
-                <div className="sc-container-parent" style={{ paddingTop: container.paddingTopPixels.value + container.paddingTopPixels.sizeSuffix, paddingBottom: container.paddingBottomPixels.value + container.paddingBottomPixels.sizeSuffix,...(container.backgroundColor.value !== "transparent" ? { backgroundColor: container.backgroundColor.value } : {  }) }}>
-                    <div className="sc-container" style={{ margin: '0 auto', minWidth: '320px', maxWidth: container.calculatedWidthPixels + "px", overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word', ...(container.contentBackgroundColor.value !== "transparent" ? { backgroundColor: container.contentBackgroundColor.value } : {  }) }}>
+                <div className="sc-container-parent" style={{ paddingTop: container.paddingTopPixels.value + container.paddingTopPixels.sizeSuffix, paddingBottom: container.paddingBottomPixels.value + container.paddingBottomPixels.sizeSuffix, ...(container.backgroundColor.value !== "transparent" ? { backgroundColor: container.backgroundColor.value } : {}) }}>
+                    <div className="sc-container" style={{ margin: '0 auto',minWidth: '320px', maxWidth: containerWidth + "px", overflowWrap: 'break-word', wordWrap: 'break-word', wordBreak: 'break-word', ...(container.contentBackgroundColor.value !== "transparent" ? { backgroundColor: container.contentBackgroundColor.value } : {}) }}>
                         <div style={{ borderCollapse: 'collapse', display: 'table', width: '100%', height: '100%', backgroundColor: 'transparent' }}>
                             {items}
                         </div>

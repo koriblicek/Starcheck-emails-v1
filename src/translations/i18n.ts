@@ -37,6 +37,8 @@ i18next
                         divider: 'Divider',
                         confirm: 'Confirm',
                         discard: 'Discard',
+                        move_up: 'Move up',
+                        move_down: 'Move down',
                     },
                     label: {
                         selectLanguage: 'Select Language:',
@@ -174,6 +176,8 @@ i18next
                         divider: 'Oddelovač',
                         confirm: 'Potvrdiť',
                         discard: 'Zrušiť',
+                        move_up: 'Presunúť hore',
+                        move_down: 'Presunúť dole',
                     },
                     label: {
                         selectLanguage: 'Vyberte jazyk:',

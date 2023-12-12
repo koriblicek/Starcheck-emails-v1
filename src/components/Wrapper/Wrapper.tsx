@@ -9,7 +9,6 @@ export function Wrapper() {
 
     const template = useAppSelector(state => state.emailsCurrentEmail.template);
 
-    console.log("Wrapper");
     return (
         <Box sx={{ minWidth: APP_MIN_WIDTH }}>
             <EmailAppBar />
