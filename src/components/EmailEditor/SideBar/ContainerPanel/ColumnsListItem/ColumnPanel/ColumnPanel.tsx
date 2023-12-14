@@ -9,7 +9,7 @@ interface IColumnPanelProps {
     column: IColumn;
 }
 export function ColumnPanel({ column}: IColumnPanelProps) {
-    
+
     const dispatch = useDispatch();
     
     function updateKey(propertyKey: string, value: string) {

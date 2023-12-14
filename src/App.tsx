@@ -27,7 +27,7 @@ function App({ inputData }: IAppProps) {
   useEffect(() => {
     if (data) {
       //initialize loaded urls
-      dispatch(emailsSettingsActions.initialize({ urls: data }));
+      dispatch(emailsSettingsActions.initialize({ urls: data, inputData: inputData }));
       //initialize data
       dispatch(emailsDataActions.initiBuiltinTemplates());
       dispatch(emailsDataActions.initBuiltinContainers());

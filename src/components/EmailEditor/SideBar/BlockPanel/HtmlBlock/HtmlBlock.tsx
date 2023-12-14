@@ -29,6 +29,8 @@ export function HtmlBlock({ block }: IHtmlBlockProps) {
             <Divider light sx={{ mt: 1, mb: 1 }} />
             <ControlSize propertyKey={"fontSizePixels"} data={block.fontSizePixels} handleUpdateProperty={updateKey} />
             <Divider light sx={{ mt: 1, mb: 1 }} />
+            <ControlSize propertyKey={"lineHeightPercent"} data={block.lineHeightPercent} handleUpdateProperty={updateKey} />
+            <Divider light sx={{ mt: 1, mb: 1 }} />
             <ControlSelection propertyKey={"fontWeight"} data={block.fontWeight} handleUpdateProperty={updateKey} />
             <Divider light sx={{ mt: 1, mb: 1 }} />
             <ControlColor propertyKey={"color"} data={block.color} handleUpdateProperty={updateKey} />

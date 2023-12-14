@@ -7,7 +7,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 export function SendPreviewMail() {
 
-    const { urls } = useAppSelector(state => state.emailsSettings);
+    const { urls, inputData } = useAppSelector(state => state.emailsSettings);
 
     const { template } = useAppSelector(state => state.emailsCurrentEmail);
 
@@ -32,12 +32,12 @@ export function SendPreviewMail() {
                 <CircularProgress color="inherit" />
             </Backdrop>
             <Button size="small" disabled={isUploading} variant="contained"
-                startIcon={<SendIcon/>}
+                startIcon={<SendIcon />}
                 onClick={() => {
-                setOpen(true);
-                handleSubmit({ emailTo: "koriblik@gmail.com", emailBody: template!.exportedText, subjectLine: template!.subjectLine.value });
-                
-            }}>{t('button.send_preview_mail')}</Button>
+                    setOpen(true);
+                    handleSubmit({ emailTo: "koriblik@gmail.com", emailBody: template!.exportedText, subjectLine: template!.subjectLine.value, id: inputData.dataId });
+
+                }}>{t('button.send_preview_mail')}</Button>
         </>
     );
 }

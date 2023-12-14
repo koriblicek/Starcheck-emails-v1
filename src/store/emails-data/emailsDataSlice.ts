@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { baseColumn, baseContainer, blockDivider, blockHeading, blockHtml, blockImage, blockText, emptyTemplate } from '../../data';
+import { baseColumn, baseContainer, blockButton, blockDivider, blockHeading, blockHtml, blockImage, blockText, emptyTemplate } from '../../data';
 import { IBlock, IContainer, ICustomTemplates, ITemplate } from '../../types';
 import * as uuid from 'uuid';
 import logo_container_1 from '../../assets/images/container_1.png';
@@ -12,6 +12,7 @@ import logo_block_text from '../../assets/images/block_text.png';
 import logo_block_heading from '../../assets/images/block_heading.png';
 import logo_block_html from '../../assets/images/block_html.png';
 import logo_block_divider from '../../assets/images/block_divider.png';
+import logo_block_button from '../../assets/images/block_button.png';
 
 interface IState {
     builtinTemplates: ITemplate[];
@@ -123,9 +124,10 @@ export const emailsDataSlice = createSlice({
             block_html.logo = logo_block_html;
             const block_divider = JSON.parse(JSON.stringify(blockDivider)) as IBlock;
             block_divider.logo = logo_block_divider;
-            state.builtinBlocks = [block_image, block_heading, block_text, block_html, block_divider];
+            const block_button = JSON.parse(JSON.stringify(blockButton)) as IBlock;
+            block_button.logo = logo_block_button;
+            state.builtinBlocks = [block_image, block_heading, block_text, block_html, block_divider /*, block_button*/];
         }
-
     }
 });
 

@@ -1,12 +1,11 @@
-import { Backdrop, CircularProgress, Fab, Grid } from '@mui/material';
+import { Backdrop, CircularProgress, Fab, Grid, Typography } from '@mui/material';
 import { Fragment, useReducer, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import SaveAltOutlinedIcon from '@mui/icons-material/SaveAltOutlined';
-import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import { emailsCurrentEmailActions } from '../../../store/emails-data/emailsCurrentEmailSlice';
 import { useAppSelector } from '../../../store/hooks';
 import { IErrorObject, ITemplate } from '../../../types';
+import SaveAltOutlinedIcon from '@mui/icons-material/SaveAltOutlined';
 import axios, { AxiosError } from 'axios';
 
 type State = {
@@ -69,6 +68,8 @@ export function SaveManager({ template }: ISaveManagerProps) {
 
     const { urls } = useAppSelector(state => state.emailsSettings);
 
+    const { saveIsRequired } = useAppSelector(state => state.emailsCurrentEmail);
+
     const [, dispatchReducer] = useReducer<Reducer>(reducer, initialState);
 
     const [isOpenedBackdrop, setIsOpenedBackdrop] = useState<boolean>(false);
@@ -86,7 +87,8 @@ export function SaveManager({ template }: ISaveManagerProps) {
             .then((response) => {
                 dispatchReducer({ type: "PUT_SUCCESS" });
                 setIsOpenedBackdrop(false);
-                dispatch(emailsCurrentEmailActions.setTemplate({ template: null, updateIds: false }));
+                //dispatch(emailsCurrentEmailActions.setTemplate({ template: null, updateIds: false }));
+                dispatch(emailsCurrentEmailActions.saveCompleted());
                 //TODO add notification
             })
             .catch((error: AxiosError) => {
@@ -98,20 +100,20 @@ export function SaveManager({ template }: ISaveManagerProps) {
 
     return (
         <Fragment>
-            <Grid item>
+            {/* <Grid item>
                 <Fab size="medium" color="info" variant="extended"
                     onClick={() => dispatch(emailsCurrentEmailActions.setTemplate({ template: null, updateIds: false }))}
                 >
                     <HighlightOffOutlinedIcon sx={{ pr: 1 }} />
                     {t('button.discardSaveAndCloseTemplate')}
                 </Fab>
-            </Grid>
+            </Grid> */}
             <Grid item>
                 <Fab size="medium" color="warning" variant="extended"
                     onClick={() => saveTemplate()}
+                    disabled={!saveIsRequired}
                 >
-                    <SaveAltOutlinedIcon sx={{ pr: 1 }} />
-                    {t('button.confirmSaveAndCloseTemplate')}
+                    <SaveAltOutlinedIcon sx={{ pr: 1 }} /><Typography variant='body1'>{t('button.confirmSaveTemplate')}</Typography>
                 </Fab>
             </Grid>
             <Backdrop

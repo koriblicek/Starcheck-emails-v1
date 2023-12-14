@@ -71,10 +71,26 @@ export interface IColumn extends ISharedProps, ISharedHtml {
 //#endregion
 
 //#region BLOCK
+export interface IBlockButton extends IBlock {
+    buttonText: ITextType;
+    anchor: ITextType;
+    target: ISelectionType;
+    fontFamily: ITextType;
+    fontSizePixels: ISizeType;
+    fontWeight: ISelectionType;
+    color: IColorType;
+    backgroundColor: IColorType;
+    align: IHAlign;
+    widthPixels: ISizeType;
+    heightPixels: ISizeType;
+    borderRadius: ISizeType;
+}
+
 export interface IBlockHtml extends IBlock {
     html: IMultilineTextType;
     fontFamily: ITextType;
     fontSizePixels: ISizeType;
+    lineHeightPercent: ISizeType;
     fontWeight: ISelectionType;
     color: IColorType;
     textAlign: ITAlign;
@@ -202,7 +218,7 @@ export interface IPropertyBase {
     label: string; //property label
 };
 
-export type TBlockIdentifiers = "image" | "heading" | "text" | "html" | "divider";
+export type TBlockIdentifiers = "image" | "heading" | "text" | "html" | "divider" | "button";
 
 export type TPropertyIdentifiers = "color" | "size" | "text" | "multilineText" | "selection" | "numberArray" | "image" | "hAlign" | "tAlign";
 export type TPropertyTypes = IColorType | ISizeType | ITextType | IMultilineTextType | INumberArrayType | ISelectionType | IImageType | IHAlign | ITAlign;

@@ -19,12 +19,6 @@ export function ColumnsListItem({ columns }: IColumnsListItemProps) {
         setColumnId(newValue);
     };
 
-    const [columnPanel, setColumnPanel] = useState<JSX.Element | null>(null);
-
-    useEffect(() => {
-        setColumnPanel(<ColumnPanel column={columns[columnId]} key={columns[columnId].id} />);
-    }, [columnId, columns]);
-
     return (
         <Fragment>
             <AppBar position="static" sx={{ backgroundColor: theme.palette.grey[200] }}>
@@ -34,7 +28,7 @@ export function ColumnsListItem({ columns }: IColumnsListItemProps) {
                     })}
                 </Tabs>
             </AppBar>
-            {columnPanel}
+            <ColumnPanel column={columns[columnId]} key={columns[columnId].id} />
         </Fragment>
 
     );

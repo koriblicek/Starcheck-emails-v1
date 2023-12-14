@@ -1,8 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IAppData } from '../../types';
+import { IAppData, IAppInputData } from '../../types';
 
 interface IState {
     urls: IAppData;
+    inputData: IAppInputData;
 }
 
 const initialState = {
@@ -12,8 +13,9 @@ export const emailsSettingsSlice = createSlice({
     name: 'emailsSettings',
     initialState,
     reducers: {
-        initialize: (state, action: PayloadAction<{ urls: IAppData; }>) => {
+        initialize: (state, action: PayloadAction<{ urls: IAppData; inputData: IAppInputData; }>) => {
             state.urls = action.payload.urls;
+            state.inputData = action.payload.inputData;
         }
     }
 });

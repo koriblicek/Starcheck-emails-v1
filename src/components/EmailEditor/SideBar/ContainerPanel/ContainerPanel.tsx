@@ -78,7 +78,7 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                 </ListItemButton>
                 <Collapse in={openColumns} timeout="auto" unmountOnExit>
                     <List component="div" >
-                        <ColumnsListItem columns={container.columns} key={container.id} />
+                        <ColumnsListItem columns={container.columns} />
                     </List>
                 </Collapse>
             </List>

@@ -1,4 +1,4 @@
-import { IBlockDivider, IBlockHeading, IBlockHtml, IBlockImage, IBlockText, IColumn, IContainer, ITemplate } from '../types';
+import { IBlockButton, IBlockDivider, IBlockHeading, IBlockHtml, IBlockImage, IBlockText, IColumn, IContainer, ITemplate } from '../types';
 
 //MAIN email template
 const baseTemplateHtmlText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -270,18 +270,6 @@ const baseColumnHtmlText = `
     </div>
 <!--[if (mso)|(IE)]></td><![endif]-->
 `;
-// const baseColumnHtmlText = `
-// <!--[if (mso)|(IE)]><td align="center" width="{{calculatedWidthPixels}}" style="{{backgroundColor}}width: {{calculatedWidthPixels}}px;padding: {{padding}}{{paddingSuffix}};border: {{borderWidthPixels}}{{borderWidthPixelsSuffix}} {{borderType}} {{borderColor}};border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
-//     <div class="sc-column sc-column-{{calculatedWidthPixelsToFixedString}}" style="max-width: 320px;min-width: {{calculatedWidthPixels}}px;display: table-cell;vertical-align: top;">
-//         <div style="{{backgroundColor}}height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
-//         <!--[if (!mso)&(!IE)]><!--><div style="box-sizing: border-box; height: 100%; padding: {{padding}}{{paddingSuffix}};border: {{borderWidthPixels}}{{borderWidthPixelsSuffix}} {{borderType}} {{borderColor}}; border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"><!--<![endif]-->
-//             <!-- BLOCKS -->
-//             {{blocks}}
-//         <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
-//         </div>
-//     </div>
-// <!--[if (mso)|(IE)]></td><![endif]-->
-// `;
 export const baseColumn: IColumn = {
     calculatedWidthPixels: 0,
     id: '',
@@ -341,14 +329,13 @@ export const baseColumn: IColumn = {
 };
 
 //BLOCKS
-
 const blockHtmlHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
             <td style="overflow-wrap:break-word;word-break:break-word;padding:{{padding}}{{paddingSuffix}}" align="left">
 
             <!-- TEXT -->
-            <div style="font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}}; {{color}} text-align: {{textAlign}}; word-wrap: break-word;">
+            <div style="font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}}; {{color}} text-align: {{textAlign}}; word-wrap: break-word; line-height: {{lineHeightPixels}}px;">
                 {{html}}
             </div>
 
@@ -389,6 +376,18 @@ export const blockHtml: IBlockHtml = {
         active: true,
         required: true,
         label: "font_size"
+    },
+    lineHeightPercent: {
+        type: "size",
+        value: 130,
+        defaultValue: 100,
+        max: 1000,
+        min: 0,
+        step: 10,
+        sizeSuffix: "%",
+        active: true,
+        required: true,
+        label: "line_height"
     },
     fontWeight: {
         value: 'normal',
@@ -434,6 +433,7 @@ export const blockHtml: IBlockHtml = {
     exportedText: ''
 };
 
+//removed line-height: {{lineHeightPercent}}{{lineHeightPercentSuffix}}; from <h2 style>
 const blockHeadingHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
@@ -441,7 +441,7 @@ const blockHeadingHtmlText = `<table cellpadding="0" cellspacing="0" width="100%
 
             <!-- HEADING -->
             <!--[if mso]><table width="100%"><tr><td><![endif]-->
-                <h2 style="margin: 0px; {{color}} line-height: {{lineHeightPercent}}{{lineHeightPercentSuffix}}; text-align: {{textAlign}}; word-wrap: break-word; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}};"><span style="line-height: {{lineHeightPixels}}px;">{{heading}}</span></h2>
+                <h2 style="margin: 0px; {{color}} text-align: {{textAlign}}; word-wrap: break-word; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}};"><span style="line-height: {{lineHeightPixels}}px;">{{heading}}</span></h2>
             <!--[if mso]></td></tr></table><![endif]-->
 
             </td>
@@ -484,8 +484,8 @@ export const blockHeading: IBlockHeading = {
     },
     lineHeightPercent: {
         type: "size",
-        value: 100,
-        defaultValue: 100,
+        value: 130,
+        defaultValue: 130,
         max: 1000,
         min: 0,
         step: 10,
@@ -538,13 +538,14 @@ export const blockHeading: IBlockHeading = {
     exportedText: ''
 };
 
+//remvoed line-height: {{lineHeightPercent}}{{lineHeightPercentSuffix}};  from <div style
 const blockTextHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
             <td style="overflow-wrap:break-word;word-break:break-word;padding:{{padding}}{{paddingSuffix}}" align="left">
 
-            <!-- TEXT -->
-            <div style="font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}}; {{color}} line-height: {{lineHeightPercent}}{{lineHeightPercentSuffix}}; text-align: {{textAlign}}; word-wrap: break-word;">
+            <!-- HTML -->
+            <div style="font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}}; {{color}} text-align: {{textAlign}}; word-wrap: break-word;">
                 <p style="line-height: {{lineHeightPixels}}px;">{{text}}</p>
             </div>
 
@@ -589,7 +590,7 @@ export const blockText: IBlockText = {
     lineHeightPercent: {
         type: "size",
         value: 130,
-        defaultValue: 100,
+        defaultValue: 130,
         max: 1000,
         min: 0,
         step: 10,
@@ -748,11 +749,13 @@ export const blockImage: IBlockImage = {
     htmlText: blockImageHtmlText,
     exportedText: ''
 };
+
 const blockDividerHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
             <td style="overflow-wrap:break-word;word-break:break-word;padding:{{padding}}{{paddingSuffix}}" align="left">
         
+                <!-- DIVIDER -->
                 <table height="0px" align="{{align}}" border="0" cellpadding="0" cellspacing="0" width="{{widthPercent}}{{widthPercentSuffix}}" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: {{lineWidthPixels}}{{lineWidthPixelsSuffix}} {{lineType}} {{lineColor}};-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
                     <tbody>
                         <tr style="vertical-align: top">
@@ -835,5 +838,169 @@ export const blockDivider: IBlockDivider = {
         label: "padding"
     },
     htmlText: blockDividerHtmlText,
+    exportedText: '',
+};
+
+const blockButtonHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+    <tbody>
+        <tr>
+            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{padding}}{{paddingSuffix}}" align="left">
+        
+                <!-- BUTTON -->
+                <!--[if mso]><style>.sc-button {background: transparent !important;}</style><![endif]-->
+                    <div align="{{align}}">
+                    <!--[if mso]>
+                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{anchor}}" style="height:{{heightPixels}}{{heightPixelsSuffix}}; v-text-anchor:middle; width:{{widthPixels}}{{widthPixelsSuffix}};" arcsize="{{borderRadiusPercent}}%" stroke="f" fillcolor="{{backgroundColor}}"><w:anchorlock/>
+                        <center style="color:{{color}}; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}};">
+                        <![endif]-->
+                            <a href="{{anchor}}" target="{{target}}" class="sc-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center; color:{{color}}; background-color: {{backgroundColor}}; border-radius: 5px;-webkit-border-radius: 5px; -moz-border-radius: 5px; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}};font-weight: {{fontWeight}};width:{{widthPixels}}{{widthPixelsSuffix}};height:{{heightPixels}}{{heightPixelsSuffix}};line-height:{{lineHeight}}{{heightPixelsSuffix}};">{{buttonText}}</a>
+                        <!--[if mso]>
+                        </center>
+                    </v:roundrect>
+                    <![endif]-->
+                    </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+`;
+export const blockButton: IBlockButton = {
+    calculatedWidthPixels: 0,
+    id: '',
+    logo: '',
+    type: 'button',
+    buttonText: {
+        type: "text",
+        value: "",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "button_text"
+    },
+    anchor: {
+        type: "text",
+        value: "",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "button_anchor"
+    },
+    target: {
+        value: '_blank',
+        defaultValue: '_blank',
+        options: [
+            { key: "_blank", label: "control_a_target_blank" },
+            { key: "_self", label: "control_a_target_self" },
+        ],
+        type: 'selection',
+        active: true,
+        required: true,
+        label: 'button_anchor_target'
+    },
+    fontFamily: {
+        type: "text",
+        value: "Segoe UI",
+        defaultValue: "Segoe UI",
+        active: true,
+        required: true,
+        label: "font_family"
+    },
+    fontSizePixels: {
+        type: "size",
+        value: 15,
+        defaultValue: 15,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "font_size"
+    },
+    fontWeight: {
+        value: 'bold',
+        defaultValue: 'bold',
+        options: [
+            { key: "normal", label: "control_font_weight_normal" },
+            { key: "bold", label: "control_font_weight_bold" },
+        ],
+        type: 'selection',
+        active: true,
+        required: true,
+        label: 'font_weight'
+    },
+    color: {
+        type: "color",
+        value: "#ffffff",
+        defaultValue: "#ffffff",
+        active: true,
+        required: true,
+        label: "button_text_color"
+    },
+    backgroundColor: {
+        type: "color",
+        value: "#1976D2",
+        defaultValue: "#1976D2",
+        active: true,
+        required: true,
+        label: "button_background_color"
+    },
+    align: {
+        type: 'hAlign',
+        value: 'center',
+        defaultValue: 'center',
+        active: true,
+        required: true,
+        label: 'align_type'
+    },
+    widthPixels: {
+        type: "size",
+        value: 160,
+        defaultValue: 160,
+        max: 800,
+        min: 0,
+        step: 10,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "button_width"
+    },
+    heightPixels: {
+        type: "size",
+        value: 40,
+        defaultValue: 40,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "button_height"
+    },
+    borderRadius: {
+        type: "size",
+        value: 0,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "border_radius"
+    },
+    padding: {
+        type: "size",
+        value: 2,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding"
+    },
+    htmlText: blockButtonHtmlText,
     exportedText: '',
 };

@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { IBlock, IBlockDivider, IBlockHeading, IBlockHtml, IBlockImage, IBlockText } from "../../../../types";
+import { IBlock, IBlockButton, IBlockDivider, IBlockHeading, IBlockHtml, IBlockImage, IBlockText } from "../../../../types";
 import { BlockImage } from "./BlockImage";
 import { Box } from "@mui/material";
 import { BlockOverlay } from "../BlockOverlay";
@@ -10,6 +10,7 @@ import { BlockHeading } from "./BlockHeading";
 import { DropAreaBlock } from "../DropAreaBlock";
 import { BlockHtml } from "./BlockHtml";
 import { BlockDivider } from "./BlockDivider";
+import { BlockButton } from "./BlockButton";
 
 interface IDesktopItemBlockProps {
   block: IBlock;
@@ -41,6 +42,9 @@ export function DesktopItemBlock({ block, containerIndex, columnIndex, blockInde
       break;
     case "divider":
       blockElement = <BlockDivider block={block as IBlockDivider} />;
+      break;
+    case "button":
+      blockElement = <BlockButton block={block as IBlockButton} />;
       break;
   }
 

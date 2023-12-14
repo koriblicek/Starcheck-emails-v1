@@ -1,7 +1,7 @@
 import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
 import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
 import { useDispatch } from "react-redux";
-import { blockDivider, blockHeading, blockHtml, blockImage, blockText } from "../../../../data";
+import { blockButton, blockDivider, blockHeading, blockHtml, blockImage, blockText } from "../../../../data";
 import { IColumn } from "../../../../types";
 import { useTranslation } from "react-i18next";
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
@@ -9,6 +9,7 @@ import ShortTextOutlinedIcon from '@mui/icons-material/ShortTextOutlined';
 import CodeIcon from '@mui/icons-material/Code';
 import HMobiledataOutlinedIcon from '@mui/icons-material/HMobiledataOutlined';
 import CommitOutlinedIcon from '@mui/icons-material/CommitOutlined';
+import Crop169OutlinedIcon from '@mui/icons-material/Crop169Outlined';
 
 interface IAddBlockMenuProps {
     anchorEl: null | HTMLElement;
@@ -37,6 +38,9 @@ export function AddBlockMenu({ anchorEl, column, handleAnchorClear }: IAddBlockM
                 break;
             case "divider":
                 dispatch(emailsCurrentEmailActions.addBlock({ columnId: column.id, block: JSON.stringify(blockDivider) }));
+                break;
+            case "button":
+                dispatch(emailsCurrentEmailActions.addBlock({ columnId: column.id, block: JSON.stringify(blockButton) }));
                 break;
         }
         handleAnchorClear();
@@ -75,6 +79,10 @@ export function AddBlockMenu({ anchorEl, column, handleAnchorClear }: IAddBlockM
                 <ListItemIcon><CommitOutlinedIcon /></ListItemIcon>
                 <ListItemText>{t('button.divider')}</ListItemText>
             </MenuItem>
+            {/* <MenuItem onClick={() => handleSelectMenu("button")}>
+                <ListItemIcon><Crop169OutlinedIcon /></ListItemIcon>
+                <ListItemText>{t('button.button')}</ListItemText>
+            </MenuItem> */}
         </Menu>
     );
 }

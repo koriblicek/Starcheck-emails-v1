@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign, ITAlign, TTAlign, IMultilineTextType, IBlockHeading, IBlockText, IBlockImage, IBlockHtml, IBlockDivider } from '../../types';
+import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign, ITAlign, TTAlign, IMultilineTextType, IBlockHeading, IBlockText, IBlockImage, IBlockHtml, IBlockDivider, IBlockButton } from '../../types';
 import * as uuid from 'uuid';
+import { selectClasses } from '@mui/material';
 
 interface IState {
     template: ITemplate | null;
@@ -274,6 +275,8 @@ function exportBlockText(block: IBlock): string {
             exportedText = exportedText.replaceAll('{{fontWeight}}', blockHtml.fontWeight.value);
             exportedText = exportedText.replaceAll('{{color}}',
                 blockHtml.color.value === "transparent" ? "" : `color: ${blockHtml.color.value};`);
+            //line height pixels added to have extra pixels value due to Outlook
+            exportedText = exportedText.replaceAll('{{lineHeightPixels}}', (blockHtml.lineHeightPercent.value * blockHtml.fontSizePixels.value / 100).toString());
             exportedText = exportedText.replaceAll('{{textAlign}}', blockHtml.textAlign.value);
             break;
         case "divider":
@@ -285,6 +288,27 @@ function exportBlockText(block: IBlock): string {
             exportedText = exportedText.replaceAll('{{lineWidthPixelsSuffix}}', blockDivider.lineWidthPixels.sizeSuffix);
             exportedText = exportedText.replaceAll('{{lineType}}', blockDivider.lineType.value);
             exportedText = exportedText.replaceAll('{{lineColor}}', blockDivider.lineColor.value);
+            break;
+        case "button":
+            const blockButton = block as IBlockButton;
+            exportedText = exportedText.replaceAll('{{buttonText}}', blockButton.buttonText.value);
+            exportedText = exportedText.replaceAll('{{anchor}}', blockButton.anchor.value);
+            exportedText = exportedText.replaceAll('{{target}}', blockButton.target.value);
+            exportedText = exportedText.replaceAll('{{fontFamily}}', blockButton.fontFamily.value);
+            exportedText = exportedText.replaceAll('{{fontSizePixels}}', blockButton.fontSizePixels.value.toString());
+            exportedText = exportedText.replaceAll('{{fontSizePixelsSuffix}}', blockButton.fontSizePixels.sizeSuffix);
+            exportedText = exportedText.replaceAll('{{fontWeight}}', blockButton.fontWeight.value);
+            exportedText = exportedText.replaceAll('{{color}}', blockButton.color.value);
+            exportedText = exportedText.replaceAll('{{backgroundColor}}', blockButton.backgroundColor.value);
+            exportedText = exportedText.replaceAll('{{align}}', blockButton.align.value);
+            exportedText = exportedText.replaceAll('{{widthPixels}}', blockButton.widthPixels.value.toString());
+            exportedText = exportedText.replaceAll('{{widthPixelsSuffix}}', blockButton.widthPixels.sizeSuffix);
+            exportedText = exportedText.replaceAll('{{heightPixels}}', blockButton.heightPixels.value.toString());
+            exportedText = exportedText.replaceAll('{{heightPixelsSuffix}}', blockButton.heightPixels.sizeSuffix);
+            exportedText = exportedText.replaceAll('{{lineHeight}}', blockButton.heightPixels.value.toString());
+            exportedText = exportedText.replaceAll('{{borderRadiusPixels}}', blockButton.borderRadius.value.toString());
+            exportedText = exportedText.replaceAll('{{borderRadiusPixelsSuffix}}', blockButton.borderRadius.sizeSuffix);
+            exportedText = exportedText.replaceAll('{{borderRadiusPercent}}', (blockButton.borderRadius.value * 2.5).toString());
             break;
     }
     return exportedText;
@@ -302,10 +326,9 @@ export const emailsCurrentEmailSlice = createSlice({
                     regenerateIDsTemplate(template);
                 }
 
-                //TODO update exports
                 updateTemplate(template);
                 state.template = template;
-
+                state.saveIsRequired = action.payload.updateIds;
             } else {
                 state.template = null;
                 //throw new Error("debuilderSaveSlice (setTemplate): NO email template provided!");
@@ -313,11 +336,15 @@ export const emailsCurrentEmailSlice = createSlice({
             //clear selection
             emailsCurrentEmailSlice.caseReducers.clearSelection(state);
         },
+        saveCompleted: (state) => {
+            state.saveIsRequired = false;
+        },
         updateTemplateProperty: (state, action: PayloadAction<{ propertyKey: string; value: string; }>) => {
             if (state.template) {
                 //if module exists - update value
                 updateProperty(state.template, action.payload.propertyKey, action.payload.value);
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
             }
         },
         clearSelection: (state) => {
@@ -330,6 +357,7 @@ export const emailsCurrentEmailSlice = createSlice({
                 regenerateIDsContainer(container, true, true);
                 state.template.containers = [...state.template.containers, container];
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
             }
         },
         addContainerToIndex: (state, action: PayloadAction<{ container: IContainer; index: number; }>) => {
@@ -338,6 +366,7 @@ export const emailsCurrentEmailSlice = createSlice({
                 regenerateIDsContainer(container, true, true);
                 state.template.containers.splice(action.payload.index, 0, container);
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
             }
         },
         duplicateContainer: (state, action: PayloadAction<{ containerId: string; }>) => {
@@ -349,6 +378,7 @@ export const emailsCurrentEmailSlice = createSlice({
                     regenerateIDsContainer(newContainer);
                     state.template.containers.splice(index + 1, 0, newContainer);
                     updateTemplate(state.template);
+                    state.saveIsRequired = true;
                 }
             }
         },
@@ -356,6 +386,7 @@ export const emailsCurrentEmailSlice = createSlice({
             if (state.template) {
                 state.template.containers = state.template.containers.filter(container => container.id !== action.payload.containerId);
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
                 //clear selection
                 emailsCurrentEmailSlice.caseReducers.clearSelection(state);
             }
@@ -393,6 +424,7 @@ export const emailsCurrentEmailSlice = createSlice({
                     }
                 });
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
             }
         },
         addBlockToIndex: (state, action: PayloadAction<{ block: IBlock; containerIndex: number, columnIndex: number, blockIndex: number; }>) => {
@@ -401,6 +433,7 @@ export const emailsCurrentEmailSlice = createSlice({
                 regenerateIDsBlock(block);
                 state.template.containers[action.payload.containerIndex].columns[action.payload.columnIndex].blocks.splice(action.payload.blockIndex, 0, block);
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
             }
         },
         duplicateBlock: (state, action: PayloadAction<{ blockId: string; }>) => {
@@ -418,6 +451,7 @@ export const emailsCurrentEmailSlice = createSlice({
                     });
                 });
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
             }
         },
         removeBlock: (state, action: PayloadAction<{ blockId: string; }>) => {
@@ -428,6 +462,7 @@ export const emailsCurrentEmailSlice = createSlice({
                     });
                 });
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
                 //clear selection
                 emailsCurrentEmailSlice.caseReducers.clearSelection(state);
             }
@@ -455,6 +490,14 @@ export const emailsCurrentEmailSlice = createSlice({
                     return container;
                 });
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
+                //change correct selected container
+                if (state.selectedContainer) {
+                    const found = state.template.containers.find(container => container.id === state.selectedContainer?.id);
+                    if (found) {
+                        state.selectedContainer = found;
+                    }
+                }
             }
         },
         updateColumnProperty: (state, action: PayloadAction<{ columnId: string, propertyKey: string; value: string; }>) => {
@@ -472,6 +515,14 @@ export const emailsCurrentEmailSlice = createSlice({
 
                 });
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
+                //change correct selected container
+                if (state.selectedContainer) {
+                    const found = state.template.containers.find(container => container.id === state.selectedContainer?.id);
+                    if (found) {
+                        state.selectedContainer = found;
+                    }
+                }
             }
         },
         updateBlockProperty: (state, action: PayloadAction<{ blockId: string, propertyKey: string; value: string; }>) => {
@@ -493,6 +544,15 @@ export const emailsCurrentEmailSlice = createSlice({
                     };
                 });
                 updateTemplate(state.template);
+                state.saveIsRequired = true;
+                //change correct selected container
+                if (state.selectedContainer) {
+                    const found = state.template.containers.find(container => container.id === state.selectedContainer?.id);
+                    if (found) {
+                        state.selectedContainer = found;
+                    }
+                }
+                //TODO as new block array is created I should change selectedBlock to new reference
             }
         },
     }

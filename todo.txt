@@ -12,8 +12,11 @@ done - add ... functionality to browse for images
 done - fix save template to follow delete pattern
 done - move container up and down
 done - add mobile view
-add button as new block
 think about adding global font - and add check box to font to activate/deactivate it
+add button as new block /added but incorrectly - ask roman for help/ 
+
+ERRORS
+done - image width on mobile does not work under Mobile preview
 
 USER EXPERIENCE FUNCTIONS
 fix send preview to follow save template pattern
