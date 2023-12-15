@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign, ITAlign, TTAlign, IMultilineTextType, IBlockHeading, IBlockText, IBlockImage, IBlockHtml, IBlockDivider, IBlockButton } from '../../types';
 import * as uuid from 'uuid';
-import { selectClasses } from '@mui/material';
 
 interface IState {
     template: ITemplate | null;

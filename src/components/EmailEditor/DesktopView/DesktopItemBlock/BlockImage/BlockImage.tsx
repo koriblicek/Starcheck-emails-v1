@@ -1,17 +1,26 @@
 import { IBlockImage } from '../../../../../types';
 import imageBlockDefault from '../../../../../assets/images/image-block-default.png';
 import { Fragment } from 'react';
+import { useAppSelector } from '../../../../../store/hooks';
 
 interface IBlockImageProps {
     block: IBlockImage;
 }
 export function BlockImage({ block }: IBlockImageProps) {
+    const { editorMobileView } = useAppSelector(state => state.emailsApp)
     const src = block.imageSrc.value === "" ? imageBlockDefault : block.imageSrc.value;
     console.log(1)
-    const css = `
+    const css = editorMobileView
+    ?
+    `
     .sc-image-${block.id}{
         width: ${(block as IBlockImage).widthMobilePercent.value === 100 ? "100%" : "auto"} !important;
         max-width: ${(block as IBlockImage).widthMobilePercent.value + (block as IBlockImage).widthMobilePercent.sizeSuffix} !important;
+    }
+    `
+    :
+    `
+    .sc-image-${block.id}{
     }
     `
     return (
