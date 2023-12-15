@@ -1,7 +1,7 @@
 import { AppBar, Tab, Tabs, useTheme } from "@mui/material";
 import { IColumn } from "../../../../../types";
 import { useTranslation } from "react-i18next";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { ColumnPanel } from "./ColumnPanel";
 
 interface IColumnsListItemProps {

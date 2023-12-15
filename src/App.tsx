@@ -37,7 +37,7 @@ function App({ inputData }: IAppProps) {
     if (error) {
       console.log(error);
     }
-  }, [data, error, dispatch]);
+  }, [data, error, dispatch,inputData]);
 
   return (
     <Fragment>

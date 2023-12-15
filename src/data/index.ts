@@ -736,7 +736,7 @@ export const blockImage: IBlockImage = {
     },
     padding: {
         type: "size",
-        value: 10,
+        value: 0,
         defaultValue: 0,
         max: 100,
         min: 0,

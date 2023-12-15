@@ -1,5 +1,4 @@
 import { Box, Grid } from "@mui/material";
-import { useAppSelector } from "../../store/hooks";
 import { DesktopView } from "./DesktopView/DesktopView";
 import { SideBar } from "./SideBar";
 import { PanelSelection } from "./SideBar/PanelSelection";

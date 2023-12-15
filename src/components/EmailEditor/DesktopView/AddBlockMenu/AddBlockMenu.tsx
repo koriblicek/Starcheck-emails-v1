@@ -9,7 +9,6 @@ import ShortTextOutlinedIcon from '@mui/icons-material/ShortTextOutlined';
 import CodeIcon from '@mui/icons-material/Code';
 import HMobiledataOutlinedIcon from '@mui/icons-material/HMobiledataOutlined';
 import CommitOutlinedIcon from '@mui/icons-material/CommitOutlined';
-import Crop169OutlinedIcon from '@mui/icons-material/Crop169Outlined';
 
 interface IAddBlockMenuProps {
     anchorEl: null | HTMLElement;
