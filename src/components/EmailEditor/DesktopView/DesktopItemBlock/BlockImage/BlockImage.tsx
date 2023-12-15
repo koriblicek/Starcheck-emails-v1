@@ -7,9 +7,11 @@ interface IBlockImageProps {
     block: IBlockImage;
 }
 export function BlockImage({ block }: IBlockImageProps) {
+
     const { editorMobileView } = useAppSelector(state => state.emailsApp)
+
     const src = block.imageSrc.value === "" ? imageBlockDefault : block.imageSrc.value;
-    console.log(1)
+    
     const css = editorMobileView
     ?
     `
@@ -32,7 +34,7 @@ export function BlockImage({ block }: IBlockImageProps) {
                 <tbody>
                     <tr>
                         <td style={{ paddingRight: '0px', paddingLeft: '0px', fontSize: 0 }} align={block.align.value}>
-                            <img /*align={block.align.value} border={0}*/ src={src} alt={block.alternateText.value} title={block.alternateText.value} style={{ outline: 'none', textDecoration: 'none', clear: 'both', display: 'inline-block !important', border: 'none', height: 'auto', float: 'left', width: block.widthPercent.value + block.widthPercent.sizeSuffix, maxWidth: (block.calculatedWidthPixels * block.widthPercent.value / 100) + "px" }} width={block.calculatedWidthPixels * block.widthPercent.value / 100} className={`sc-image-${block.id}`} />
+                            <img /*align={block.align.value} border={0}*/ src={src} alt={block.alternateText.value} title={block.alternateText.value} style={{ outline: 'none', textDecoration: 'none', clear: 'both', display: 'inline-block !important', border: 'none', height: 'auto', float: 'none', width: block.widthPercent.value + block.widthPercent.sizeSuffix, maxWidth: (block.calculatedWidthPixels * block.widthPercent.value / 100) + "px" }} width={block.calculatedWidthPixels * block.widthPercent.value / 100} className={`sc-image-${block.id}`} />
                         </td>
                     </tr>
                 </tbody>

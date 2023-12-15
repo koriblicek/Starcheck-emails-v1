@@ -13,7 +13,7 @@ export function SendPreviewMail() {
 
     const { t } = useTranslation();
 
-    const { isUploading, isCompleted, handleSubmit } = usePutToAPI<Object>(urls.outputURL);
+    const { isUploading, isCompleted, handleSubmit } = usePutToAPI<Object>(urls.previewURL);
 
     const [open, setOpen] = useState(false);
 

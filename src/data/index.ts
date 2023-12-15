@@ -32,9 +32,11 @@ const baseTemplateHtmlText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Trans
             {{columnStyles}}
         }
 
-        @media (max-width: {{contentWidthPixelsWithPadding}}px) {
+        @media (max-width: 480px) {
             {{imageStyles}}
-
+        }
+        
+        @media (max-width: {{contentWidthPixelsWithPadding}}px) {
             .sc-container-parent {
                 max-width: 100% !important;
                 padding-left: 0px !important;
@@ -652,7 +654,7 @@ const blockImageHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" 
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td style="padding-right: 0px;padding-left: 0px;font-size: 0px;" align="{{align}}">
-                        {{anchorStart}}<img align="{{align}}" border="0" src="{{imageSrc}}" alt="{{alternateText}}" title="{{alternateText}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: left;width: {{widthPercent}}{{widthPercentSuffix}};max-width: {{widthPixels}}px;" width="{{widthPixels}}" class="{{classMobile}}" />{{anchorEnd}}
+                        {{anchorStart}}<img align="{{align}}" border="0" src="{{imageSrc}}" alt="{{alternateText}}" title="{{alternateText}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: {{widthPercent}}{{widthPercentSuffix}};max-width: {{widthPixels}}px;" width="{{widthPixels}}" class="{{classMobile}}" />{{anchorEnd}}
                         </td>
                     </tr>
                 </table>

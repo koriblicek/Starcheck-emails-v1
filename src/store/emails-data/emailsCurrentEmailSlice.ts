@@ -156,8 +156,10 @@ function exportTemplateText(template: ITemplate): string {
             column.blocks.forEach((block) => {
                 if (block.type === "image") {
                     exportedCss = `${exportedCss}
-                    .sc-image-${block.id} {
+                    .sc-image-w-${block.id} {
                         width: ${(block as IBlockImage).widthMobilePercent.value === 100 ? "100%" : "auto"} !important;
+                    }
+                    .sc-image-m-w-${block.id} {
                         max-width: ${(block as IBlockImage).widthMobilePercent.value + (block as IBlockImage).widthMobilePercent.sizeSuffix} !important;
                     }
                     `;
@@ -263,7 +265,7 @@ function exportBlockText(block: IBlock): string {
             }
             exportedText = exportedText.replaceAll('{{anchorStart}}', blockImage.widthPercent.sizeSuffix);
             exportedText = exportedText.replaceAll('{{widthPixels}}', ((blockImage.calculatedWidthPixels - 2 * blockImage.padding.value) * blockImage.widthPercent.value / 100).toString());
-            exportedText = exportedText.replaceAll('{{classMobile}}', `sc-image-${blockImage.id}`);
+            exportedText = exportedText.replaceAll('{{classMobile}}', `sc-image-w-${blockImage.id} sc-image-m-w-${blockImage.id}`);
             break;
         case "html":
             const blockHtml = block as IBlockHtml;

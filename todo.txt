@@ -14,7 +14,8 @@ done - move container up and down
 done - add mobile view
 think about adding global font - and add check box to font to activate/deactivate it
 add button as new block /added but incorrectly - ask roman for help/ 
-
+[16:27, 12/15/2023] Roman Novota: https://www.starcheck.sk/api/preview je PUT
+[16:27, 12/15/2023] Roman Novota: https://www.starcheck.sk/api/output je post
 ERRORS
 done - image width on mobile does not work under Mobile preview
 
@@ -23,3 +24,27 @@ fix send preview to follow save template pattern
 add notifications: delete (fail, ok), save (fail, ok)
 add visual representation of the table
 containers movement with drag and drop
+
+
+button:
+<tr style="background: rgb(240, 240, 240);">
+ 	<td style="padding: 0;"> 
+ 		<table width="100%" align="center" class="mob_full_width" style="width: 100%; min-width: 100%;" border="0" cellspacing="0" cellpadding="0">
+ 			<tbody><tr>
+ 				<td align="center" style="padding: 0;"> 
+ <table style="display: inline;" border="0" cellspacing="0" cellpadding="0">
+ 							<tbody><tr>
+ 								<td align="center" class="mob_fontsize_14 mob_button_padding" style="background: red; padding: 7px 30px 10px; border-radius: 5px; color: rgb(255, 255, 255); line-height: 20px; font-family: &quot;Segoe UI Semibold&quot;,&quot;Segoe UI&quot;,SUWSB,Arial,sans-serif; font-size: 16px; font-weight: normal;">
+ 									<a style="color: rgb(255, 255, 255); text-decoration: none;" href="sadsad" target="_blank" alias="">
+ 										<strong style="font-weight: normal; white-space: nowrap;">
+ 											<b semibold="">asddsa</b>
+ 										</strong>
+ 									</a>
+ 								</td>
+ 							</tr>
+ 						</tbody></table> 				
+ 				</td>
+ 			</tr>
+ 		</tbody></table>
+ 	</td>
+ </tr>

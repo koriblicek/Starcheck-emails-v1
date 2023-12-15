@@ -15,6 +15,7 @@ export interface IAppData {
     imagesURL: string;
     dataURL: string;
     outputURL: string;
+    previewURL: string;
 }
 
 //Error object
