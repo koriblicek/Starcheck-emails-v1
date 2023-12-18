@@ -8,7 +8,7 @@ export function LanguageSelector() {
 
 
     return (
-        <ButtonGroup orientation="horizontal" >
+        <ButtonGroup orientation="vertical" >
             {APP_LANGUAGES.map(lng => {
                 return <Button size="small" variant="contained" color="info" key={lng} sx={{ p: 0 }}
                     onClick={() => i18n.changeLanguage(lng)} disabled={i18n.resolvedLanguage === lng}

@@ -1,4 +1,4 @@
-import { AppBar, Box,  Grid, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 import { Fragment } from "react";
 import { LanguageSelector } from "./LanguageSelector";
 import { useAppSelector } from "../../store/hooks";
@@ -9,20 +9,21 @@ import { useTranslation } from "react-i18next";
 import { SaveManager } from "./SaveManager";
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import { ExportManager } from "./ExportManager";
 
 export function EmailAppBar() {
 
     const dispatch = useDispatch();
-    
+
     const { template } = useAppSelector(state => state.emailsCurrentEmail);
 
     const { t } = useTranslation();
-    
+
     return (
         <AppBar position="static" sx={{ p: 1 }}>
             <Toolbar disableGutters>
                 {template &&
-                    <Box sx={{ p: 2, flexFlow: 0 }}>
+                    <Box sx={{ p: 0, flexFlow: 0 }}>
                         <IconButton size="large" color="inherit"
                             onClick={() => dispatch(emailsCurrentEmailActions.setTemplate({ template: null, updateIds: false }))}
                             title={t('button.discardSaveTemplate')}
@@ -31,10 +32,10 @@ export function EmailAppBar() {
                         </IconButton>
                     </Box>
                 }
-                <Box sx={{ p: 2, flexFlow: 0 }}>
+                <Box sx={{ p: 1, flexFlow: 0 }}>
                     <EmailOutlinedIcon fontSize="large" sx={{ pl: 2 }} />
                 </Box>
-                <Box sx={{ p: 2, flexFlow: 0 }}>
+                <Box sx={{ p: 1, flexFlow: 0 }}>
                     <Typography variant="h6" component="i" >EMAILS API</Typography>
                 </Box>
                 <Grid container columnGap={1} justifyContent='end' alignItems='center'>
@@ -42,6 +43,7 @@ export function EmailAppBar() {
                         <Fragment>
                             <DeviceSelector />
                             <SaveManager template={template} />
+                            <ExportManager template={template} />
                         </Fragment>
                     }
                 </Grid>

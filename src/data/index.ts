@@ -653,7 +653,7 @@ const blockImageHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" 
                 <!-- IMAGE -->
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td style="padding-right: 0px;padding-left: 0px;font-size: 0px;" align="{{align}}">
+                        <td style="padding-right: 0px;padding-left: 0px;font-size: 0px; line-heigth: 0px;" align="{{align}}">
                         {{anchorStart}}<img align="{{align}}" border="0" src="{{imageSrc}}" alt="{{alternateText}}" title="{{alternateText}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: {{widthPercent}}{{widthPercentSuffix}};max-width: {{widthPixels}}px;" width="{{widthPixels}}" class="{{classMobile}}" />{{anchorEnd}}
                         </td>
                     </tr>

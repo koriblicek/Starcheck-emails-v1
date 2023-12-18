@@ -22,6 +22,8 @@ export function DesktopView() {
 
     const { template } = useAppSelector(state => state.emailsCurrentEmail);
 
+    const { urls } = useAppSelector(state => state.emailsSettings);
+
     const { editorMobileView } = useAppSelector(state => state.emailsApp);
 
     const [toggle, setToggle] = useState<string[]>([]);
@@ -77,6 +79,10 @@ export function DesktopView() {
                         <Grid item xs={12}>
                             <Typography variant="subtitle2" color="GrayText">{template.previewLine2.value}</Typography>
                         </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle2" color="CaptionText">{t('templates.preview_email_adress') + ": " + urls.emailAdressTest}</Typography>
+                        </Grid>
+
                         <Grid item>
                         </Grid>
                         <Grid item xs={12}>

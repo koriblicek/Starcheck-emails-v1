@@ -35,7 +35,7 @@ export function SendPreviewMail() {
                 startIcon={<SendIcon />}
                 onClick={() => {
                     setOpen(true);
-                    handleSubmit({ emailTo: "koriblik@gmail.com", emailBody: template!.exportedText, subjectLine: template!.subjectLine.value, id: inputData.dataId });
+                    handleSubmit({ emailTo: urls.emailAdressTest, emailBody: template!.exportedText, subjectLine: template!.subjectLine.value, id: inputData.dataId, templateName: template!.name.value });
 
                 }}>{t('button.send_preview_mail')}</Button>
         </>

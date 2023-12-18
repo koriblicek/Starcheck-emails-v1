@@ -12,8 +12,9 @@ export interface IAppInputData {
 
 //Settings from API
 export interface IAppData {
-    imagesURL: string;
     dataURL: string;
+    emailAdressTest: string;
+    imagesURL: string;
     outputURL: string;
     previewURL: string;
 }
@@ -30,7 +31,7 @@ export interface IErrorObject {
 
 
 //#region TEMPLATE
-export interface ICustomTemplates{ 
+export interface ICustomTemplates {
     [id: string]: ITemplate;
 }
 export interface ITemplate extends ISharedHtml {

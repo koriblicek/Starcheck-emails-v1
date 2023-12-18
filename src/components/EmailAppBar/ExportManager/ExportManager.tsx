@@ -1,12 +1,12 @@
+import * as React from 'react';
+import { IErrorObject, ITemplate } from '../../../types';
 import { Backdrop, CircularProgress, Fab, Grid, Typography } from '@mui/material';
 import { Fragment, useReducer, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { emailsCurrentEmailActions } from '../../../store/emails-data/emailsCurrentEmailSlice';
 import { useAppSelector } from '../../../store/hooks';
-import { IErrorObject, ITemplate } from '../../../types';
-import SaveAltOutlinedIcon from '@mui/icons-material/SaveAltOutlined';
+import ImportExportOutlinedIcon from '@mui/icons-material/ImportExportOutlined';
 import axios, { AxiosError } from 'axios';
+
 
 type State = {
     isUploading: boolean;
@@ -55,12 +55,12 @@ function reducer(state: State, action: Action): State {
     }
 }
 
-export interface ISaveManagerProps {
+
+export interface IExportManagerProps {
     template: ITemplate;
 }
 
-export function SaveManager({ template }: ISaveManagerProps) {
-    const dispatch = useDispatch();
+export function ExportManager({ template }: IExportManagerProps) {
 
     const { t } = useTranslation();
 
@@ -68,18 +68,21 @@ export function SaveManager({ template }: ISaveManagerProps) {
 
     const { urls } = useAppSelector(state => state.emailsSettings);
 
-    const { saveIsRequired } = useAppSelector(state => state.emailsCurrentEmail);
-
     const [, dispatchReducer] = useReducer<Reducer>(reducer, initialState);
 
     const [isOpenedBackdrop, setIsOpenedBackdrop] = useState<boolean>(false);
 
-    function saveTemplate() {
-        const url = urls.dataURL + "/customTemplates/" + template.id;
+    function exportTemplate() {
+        const url = urls.outputURL;
         dispatchReducer({ type: "PUT_INIT" });
         setIsOpenedBackdrop(true);
         axios
-            .put(url, template, {
+            .post(url, {
+                emailBody: template!.exportedText,
+                subjectLine: template!.subjectLine.value,
+                templateId: template!.id,
+                templateName: template!.name.value
+            }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -87,8 +90,6 @@ export function SaveManager({ template }: ISaveManagerProps) {
             .then((response) => {
                 dispatchReducer({ type: "PUT_SUCCESS" });
                 setIsOpenedBackdrop(false);
-                //dispatch(emailsCurrentEmailActions.setTemplate({ template: null, updateIds: false }));
-                dispatch(emailsCurrentEmailActions.saveCompleted());
                 //TODO add notification
             })
             .catch((error: AxiosError) => {
@@ -101,11 +102,10 @@ export function SaveManager({ template }: ISaveManagerProps) {
     return (
         <Fragment>
             <Grid item>
-                <Fab size="small" color="warning" variant="extended"
-                    onClick={() => saveTemplate()}
-                    disabled={!saveIsRequired}
+                <Fab size="small" color="success" variant="extended"
+                    onClick={() => exportTemplate()}
                 >
-                    <SaveAltOutlinedIcon  fontSize="small" sx={{ pr: 1 }} /><Typography variant='body1'>{t('button.confirmSaveTemplate')}</Typography>
+                    <ImportExportOutlinedIcon fontSize="small" sx={{ pr: 1 }} /><Typography variant='body1'>{t('button.confirmExportTemplate')}</Typography>
                 </Fab>
             </Grid>
             <Backdrop

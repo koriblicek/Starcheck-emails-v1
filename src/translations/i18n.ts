@@ -14,6 +14,7 @@ i18next
                         removeTemplate: 'Delete',
                         discardSaveTemplate: 'Exit without save',
                         confirmSaveTemplate: 'Save template',
+                        confirmExportTemplate: 'Export to HTML',
                         desktop: 'Desktop',
                         mobile: 'Mobile',
                         delete: 'Delete',
@@ -58,6 +59,7 @@ i18next
                         yourButtonTextHere: 'Your button text...',
                         dropContainerHere: 'Drop container here',
                         dropBlockHere: 'Drop here',
+                        imageLoadingError: 'Image loading error. Wrong URL?'
                     },
                     title: {
                         customTemplates: 'Custom templates',
@@ -140,6 +142,7 @@ i18next
                         containers: "Layout containers",
                         template_header: 'Header',
                         sender_adress: 'Sender\'s address',
+                        preview_email_adress: 'Preview email recepient',
                     },
                     containers: {
                         container_settings: 'Container settings',
@@ -163,6 +166,7 @@ i18next
                         removeTemplate: 'Zmazať',
                         discardSaveTemplate: 'Zatvoriť bez uloženia',
                         confirmSaveTemplate: 'Uložiť šablónu',
+                        confirmExportTemplate: 'Exportovať do HTML',
                         desktop: 'Desktop',
                         mobile: 'Mobil',
                         delete: 'Vymazať',
@@ -206,7 +210,8 @@ i18next
                         yourHeadingHere: 'Váša hlavička...',
                         yourButtonTextHere: 'Váš text na tlačidle...',
                         dropContainerHere: 'Pustite šablónu obsahu tu',
-                        dropBlockHere: 'Pustite tu'
+                        dropBlockHere: 'Pustite tu',
+                        imageLoadingError: 'Obrazok nie je možné načítať. Chybná URL cesta?',
                     },
                     title: {
                         customTemplates: 'Uživatelské šablóny',
@@ -289,6 +294,7 @@ i18next
                         containers: "Šablóny obsahu",
                         template_header: 'Hlavička',
                         sender_adress: 'Adresa odosielateľa',
+                        preview_email_adress: 'Adresa prijímateľa skúšobného emailu',
                     },
                     containers: {
                         container_settings: 'Nastavenia rozloženia obsahu',
