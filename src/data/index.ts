@@ -32,10 +32,6 @@ const baseTemplateHtmlText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Trans
             {{columnStyles}}
         }
 
-        @media (max-width: 480px) {
-            {{imageStyles}}
-        }
-        
         @media (max-width: {{contentWidthPixelsWithPadding}}px) {
             .sc-container-parent {
                 max-width: 100% !important;
@@ -85,6 +81,11 @@ const baseTemplateHtmlText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Trans
             color: inherit !important;
             text-decoration: none !important;
         }
+
+        @media (max-width: {{contentWidthPixelsWithPadding}}px) {
+            {{imageStyles}}
+        }
+        
     </style>
 </head>
 <body style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;{{backgroundColor}}{{textColor}}">
@@ -645,7 +646,7 @@ export const blockText: IBlockText = {
     exportedText: ''
 };
 
-const blockImageHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+const blockImageHtmlText = `<table id="{{tableId}}" cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
             <td style="overflow-wrap:break-word;word-break:break-word;padding:{{padding}}{{paddingSuffix}}" align="left">
@@ -653,8 +654,8 @@ const blockImageHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" 
                 <!-- IMAGE -->
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td style="padding-right: 0px;padding-left: 0px;font-size: 0px; line-heigth: 0px;" align="{{align}}">
-                        {{anchorStart}}<img align="{{align}}" border="0" src="{{imageSrc}}" alt="{{alternateText}}" title="{{alternateText}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: {{widthPercent}}{{widthPercentSuffix}};max-width: {{widthPixels}}px;" width="{{widthPixels}}" class="{{classMobile}}" />{{anchorEnd}}
+                        <td style="padding-right: 0px;padding-left: 0px;font-size: 0px; line-height: 0px;" align="{{align}}">
+                        {{anchorStart}}<img align="{{align}}" border="0" src="{{imageSrc}}" alt="{{alternateText}}" title="{{alternateText}}" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;max-width: {{widthPercent}}{{widthPercentSuffix}};width: {{widthPixels}}px;" width="{{widthPixels}}" class="{{classMobile}}" />{{anchorEnd}}
                         </td>
                     </tr>
                 </table>

@@ -156,10 +156,10 @@ function exportTemplateText(template: ITemplate): string {
             column.blocks.forEach((block) => {
                 if (block.type === "image") {
                     exportedCss = `${exportedCss}
-                    .sc-image-w-${block.id} {
-                        width: ${(block as IBlockImage).widthMobilePercent.value === 100 ? "100%" : "auto"} !important;
+                    #sc-content-image-${block.id} .sc-image-w {
+                        width: auto !important;
                     }
-                    .sc-image-m-w-${block.id} {
+                    #sc-content-image-${block.id} .sc-image-m-w {
                         max-width: ${(block as IBlockImage).widthMobilePercent.value + (block as IBlockImage).widthMobilePercent.sizeSuffix} !important;
                     }
                     `;
@@ -250,6 +250,7 @@ function exportBlockText(block: IBlock): string {
             break;
         case "image":
             const blockImage = block as IBlockImage;
+            exportedText = exportedText.replaceAll('{{tableId}}', `sc-content-image-${blockImage.id}`);
             exportedText = exportedText.replaceAll('{{align}}', blockImage.align.value);
             exportedText = exportedText.replaceAll('{{imageSrc}}', blockImage.imageSrc.value);
             exportedText = exportedText.replaceAll('{{alternateText}}', blockImage.alternateText.value);
@@ -265,7 +266,7 @@ function exportBlockText(block: IBlock): string {
             }
             exportedText = exportedText.replaceAll('{{anchorStart}}', blockImage.widthPercent.sizeSuffix);
             exportedText = exportedText.replaceAll('{{widthPixels}}', ((blockImage.calculatedWidthPixels - 2 * blockImage.padding.value) * blockImage.widthPercent.value / 100).toString());
-            exportedText = exportedText.replaceAll('{{classMobile}}', `sc-image-w-${blockImage.id} sc-image-m-w-${blockImage.id}`);
+            exportedText = exportedText.replaceAll('{{classMobile}}', 'sc-image-w sc-image-m-w');
             break;
         case "html":
             const blockHtml = block as IBlockHtml;
