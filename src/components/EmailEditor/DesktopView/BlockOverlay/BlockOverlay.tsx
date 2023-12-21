@@ -50,7 +50,7 @@ export function BlockOverlay({ isOver, block, columnPadding }: IBlockOverlayProp
         border: !selected ? `1px ${theme.palette.secondary.main} dashed` : `1px ${theme.palette.secondary.main} solid`,
         visibility: (isOver || selected) ? "visible" : "hidden",
         pointerEvents: 'none',
-        minWidth: blockWidth - block.padding.value * 2 - 2 + "px"
+        minWidth: blockWidth - block.paddingLeftRight.value * 2 - 2 + "px"
       }}
     >
       {(isOver && !selected) &&

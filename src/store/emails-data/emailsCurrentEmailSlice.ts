@@ -99,7 +99,7 @@ function updateTemplate(template: ITemplate) {
 
                 column.blocks.forEach(block => {
                     //set width of all columns - based on column width - column padding * 2
-                    block.calculatedWidthPixels = column.calculatedWidthPixels - 2 * column.padding.value;
+                    block.calculatedWidthPixels = column.calculatedWidthPixels - 2 * column.paddingLeftRight.value;
 
                     //create block export text
                     block.exportedText = exportBlockText(block);
@@ -201,8 +201,12 @@ function exportColumnText(column: IColumn): string {
     let exportedText: string = column.htmlText;
     exportedText = exportedText.replaceAll('{{backgroundColor}}',
         column.backgroundColor.value === "transparent" ? "" : `background-color: ${column.backgroundColor.value};`);
-    exportedText = exportedText.replaceAll('{{padding}}', column.padding.value.toString());
-    exportedText = exportedText.replaceAll('{{paddingSuffix}}', column.padding.sizeSuffix);
+    exportedText = exportedText.replaceAll('{{paddingTop}}', column.paddingTop.value.toString());
+    exportedText = exportedText.replaceAll('{{paddingTopSuffix}}', column.paddingTop.sizeSuffix);
+    exportedText = exportedText.replaceAll('{{paddingLeftRight}}', column.paddingLeftRight.value.toString());
+    exportedText = exportedText.replaceAll('{{paddingLeftRightSuffix}}', column.paddingLeftRight.sizeSuffix);
+    exportedText = exportedText.replaceAll('{{paddingBottom}}', column.paddingBottom.value.toString());
+    exportedText = exportedText.replaceAll('{{paddingBottomSuffix}}', column.paddingBottom.sizeSuffix);
     exportedText = exportedText.replaceAll('{{borderWidthPixels}}', column.borderWidthPixels.value.toString());
     exportedText = exportedText.replaceAll('{{borderWidthPixelsSuffix}}', column.borderWidthPixels.sizeSuffix);
     exportedText = exportedText.replaceAll('{{borderColor}}', column.borderColor.value);
@@ -215,8 +219,12 @@ function exportColumnText(column: IColumn): string {
 
 function exportBlockText(block: IBlock): string {
     let exportedText: string = block.htmlText;
-    exportedText = exportedText.replaceAll('{{padding}}', block.padding.value.toString());
-    exportedText = exportedText.replaceAll('{{paddingSuffix}}', block.padding.sizeSuffix);
+    exportedText = exportedText.replaceAll('{{paddingTop}}', block.paddingTop.value.toString());
+    exportedText = exportedText.replaceAll('{{paddingTopSuffix}}', block.paddingTop.sizeSuffix);
+    exportedText = exportedText.replaceAll('{{paddingLeftRight}}', block.paddingLeftRight.value.toString());
+    exportedText = exportedText.replaceAll('{{paddingLeftRightSuffix}}', block.paddingLeftRight.sizeSuffix);
+    exportedText = exportedText.replaceAll('{{paddingBottom}}', block.paddingBottom.value.toString());
+    exportedText = exportedText.replaceAll('{{paddingBottomSuffix}}', block.paddingBottom.sizeSuffix);
     switch (block.type) {
         case "heading":
             const blockHeading = block as IBlockHeading;
@@ -265,7 +273,7 @@ function exportBlockText(block: IBlock): string {
                 exportedText = exportedText.replaceAll('{{anchorEnd}}', "");
             }
             exportedText = exportedText.replaceAll('{{anchorStart}}', blockImage.widthPercent.sizeSuffix);
-            exportedText = exportedText.replaceAll('{{widthPixels}}', ((blockImage.calculatedWidthPixels - 2 * blockImage.padding.value) * blockImage.widthPercent.value / 100).toString());
+            exportedText = exportedText.replaceAll('{{widthPixels}}', ((blockImage.calculatedWidthPixels - 2 * blockImage.paddingLeftRight.value) * blockImage.widthPercent.value / 100).toString());
             exportedText = exportedText.replaceAll('{{classMobile}}', 'sc-image-w sc-image-m-w');
             break;
         case "html":

@@ -1,9 +1,0 @@
-{
-  "customTemplates": [],
-  "customContainers": [],
-  "settings": {
-    "imagesURL": "http://localhost:3000/images/",
-    "dataURL": "http://localhost:5000/",
-    "outputURL": "http://localhost:3000/output/"
-  }
-}

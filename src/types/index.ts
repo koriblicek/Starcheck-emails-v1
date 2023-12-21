@@ -64,7 +64,9 @@ export interface IContainer extends ISharedProps, ISharedHtml {
 export interface IColumn extends ISharedProps, ISharedHtml {
     widthPixels: number;
     backgroundColor: IColorType;
-    padding: ISizeType;
+    paddingTop: ISizeType;
+    paddingLeftRight: ISizeType;
+    paddingBottom: ISizeType;
     borderWidthPixels: ISizeType;
     borderColor: IColorType;
     borderType: ISelectionType;
@@ -139,7 +141,9 @@ export interface IBlockDivider extends IBlock {
 export interface IBlock extends ISharedProps, ISharedHtml {
     logo: string;
     type: TBlockIdentifiers;
-    padding: ISizeType;
+    paddingTop: ISizeType;
+    paddingLeftRight: ISizeType;
+    paddingBottom: ISizeType;
 }
 //#endregion
 

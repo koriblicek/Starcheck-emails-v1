@@ -68,7 +68,7 @@ export function DesktopItemBlock({ block, containerIndex, columnIndex, blockInde
         <table cellPadding={0} cellSpacing={0} width="100%" border={0}>
           <tbody>
             <tr>
-              <td style={{ overflowWrap: 'break-word', wordBreak: 'break-word', padding: block.padding.value + block.padding.sizeSuffix }} align="left">
+              <td style={{ overflowWrap: 'break-word', wordBreak: 'break-word', padding: block.paddingTop.value + block.paddingTop.sizeSuffix + " " + block.paddingLeftRight.value + block.paddingLeftRight.sizeSuffix + " " + block.paddingBottom.value + block.paddingBottom.sizeSuffix }} align="left">
                 {/* ID */}
                 {/* <Box sx={{ fontSize: '9px' }}>{block.id}</Box> */}
                 {blockElement}

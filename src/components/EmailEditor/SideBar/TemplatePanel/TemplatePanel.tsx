@@ -59,11 +59,11 @@ export function TemplatePanel({ template }: ITemplatePanelProps) {
                 <Collapse in={openGeneral} timeout="auto" unmountOnExit>
                     <List component="div" sx={{ padding: 1 }}>
                         <ControlText propertyKey="name" data={template.name} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb:1 }} />
                         <ControlColor propertyKey="backgroundColor" data={template.backgroundColor} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb:1 }} />
                         <ControlColor propertyKey="textColor" data={template.textColor} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb:1 }} />
                         <ControlSize propertyKey="contentWidthPixels" data={template.contentWidthPixels} handleUpdateProperty={updateKey} />
                     </List>
                 </Collapse>
@@ -75,9 +75,9 @@ export function TemplatePanel({ template }: ITemplatePanelProps) {
                 <Collapse in={openEmailTemplate} timeout="auto" unmountOnExit>
                     <List component="div" sx={{ padding: 1 }}>
                         <ControlText propertyKey="subjectLine" data={template.subjectLine} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb:1 }} />
                         <ControlText propertyKey="previewLine1" data={template.previewLine1} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb:1 }} />
                         <ControlText propertyKey="previewLine2" data={template.previewLine2} handleUpdateProperty={updateKey} />
                     </List>
                 </Collapse>

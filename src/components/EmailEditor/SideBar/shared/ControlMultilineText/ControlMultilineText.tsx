@@ -37,16 +37,12 @@ export function ControlMultilineText({ propertyKey, data, handleUpdateProperty }
     );
 
     return (
-        <Grid container columnGap={1} alignItems='center'>
+        <Grid container columnGap={1} alignItems='end'>
             <Grid item xs>
                 <Typography variant='caption' color="GrayText">{label}</Typography>
             </Grid>
-            <Grid item>
-                <IconButton size="small" sx={{ color: theme.palette.error.light }} onClick={() => handleChange("")} title={t('button.delete_value')}>
-                    <DeleteForeverOutlinedIcon />
-                </IconButton>
-            </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12}></Grid>
+            <Grid item xs>
                 <TextField
                     name={propertyKey+"multiline"}
                     type="text"
@@ -59,6 +55,11 @@ export function ControlMultilineText({ propertyKey, data, handleUpdateProperty }
                     size="small"
                     onChange={(e) => handleChange(e.currentTarget.value)}
                 />
+            </Grid>
+            <Grid item>
+                <IconButton size="small" sx={{ color: theme.palette.error.light }} onClick={() => handleChange("")} title={t('button.delete_value')}>
+                    <DeleteForeverOutlinedIcon />
+                </IconButton>
             </Grid>
         </Grid>
     );

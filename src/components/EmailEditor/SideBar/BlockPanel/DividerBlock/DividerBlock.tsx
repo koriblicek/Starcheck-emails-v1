@@ -23,13 +23,13 @@ export function DividerBlock({ block }: IDividerBlockProps) {
     return (
         <Fragment>
             <ControlSlider propertyKey={"widthPercent"} data={block.widthPercent} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSize propertyKey="lineWidthPixels" data={block.lineWidthPixels} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlColor propertyKey="lineColor" data={block.lineColor} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSelection propertyKey="lineType" data={block.lineType} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlHAlign propertyKey={"align"} data={block.align} handleUpdateProperty={updateKey} />
         </Fragment>
     );

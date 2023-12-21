@@ -23,27 +23,27 @@ export function ButtonBlock({ block }: IButtonBlockProps) {
     return (
         <Fragment>
             <ControlText propertyKey={"buttonText"} data={block.buttonText} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlText propertyKey={"anchor"} data={block.anchor} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSelection propertyKey={"target"} data={block.target} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlText propertyKey={"fontFamily"} data={block.fontFamily} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSize propertyKey={"fontSizePixels"} data={block.fontSizePixels} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSelection propertyKey={"fontWeight"} data={block.fontWeight} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlColor propertyKey={"color"} data={block.color} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlColor propertyKey={"backgroundColor"} data={block.backgroundColor} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlHAlign propertyKey={"align"} data={block.align} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSize propertyKey={"widthPixels"} data={block.widthPixels} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb: 1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSize propertyKey={"heightPixels"} data={block.heightPixels} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb:1 }} />
+            <Divider sx={{ mt: 1, mb:1 }} />
             <ControlSize propertyKey="borderRadius" data={block.borderRadius} handleUpdateProperty={updateKey} />
         </Fragment>
     );

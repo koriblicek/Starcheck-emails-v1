@@ -61,13 +61,13 @@ export function ContainerPanel({ container }: IContainerPanelProps) {
                 <Collapse in={openGeneral} timeout="auto" unmountOnExit>
                     <List component="div" sx={{ padding: 1 }} key={container.id}>
                         <ControlColor propertyKey="backgroundColor" data={container.backgroundColor} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ mt: 1, mb: 1 }} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlColor propertyKey="contentBackgroundColor" data={container.contentBackgroundColor} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ mt: 1, mb: 1 }} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlSize propertyKey="paddingTopPixels" data={container.paddingTopPixels} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ mt: 1, mb: 1 }} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlSize propertyKey="paddingBottomPixels" data={container.paddingBottomPixels} handleUpdateProperty={updateKey} />
-                        <Divider light sx={{ mt: 1, mb: 1 }} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlMultiSlider propertyKey="columnsWidthsPercents" data={container.columnsWidthsPercents} handleUpdateProperty={updateKey} />
                     </List>
                 </Collapse>

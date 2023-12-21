@@ -50,13 +50,14 @@ export function BlockImage({ block }: IBlockImageProps) {
                                     </Grid>
                                 </Grid>
                             }
-                            <img onError={() => {
-                                setIsLoadingError(true);
-                            }}
+                            <img
+                                onError={() => {
+                                    setIsLoadingError(true);
+                                }}
                                 onLoad={() => {
                                     setIsLoadingError(false);
                                 }}
-                             /*align={block.align.value} border={0}*/ src={src} alt={block.alternateText.value} title={block.alternateText.value} style={{ outline: 'none', textDecoration: 'none', clear: 'both', display: 'inline-block !important', border: 'none', height: 'auto', float: 'none', width: block.widthPercent.value + block.widthPercent.sizeSuffix, maxWidth: (block.calculatedWidthPixels * block.widthPercent.value / 100) + "px" }} width={block.calculatedWidthPixels * block.widthPercent.value / 100} className={`sc-image-${block.id}`} />
+                             /*align={block.align.value} border={0}*/ src={src} alt={block.alternateText.value} title={block.alternateText.value} style={{ outline: 'none', textDecoration: 'none', clear: 'both', display: 'inline-block !important', border: 'none', height: 'auto', float: 'none', width: block.widthPercent.value + block.widthPercent.sizeSuffix, maxWidth: ((block.calculatedWidthPixels - block.paddingLeftRight.value * 2) * block.widthPercent.value / 100) + "px" }} width={block.calculatedWidthPixels * block.widthPercent.value / 100} className={`sc-image-${block.id}`} />
                         </td>
                     </tr>
                 </tbody>

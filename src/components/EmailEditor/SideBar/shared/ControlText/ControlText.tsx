@@ -41,9 +41,10 @@ export function ControlText({ propertyKey, data, handleUpdateProperty }: IContro
 
     return (
         <Grid container columnGap={1} alignItems='center'>
-            <Grid item xs={5}>
+            <Grid item xs>
                 <Typography variant='caption' color="GrayText">{label}</Typography>
             </Grid>
+            <Grid item xs={12}></Grid>
             <Grid item xs>
                 <TextField
                     name={propertyKey}

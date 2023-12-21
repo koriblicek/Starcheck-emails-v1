@@ -19,21 +19,20 @@ export function ImageBlock({ block }: IImageBlockProps) {
     function updateKey(propertyKey: string, value: string) {
         dispatch(emailsCurrentEmailActions.updateBlockProperty({ blockId: block.id, propertyKey: propertyKey, value }));
     }
-
     return (
         <Fragment>
             <ControlImage propertyKey={"imageSrc"} data={block.imageSrc} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb:1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlText propertyKey={"alternateText"} data={block.alternateText} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb:1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSlider propertyKey={"widthPercent"} data={block.widthPercent} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb:1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSlider propertyKey={"widthMobilePercent"} data={block.widthMobilePercent} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb:1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlText propertyKey={"anchor"} data={block.anchor} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb:1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSelection propertyKey={"target"} data={block.target} handleUpdateProperty={updateKey} />
-            <Divider light sx={{ mt: 1, mb:1 }} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlHAlign propertyKey={"align"} data={block.align} handleUpdateProperty={updateKey} />
         </Fragment>
     );

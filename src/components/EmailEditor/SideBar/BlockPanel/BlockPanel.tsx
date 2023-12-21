@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { IBlock, IBlockButton, IBlockDivider, IBlockHeading, IBlockHtml, IBlockImage, IBlockText } from "../../../../types";
 import { useEffect, useState } from "react";
 import { emailsCurrentEmailActions } from "../../../../store/emails-data/emailsCurrentEmailSlice";
-import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Typography } from "@mui/material";
+import { Box, Collapse, Divider, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ControlSize } from "../shared/ControlSize";
 import { useAppSelector } from "../../../../store/hooks";
@@ -78,7 +78,11 @@ export function BlockPanel({ block }: IBlockPanelProps) {
                 </ListItemButton>
                 <Collapse in={openGeneral} timeout="auto" unmountOnExit>
                     <List component="div" sx={{ padding: 1 }} key={block.id}>
-                        <ControlSize propertyKey="padding" data={block.padding} handleUpdateProperty={updateKey} />
+                        <ControlSize propertyKey="paddingTop" data={block.paddingTop} handleUpdateProperty={updateKey} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
+                        <ControlSize propertyKey="paddingLeftRight" data={block.paddingLeftRight} handleUpdateProperty={updateKey} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
+                        <ControlSize propertyKey="paddingBottom" data={block.paddingBottom} handleUpdateProperty={updateKey} />
                     </List>
                 </Collapse>
                 <ListItemButton onClick={() => setOpenBlockProperties((state) => !state)} sx={{ pt: 0, pb: 0, backgroundColor: "lightgray" }}>

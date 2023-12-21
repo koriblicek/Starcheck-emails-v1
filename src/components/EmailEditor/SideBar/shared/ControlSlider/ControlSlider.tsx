@@ -20,7 +20,7 @@ export function ControlSlider({ propertyKey, data, handleUpdateProperty }: ICont
     function valueLabel(value: number) {
         return `${value}${data.sizeSuffix}`;
     }
-    
+
     function reset(propertyValue: number | number[]) {
         setValue(propertyValue as number);
         handleUpdateProperty(propertyKey, propertyValue.toString());
@@ -44,7 +44,7 @@ export function ControlSlider({ propertyKey, data, handleUpdateProperty }: ICont
 
     return (
         <Grid container columnGap={1} alignItems='center'>
-            <Grid item xs={5}>
+            <Grid item xs={12}>
                 <Typography variant='caption' color="GrayText">{label}</Typography>
             </Grid>
             <Grid item xs sx={{ pl: 2, pr: 2 }}>

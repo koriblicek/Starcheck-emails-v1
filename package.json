@@ -22,7 +22,6 @@
     "uuid": "^9.0.1"
   },
   "scripts": {
-    "server": "json-server --watch db/data.json --port 5000",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

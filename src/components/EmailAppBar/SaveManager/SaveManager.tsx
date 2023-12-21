@@ -105,7 +105,7 @@ export function SaveManager({ template }: ISaveManagerProps) {
                     onClick={() => saveTemplate()}
                     disabled={!saveIsRequired}
                 >
-                    <SaveAltOutlinedIcon  fontSize="small" sx={{ pr: 1 }} /><Typography variant='body1'>{t('button.confirmSaveTemplate')}</Typography>
+                    <SaveAltOutlinedIcon fontSize="small" sx={{ pr: 1 }} /><Typography variant='body2' sx={{ pr: 1 }}>{t('button.confirmSaveTemplate')}</Typography>
                 </Fab>
             </Grid>
             <Backdrop

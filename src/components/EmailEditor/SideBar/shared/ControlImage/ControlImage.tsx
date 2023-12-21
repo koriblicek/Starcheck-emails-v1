@@ -43,9 +43,15 @@ export function ControlImage({ propertyKey, data, handleUpdateProperty }: IContr
     return (
         <Fragment>
             <Grid container columnGap={1} alignItems='center'>
-                <Grid item xs={5}>
+                <Grid item xs>
                     <Typography variant='caption' color="GrayText">{label}</Typography>
                 </Grid>
+                <Grid item>
+                    <IconButton size="small" sx={{ color: theme.palette.primary.main }} onClick={() => setOpenedModal(true)} title={t('button.browse_images')} >
+                        <MoreHorizOutlinedIcon />
+                    </IconButton>
+                </Grid>
+                <Grid item xs={12}></Grid>
                 <Grid item xs>
                     <TextField
                         name={propertyKey}
@@ -56,11 +62,6 @@ export function ControlImage({ propertyKey, data, handleUpdateProperty }: IContr
                         size="small"
                         onChange={(e) => handleChange(e.currentTarget.value)}
                     />
-                </Grid>
-                <Grid item>
-                    <IconButton size="small" sx={{ color: theme.palette.primary.main }} onClick={() => setOpenedModal(true)} title={t('button.browse_images')} >
-                        <MoreHorizOutlinedIcon />
-                    </IconButton>
                 </Grid>
                 <Grid item>
                     <IconButton size="small" sx={{ color: theme.palette.error.light }} onClick={() => handleChange("")} title={t('button.delete_value')}>

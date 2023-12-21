@@ -105,7 +105,7 @@ export function ExportManager({ template }: IExportManagerProps) {
                 <Fab size="small" color="success" variant="extended"
                     onClick={() => exportTemplate()}
                 >
-                    <ImportExportOutlinedIcon fontSize="small" sx={{ pr: 1 }} /><Typography variant='body1'>{t('button.confirmExportTemplate')}</Typography>
+                    <ImportExportOutlinedIcon fontSize="small" sx={{ pr: 1 }} /><Typography variant='body2' sx={{ pr: 1 }}>{t('button.confirmExportTemplate')}</Typography>
                 </Fab>
             </Grid>
             <Backdrop
