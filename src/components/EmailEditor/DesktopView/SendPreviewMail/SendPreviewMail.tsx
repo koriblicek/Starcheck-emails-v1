@@ -23,6 +23,11 @@ export function SendPreviewMail() {
         }
     }, [isCompleted]);
 
+    const extraEmails = (template!.previewEmailAddresses.value === "")
+        ?
+        ""
+        :
+        "," + template?.previewEmailAddresses.value;
     return (
         <>
             <Backdrop
@@ -35,7 +40,7 @@ export function SendPreviewMail() {
                 startIcon={<SendIcon />}
                 onClick={() => {
                     setOpen(true);
-                    handleSubmit({ emailTo: urls.emailAdressTest, emailBody: template!.exportedText, subjectLine: template!.subjectLine.value, id: inputData.dataId, templateName: template!.name.value });
+                    handleSubmit({ emailTo: urls.emailAdressTest + extraEmails, emailBody: template!.exportedText, subjectLine: template!.subjectLine.value, id: inputData.dataId, templateName: template!.name.value });
 
                 }}>{t('button.send_preview_mail')}</Button>
         </>

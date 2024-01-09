@@ -27,7 +27,7 @@ export function BlockOverlay({ isOver, block, columnPadding }: IBlockOverlayProp
 
   const { editorMobileView } = useAppSelector(state => state.emailsApp);
 
-  const blockWidth = editorMobileView ? 320 - columnPadding * 2 : block.calculatedWidthPixels;
+  const blockWidth = editorMobileView ? 320 - columnPadding : block.calculatedWidthPixels;
 
   useEffect(() => {
     if (selectedBlock) {

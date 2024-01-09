@@ -13,6 +13,8 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import CssOutlinedIcon from '@mui/icons-material/CssOutlined';
+import { ControlMultilineText } from "../shared/ControlMultilineText";
 
 interface ITemplatePanelProps {
     template: ITemplate;
@@ -24,6 +26,7 @@ export function TemplatePanel({ template }: ITemplatePanelProps) {
     const [openContainers, setOpenContainers] = useState(true);
     const [openGeneral, setOpenGeneral] = useState(true);
     const [openEmailTemplate, setOpenEmailTemplate] = useState(true);
+    const [openMobileCSS, setOpenMobileCSS] = useState(true);
 
     const { t } = useTranslation();
 
@@ -59,11 +62,11 @@ export function TemplatePanel({ template }: ITemplatePanelProps) {
                 <Collapse in={openGeneral} timeout="auto" unmountOnExit>
                     <List component="div" sx={{ padding: 1 }}>
                         <ControlText propertyKey="name" data={template.name} handleUpdateProperty={updateKey} />
-                        <Divider sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlColor propertyKey="backgroundColor" data={template.backgroundColor} handleUpdateProperty={updateKey} />
-                        <Divider sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlColor propertyKey="textColor" data={template.textColor} handleUpdateProperty={updateKey} />
-                        <Divider sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlSize propertyKey="contentWidthPixels" data={template.contentWidthPixels} handleUpdateProperty={updateKey} />
                     </List>
                 </Collapse>
@@ -74,11 +77,23 @@ export function TemplatePanel({ template }: ITemplatePanelProps) {
                 </ListItemButton>
                 <Collapse in={openEmailTemplate} timeout="auto" unmountOnExit>
                     <List component="div" sx={{ padding: 1 }}>
+                        <ControlText propertyKey="previewEmailAddresses" data={template.previewEmailAddresses} handleUpdateProperty={updateKey} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlText propertyKey="subjectLine" data={template.subjectLine} handleUpdateProperty={updateKey} />
-                        <Divider sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlText propertyKey="previewLine1" data={template.previewLine1} handleUpdateProperty={updateKey} />
-                        <Divider sx={{ mt: 1, mb:1 }} />
+                        <Divider sx={{ mt: 1, mb: 1 }} />
                         <ControlText propertyKey="previewLine2" data={template.previewLine2} handleUpdateProperty={updateKey} />
+                    </List>
+                </Collapse>
+                <ListItemButton onClick={() => setOpenMobileCSS((state) => !state)} sx={{ pt: 0, pb: 0, backgroundColor: "lightgray" }}>
+                    <ListItemIcon><CssOutlinedIcon /></ListItemIcon>
+                    <ListItemText primary={t('templates.mobile_css').toUpperCase()} />
+                    {openMobileCSS ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                <Collapse in={openMobileCSS} timeout="auto" unmountOnExit>
+                    <List component="div" sx={{ padding: 1 }}>
+                        <ControlMultilineText propertyKey={"mobileCss"} data={template.mobileCss} handleUpdateProperty={updateKey} />
                     </List>
                 </Collapse>
             </List>

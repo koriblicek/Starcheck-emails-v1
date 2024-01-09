@@ -41,10 +41,12 @@ export interface ITemplate extends ISharedHtml {
     backgroundColor: IColorType;
     textColor: IColorType;
     contentWidthPixels: ISizeType;
+    previewEmailAddresses: ITextType;
     subjectLine: ITextType;
     previewLine1: ITextType;
     previewLine2: ITextType;
     containers: IContainer[];
+    mobileCss: IMultilineTextType;
 }
 //#endregion
 
@@ -65,8 +67,10 @@ export interface IColumn extends ISharedProps, ISharedHtml {
     widthPixels: number;
     backgroundColor: IColorType;
     paddingTop: ISizeType;
-    paddingLeftRight: ISizeType;
+    paddingLeft: ISizeType;
+    paddingRight: ISizeType;
     paddingBottom: ISizeType;
+    cssMobileClassNames: ITextType;
     borderWidthPixels: ISizeType;
     borderColor: IColorType;
     borderType: ISelectionType;

@@ -84,6 +84,7 @@ const baseTemplateHtmlText = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Trans
 
         @media (max-width: {{contentWidthPixelsWithPadding}}px) {
             {{imageStyles}}
+            {{mobileCss}}
         }
         
     </style>
@@ -156,6 +157,14 @@ export const emptyTemplate: ITemplate = {
         required: true,
         label: "content_width"
     },
+    previewEmailAddresses: {
+        type: "text",
+        value: "",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "template_preview_email_addresses"
+    },
     subjectLine: {
         type: "text",
         value: "subject line",
@@ -179,6 +188,15 @@ export const emptyTemplate: ITemplate = {
         active: true,
         required: true,
         label: "template_preview_line_2"
+    },
+    mobileCss: {
+        type: "multilineText",
+        rows: 8,
+        value: ".mobile-hidden { display: none !important;}",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "mobile_css"
     },
     htmlText: baseTemplateHtmlText,
     exportedText: "",
@@ -262,10 +280,10 @@ export const baseContainer: IContainer = {
 
 //COLUMN to be used as base for all columns in app
 const baseColumnHtmlText = `
-<!--[if (mso)|(IE)]><td align="center" width="{{calculatedWidthPixels}}" style="{{backgroundColor}}width: {{calculatedWidthPixels}}px;padding: {{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}};border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
+<!--[if (mso)|(IE)]><td class="{{cssMobileClassNames}}" align="center" width="{{calculatedWidthPixels}}" style="{{backgroundColor}}width: {{calculatedWidthPixels}}px;padding: {{paddingTop}}{{paddingTopSuffix}} {{paddingRight}}{{paddingRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}} {{paddingLeft}}{{paddingLeftSuffix}};border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
     <div class="sc-column sc-column-{{calculatedWidthPixelsToFixedString}}" style="max-width: 320px;min-width: {{calculatedWidthPixels}}px;display: table-cell;vertical-align: top;">
         <div style="{{backgroundColor}}height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
-        <!--[if (!mso)&(!IE)]><!--><div style="box-sizing: border-box; height: 100%; padding: {{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}}; border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"><!--<![endif]-->
+        <!--[if (!mso)&(!IE)]><!--><div class="{{cssMobileClassNames}}" style="box-sizing: border-box; height: 100%; padding: {{paddingTop}}{{paddingTopSuffix}} {{paddingRight}}{{paddingRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}} {{paddingLeft}}{{paddingLeftSuffix}}; border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"><!--<![endif]-->
             <!-- BLOCKS -->
             {{blocks}}
         <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
@@ -297,7 +315,7 @@ export const baseColumn: IColumn = {
         required: true,
         label: "padding_top"
     },
-    paddingLeftRight: {
+    paddingLeft: {
         type: "size",
         value: 0,
         defaultValue: 0,
@@ -307,7 +325,19 @@ export const baseColumn: IColumn = {
         sizeSuffix: "px",
         active: true,
         required: true,
-        label: "padding_left_right"
+        label: "padding_left"
+    },
+    paddingRight: {
+        type: "size",
+        value: 0,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding_right"
     },
     paddingBottom: {
         type: "size",
@@ -349,6 +379,14 @@ export const baseColumn: IColumn = {
         active: true,
         required: true,
         label: 'border_style'
+    },
+    cssMobileClassNames: {
+        type: "text",
+        value: "",
+        defaultValue: "",
+        active: true,
+        required: true,
+        label: "css_class_names_for_mobile"
     },
     htmlText: baseColumnHtmlText,
     exportedText: '',

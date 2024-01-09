@@ -46,6 +46,7 @@ export function DesktopView() {
         .sc-column { width: 100% !important; }
         .sc-column > div { margin: 0 auto; }
         p { margin: 0; }
+        ${template.mobileCss.value}
     `
         : `
         p { margin: 0; }
@@ -80,7 +81,7 @@ export function DesktopView() {
                             <Typography variant="subtitle2" color="GrayText">{template.previewLine2.value}</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="subtitle2" color="CaptionText">{t('templates.preview_email_adress') + ": " + urls.emailAdressTest}</Typography>
+                            <Typography variant="subtitle2" color="CaptionText">{t('templates.preview_email_adress') + ": "}<i>{urls.emailAdressTest + " / " + template.previewEmailAddresses.value}</i></Typography>
                         </Grid>
 
                         <Grid item>

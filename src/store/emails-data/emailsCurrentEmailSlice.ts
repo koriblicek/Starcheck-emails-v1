@@ -99,7 +99,7 @@ function updateTemplate(template: ITemplate) {
 
                 column.blocks.forEach(block => {
                     //set width of all columns - based on column width - column padding * 2
-                    block.calculatedWidthPixels = column.calculatedWidthPixels - 2 * column.paddingLeftRight.value;
+                    block.calculatedWidthPixels = column.calculatedWidthPixels - (column.paddingLeft.value + column.paddingRight.value);
 
                     //create block export text
                     block.exportedText = exportBlockText(block);
@@ -126,6 +126,7 @@ function exportTemplateText(template: ITemplate): string {
     exportedText = exportedText.replaceAll('{{subjectLine}}', template.subjectLine.value);
     exportedText = exportedText.replaceAll('{{previewLine1}}', template.previewLine1.value);
     exportedText = exportedText.replaceAll('{{previewLine2}}', template.previewLine2.value);
+    exportedText = exportedText.replaceAll('{{mobileCss}}', template.mobileCss.value);
     exportedText = exportedText.replaceAll('{{contentWidthPixels}}', template.contentWidthPixels.value.toString());
     //width + padding value: 20
     exportedText = exportedText.replaceAll('{{contentWidthPixelsWithPadding}}', (template.contentWidthPixels.value + 20).toString());
@@ -203,10 +204,13 @@ function exportColumnText(column: IColumn): string {
         column.backgroundColor.value === "transparent" ? "" : `background-color: ${column.backgroundColor.value};`);
     exportedText = exportedText.replaceAll('{{paddingTop}}', column.paddingTop.value.toString());
     exportedText = exportedText.replaceAll('{{paddingTopSuffix}}', column.paddingTop.sizeSuffix);
-    exportedText = exportedText.replaceAll('{{paddingLeftRight}}', column.paddingLeftRight.value.toString());
-    exportedText = exportedText.replaceAll('{{paddingLeftRightSuffix}}', column.paddingLeftRight.sizeSuffix);
+    exportedText = exportedText.replaceAll('{{paddingLeft}}', column.paddingLeft.value.toString());
+    exportedText = exportedText.replaceAll('{{paddingLeftSuffix}}', column.paddingLeft.sizeSuffix);
     exportedText = exportedText.replaceAll('{{paddingBottom}}', column.paddingBottom.value.toString());
     exportedText = exportedText.replaceAll('{{paddingBottomSuffix}}', column.paddingBottom.sizeSuffix);
+    exportedText = exportedText.replaceAll('{{paddingRight}}', column.paddingRight.value.toString());
+    exportedText = exportedText.replaceAll('{{paddingRightSuffix}}', column.paddingRight.sizeSuffix);
+    exportedText = exportedText.replaceAll('{{cssMobileClassNames}}', column.cssMobileClassNames.value);
     exportedText = exportedText.replaceAll('{{borderWidthPixels}}', column.borderWidthPixels.value.toString());
     exportedText = exportedText.replaceAll('{{borderWidthPixelsSuffix}}', column.borderWidthPixels.sizeSuffix);
     exportedText = exportedText.replaceAll('{{borderColor}}', column.borderColor.value);

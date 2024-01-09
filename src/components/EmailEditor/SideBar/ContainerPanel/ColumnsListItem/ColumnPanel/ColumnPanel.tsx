@@ -4,6 +4,7 @@ import { ControlColor } from "../../../shared/ControlColor";
 import { useDispatch } from "react-redux";
 import { ControlSize } from "../../../shared/ControlSize";
 import { emailsCurrentEmailActions } from "../../../../../../store/emails-data/emailsCurrentEmailSlice";
+import { ControlText } from "../../../shared/ControlText";
 
 interface IColumnPanelProps {
     column: IColumn;
@@ -22,10 +23,13 @@ export function ColumnPanel({ column }: IColumnPanelProps) {
             <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSize propertyKey="paddingTop" data={column.paddingTop} handleUpdateProperty={updateKey} />
             <Divider sx={{ mt: 1, mb: 1 }} />
-            <ControlSize propertyKey="paddingLeftRight" data={column.paddingLeftRight} handleUpdateProperty={updateKey} />
+            <ControlSize propertyKey="paddingLeft" data={column.paddingLeft} handleUpdateProperty={updateKey} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
+            <ControlSize propertyKey="paddingRight" data={column.paddingRight} handleUpdateProperty={updateKey} />
             <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSize propertyKey="paddingBottom" data={column.paddingBottom} handleUpdateProperty={updateKey} />
-
+            <Divider sx={{ mt: 1, mb: 1 }} />
+            <ControlText propertyKey={"cssMobileClassNames"} data={column.cssMobileClassNames} handleUpdateProperty={updateKey} />
             {/* Border removed as it makes unexpected results on Outlook */}
             {/* <Divider sx={{ mt: 1, mb:1 }} />
             <ControlSize propertyKey="borderWidthPixels" data={column.borderWidthPixels} handleUpdateProperty={updateKey} />
