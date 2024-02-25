@@ -9,6 +9,7 @@ import ShortTextOutlinedIcon from '@mui/icons-material/ShortTextOutlined';
 import CodeIcon from '@mui/icons-material/Code';
 import HMobiledataOutlinedIcon from '@mui/icons-material/HMobiledataOutlined';
 import CommitOutlinedIcon from '@mui/icons-material/CommitOutlined';
+import Crop169OutlinedIcon from '@mui/icons-material/Crop169Outlined';
 
 interface IAddBlockMenuProps {
     anchorEl: null | HTMLElement;
@@ -78,10 +79,10 @@ export function AddBlockMenu({ anchorEl, column, handleAnchorClear }: IAddBlockM
                 <ListItemIcon><CommitOutlinedIcon /></ListItemIcon>
                 <ListItemText>{t('button.divider')}</ListItemText>
             </MenuItem>
-            {/* <MenuItem onClick={() => handleSelectMenu("button")}>
+            <MenuItem onClick={() => handleSelectMenu("button")}>
                 <ListItemIcon><Crop169OutlinedIcon /></ListItemIcon>
                 <ListItemText>{t('button.button')}</ListItemText>
-            </MenuItem> */}
+            </MenuItem>
         </Menu>
     );
 }

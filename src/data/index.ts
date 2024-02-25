@@ -280,7 +280,7 @@ export const baseContainer: IContainer = {
 
 //COLUMN to be used as base for all columns in app
 const baseColumnHtmlText = `
-<!--[if (mso)|(IE)]><td class="{{cssMobileClassNames}}" align="center" width="{{calculatedWidthPixels}}" style="{{backgroundColor}}width: {{calculatedWidthPixels}}px;padding: {{paddingTop}}{{paddingTopSuffix}} {{paddingRight}}{{paddingRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}} {{paddingLeft}}{{paddingLeftSuffix}};border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
+<!--[if (mso)|(IE)]><td class="{{cssMobileClassNames}}" align="center" width="{{calculatedWidthPixels}}" style="{{backgroundColor}}width: {{calculatedWidthPixels}}px;padding: {{paddingTop}}{{paddingTopSuffix}} {{paddingRight}}{{paddingRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}} {{paddingLeft}}{{paddingLeftSuffix}}; border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
     <div class="sc-column sc-column-{{calculatedWidthPixelsToFixedString}}" style="max-width: 320px;min-width: {{calculatedWidthPixels}}px;display: table-cell;vertical-align: top;">
         <div style="{{backgroundColor}}height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
         <!--[if (!mso)&(!IE)]><!--><div class="{{cssMobileClassNames}}" style="box-sizing: border-box; height: 100%; padding: {{paddingTop}}{{paddingTopSuffix}} {{paddingRight}}{{paddingRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}} {{paddingLeft}}{{paddingLeftSuffix}}; border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"><!--<![endif]-->
@@ -394,15 +394,15 @@ export const baseColumn: IColumn = {
 };
 
 //BLOCKS
-const blockHtmlHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+const blockHtmlHtmlText = `<!-- HTML TEXT -->
+<table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
-            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}}" align="left">
+            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}};" align="left">
 
-            <!-- TEXT -->
-            <div style="font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}}; {{color}} text-align: {{textAlign}}; word-wrap: break-word; line-height: {{lineHeightPixels}}px;">
-                {{html}}
-            </div>
+                <div style="font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}}; {{color}} text-align: {{textAlign}}; word-wrap: break-word; line-height: {{lineHeightPixels}}px;">
+                    {{html}}
+                </div>
 
             </td>
         </tr>
@@ -523,15 +523,15 @@ export const blockHtml: IBlockHtml = {
 };
 
 //removed line-height: {{lineHeightPercent}}{{lineHeightPercentSuffix}}; from <h2 style>
-const blockHeadingHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+const blockHeadingHtmlText = `<!-- HEADING -->
+<table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
-            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}}" align="left">
+            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}};" align="left">
 
-            <!-- HEADING -->
-            <!--[if mso]><table width="100%"><tr><td><![endif]-->
-                <h2 style="margin: 0px; {{color}} text-align: {{textAlign}}; word-wrap: break-word; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}};"><span style="line-height: {{lineHeightPixels}}px;">{{heading}}</span></h2>
-            <!--[if mso]></td></tr></table><![endif]-->
+                <!--[if mso]><table width="100%"><tr><td><![endif]-->
+                    <h2 style="margin: 0px; {{color}} text-align: {{textAlign}}; word-wrap: break-word; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}};"><span style="line-height: {{lineHeightPixels}}px;">{{heading}}</span></h2>
+                <!--[if mso]></td></tr></table><![endif]-->
 
             </td>
         </tr>
@@ -651,13 +651,13 @@ export const blockHeading: IBlockHeading = {
     exportedText: ''
 };
 
-//remvoed line-height: {{lineHeightPercent}}{{lineHeightPercentSuffix}};  from <div style
-const blockTextHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+//removed line-height: {{lineHeightPercent}}{{lineHeightPercentSuffix}};  from <div style
+const blockTextHtmlText = `<!-- TEXT -->
+<table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
-            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}}" align="left">
+            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}};" align="left">
 
-            <!-- HTML -->
             <div style="font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}}; {{color}} text-align: {{textAlign}}; word-wrap: break-word;">
                 <p style="line-height: {{lineHeightPixels}}px;">{{text}}</p>
             </div>
@@ -780,12 +780,12 @@ export const blockText: IBlockText = {
     exportedText: ''
 };
 
-const blockImageHtmlText = `<table id="{{tableId}}" cellpadding="0" cellspacing="0" width="100%" border="0">
+const blockImageHtmlText = `<!-- IMAGE -->
+<table id="{{tableId}}" cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
-            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}}" align="left">
+            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}};" align="left">
 
-                <!-- IMAGE -->
                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td style="padding-right: 0px;padding-left: 0px;font-size: 0px; line-height: 0px;" align="{{align}}">
@@ -911,12 +911,12 @@ export const blockImage: IBlockImage = {
     exportedText: ''
 };
 
-const blockDividerHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+const blockDividerHtmlText = `<!-- DIVIDER -->
+<table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
-            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}}" align="left">
-        
-                <!-- DIVIDER -->
+            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}};" align="left">
+                
                 <table height="0px" align="{{align}}" border="0" cellpadding="0" cellspacing="0" width="{{widthPercent}}{{widthPercentSuffix}}" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: {{lineWidthPixels}}{{lineWidthPixelsSuffix}} {{lineType}} {{lineColor}};-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">
                     <tbody>
                         <tr style="vertical-align: top">
@@ -1026,7 +1026,28 @@ export const blockDivider: IBlockDivider = {
     exportedText: '',
 };
 
-const blockButtonHtmlText = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+const blockButtonHtmlText = `<!-- BUTTON -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+                <tr>
+                    <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}};" align="{{align}}">
+                        <table cellpadding="0" cellspacing="0" border="0" style="display: inline;" >
+                            <tbody>
+                                <tr>
+                                    <td style="background-color: {{backgroundColor}}; padding: {{paddingTopButton}}{{paddingTopButtonSuffix}} {{paddingLeftRightButton}}{{paddingLeftRightButtonSuffix}} {{paddingBottomButton}}{{paddingBottomButtonSuffix}}; border-radius: {{borderRadiusPixels}}{{borderRadiusPixelsSuffix}}; -webkit-border-radius: {{borderRadiusPixels}}{{borderRadiusPixelsSuffix}}; -moz-border-radius: {{borderRadiusPixels}}{{borderRadiusPixelsSuffix}}; color: {{color}}; font-family: '{{fontFamily}}', font-weight: {{fontWeight}}; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}};">
+                                        <a href="{{anchor}}" target="{{target}}" style="text-decoration: none; color: {{color}}; white-space: nowrap;">
+                                            {{buttonText}}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        `;
+const blockButtonHtmlTextBad = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
             <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}}" align="left">
@@ -1138,29 +1159,41 @@ export const blockButton: IBlockButton = {
         required: true,
         label: 'align_type'
     },
-    widthPixels: {
+    paddingTopButton: {
         type: "size",
-        value: 160,
-        defaultValue: 160,
-        max: 800,
-        min: 0,
-        step: 10,
-        sizeSuffix: "px",
-        active: true,
-        required: true,
-        label: "button_width"
-    },
-    heightPixels: {
-        type: "size",
-        value: 40,
-        defaultValue: 40,
+        value: 7,
+        defaultValue: 0,
         max: 100,
         min: 0,
         step: 1,
         sizeSuffix: "px",
         active: true,
         required: true,
-        label: "button_height"
+        label: "padding_top_button"
+    },
+    paddingLeftRightButton: {
+        type: "size",
+        value: 30,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding_left_right_button"
+    },
+    paddingBottomButton: {
+        type: "size",
+        value: 10,
+        defaultValue: 0,
+        max: 100,
+        min: 0,
+        step: 1,
+        sizeSuffix: "px",
+        active: true,
+        required: true,
+        label: "padding_bottom_button"
     },
     borderRadius: {
         type: "size",
@@ -1176,8 +1209,8 @@ export const blockButton: IBlockButton = {
     },
     paddingTop: {
         type: "size",
-        value: 0,
-        defaultValue: 0,
+        value: 5,
+        defaultValue: 5,
         max: 100,
         min: 0,
         step: 1,
@@ -1200,8 +1233,8 @@ export const blockButton: IBlockButton = {
     },
     paddingBottom: {
         type: "size",
-        value: 0,
-        defaultValue: 0,
+        value: 5,
+        defaultValue: 5,
         max: 100,
         min: 0,
         step: 1,

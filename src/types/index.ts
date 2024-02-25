@@ -89,8 +89,9 @@ export interface IBlockButton extends IBlock {
     color: IColorType;
     backgroundColor: IColorType;
     align: IHAlign;
-    widthPixels: ISizeType;
-    heightPixels: ISizeType;
+    paddingTopButton: ISizeType;
+    paddingLeftRightButton: ISizeType;
+    paddingBottomButton: ISizeType;
     borderRadius: ISizeType;
 }
 

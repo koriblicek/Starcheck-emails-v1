@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign, ITAlign, TTAlign, IMultilineTextType, IBlockHeading, IBlockText, IBlockImage, IBlockHtml, IBlockDivider, IBlockButton } from '../../types';
 import * as uuid from 'uuid';
+import { baseColumn, baseContainer, blockButton, blockDivider, blockHeading, blockHtml, blockImage, blockText, emptyTemplate } from '../../data';
 
 interface IState {
     template: ITemplate | null;
@@ -118,11 +119,9 @@ function updateTemplate(template: ITemplate) {
 }
 
 function exportTemplateText(template: ITemplate): string {
-    let exportedText: string = template.htmlText;
-    exportedText = exportedText.replaceAll('{{backgroundColor}}',
-        template.backgroundColor.value === "transparent" ? "" : `background-color: ${template.backgroundColor.value};`);
-    exportedText = exportedText.replaceAll('{{textColor}}',
-        template.textColor.value === "transparent" ? "" : `color: ${template.textColor.value};`);
+    let exportedText: string = emptyTemplate.htmlText;
+    exportedText = exportedText.replaceAll('{{backgroundColor}}', template.backgroundColor.value === "transparent" ? "" : `background-color: ${template.backgroundColor.value};`);
+    exportedText = exportedText.replaceAll('{{textColor}}', template.textColor.value === "transparent" ? "" : `color: ${template.textColor.value};`);
     exportedText = exportedText.replaceAll('{{subjectLine}}', template.subjectLine.value);
     exportedText = exportedText.replaceAll('{{previewLine1}}', template.previewLine1.value);
     exportedText = exportedText.replaceAll('{{previewLine2}}', template.previewLine2.value);
@@ -184,11 +183,9 @@ function exportTemplateText(template: ITemplate): string {
 }
 
 function exportContainerText(container: IContainer): string {
-    let exportedText: string = container.htmlText;
-    exportedText = exportedText.replaceAll('{{backgroundColor}}',
-        container.backgroundColor.value === "transparent" ? "" : `background-color: ${container.backgroundColor.value};`);
-    exportedText = exportedText.replaceAll('{{contentBackgroundColor}}',
-        container.contentBackgroundColor.value === "transparent" ? "" : `background-color: ${container.contentBackgroundColor.value};`);
+    let exportedText: string = baseContainer.htmlText;
+    exportedText = exportedText.replaceAll('{{backgroundColor}}', container.backgroundColor.value === "transparent" ? "" : `background-color: ${container.backgroundColor.value};`);
+    exportedText = exportedText.replaceAll('{{contentBackgroundColor}}', container.contentBackgroundColor.value === "transparent" ? "" : `background-color: ${container.contentBackgroundColor.value};`);
     exportedText = exportedText.replaceAll('{{paddingTopPixels}}', container.paddingTopPixels.value.toString());
     exportedText = exportedText.replaceAll('{{paddingTopPixelsSuffix}}', container.paddingTopPixels.sizeSuffix);
     exportedText = exportedText.replaceAll('{{paddingBottomPixels}}', container.paddingBottomPixels.value.toString());
@@ -199,9 +196,8 @@ function exportContainerText(container: IContainer): string {
 }
 
 function exportColumnText(column: IColumn): string {
-    let exportedText: string = column.htmlText;
-    exportedText = exportedText.replaceAll('{{backgroundColor}}',
-        column.backgroundColor.value === "transparent" ? "" : `background-color: ${column.backgroundColor.value};`);
+    let exportedText: string = baseColumn.htmlText;
+    exportedText = exportedText.replaceAll('{{backgroundColor}}', column.backgroundColor.value === "transparent" ? "" : `background-color: ${column.backgroundColor.value};`);
     exportedText = exportedText.replaceAll('{{paddingTop}}', column.paddingTop.value.toString());
     exportedText = exportedText.replaceAll('{{paddingTopSuffix}}', column.paddingTop.sizeSuffix);
     exportedText = exportedText.replaceAll('{{paddingLeft}}', column.paddingLeft.value.toString());
@@ -223,6 +219,26 @@ function exportColumnText(column: IColumn): string {
 
 function exportBlockText(block: IBlock): string {
     let exportedText: string = block.htmlText;
+    switch (block.type) {
+        case "heading":
+            exportedText = blockHeading.htmlText;
+            break;
+        case "text":
+            exportedText = blockText.htmlText;
+            break;
+        case "image":
+            exportedText = blockImage.htmlText;
+            break;
+        case "divider":
+            exportedText = blockDivider.htmlText;
+            break;
+        case "html":
+            exportedText = blockHtml.htmlText;
+            break;
+        case "button":
+            exportedText = blockButton.htmlText;
+            break;
+    }
     exportedText = exportedText.replaceAll('{{paddingTop}}', block.paddingTop.value.toString());
     exportedText = exportedText.replaceAll('{{paddingTopSuffix}}', block.paddingTop.sizeSuffix);
     exportedText = exportedText.replaceAll('{{paddingLeftRight}}', block.paddingLeftRight.value.toString());
@@ -237,8 +253,7 @@ function exportBlockText(block: IBlock): string {
             exportedText = exportedText.replaceAll('{{fontSizePixels}}', blockHeading.fontSizePixels.value.toString());
             exportedText = exportedText.replaceAll('{{fontSizePixelsSuffix}}', blockHeading.fontSizePixels.sizeSuffix);
             exportedText = exportedText.replaceAll('{{fontWeight}}', blockHeading.fontWeight.value);
-            exportedText = exportedText.replaceAll('{{color}}',
-                blockHeading.color.value === "transparent" ? "" : `color: ${blockHeading.color.value};`);
+            exportedText = exportedText.replaceAll('{{color}}', blockHeading.color.value === "transparent" ? "" : `color: ${blockHeading.color.value};`);
             exportedText = exportedText.replaceAll('{{lineHeightPercent}}', blockHeading.lineHeightPercent.value.toString());
             exportedText = exportedText.replaceAll('{{lineHeightPercentSuffix}}', blockHeading.lineHeightPercent.sizeSuffix);
             //line height pixels added to have extra pixels value due to Outlook
@@ -252,8 +267,7 @@ function exportBlockText(block: IBlock): string {
             exportedText = exportedText.replaceAll('{{fontSizePixels}}', blockText.fontSizePixels.value.toString());
             exportedText = exportedText.replaceAll('{{fontSizePixelsSuffix}}', blockText.fontSizePixels.sizeSuffix);
             exportedText = exportedText.replaceAll('{{fontWeight}}', blockText.fontWeight.value);
-            exportedText = exportedText.replaceAll('{{color}}',
-                blockText.color.value === "transparent" ? "" : `color: ${blockText.color.value};`);
+            exportedText = exportedText.replaceAll('{{color}}', blockText.color.value === "transparent" ? "" : `color: ${blockText.color.value};`);
             exportedText = exportedText.replaceAll('{{lineHeightPercent}}', blockText.lineHeightPercent.value.toString());
             exportedText = exportedText.replaceAll('{{lineHeightPercentSuffix}}', blockText.lineHeightPercent.sizeSuffix);
             //line height pixels added to have extra pixels value due to Outlook
@@ -287,8 +301,7 @@ function exportBlockText(block: IBlock): string {
             exportedText = exportedText.replaceAll('{{fontSizePixels}}', blockHtml.fontSizePixels.value.toString());
             exportedText = exportedText.replaceAll('{{fontSizePixelsSuffix}}', blockHtml.fontSizePixels.sizeSuffix);
             exportedText = exportedText.replaceAll('{{fontWeight}}', blockHtml.fontWeight.value);
-            exportedText = exportedText.replaceAll('{{color}}',
-                blockHtml.color.value === "transparent" ? "" : `color: ${blockHtml.color.value};`);
+            exportedText = exportedText.replaceAll('{{color}}', blockHtml.color.value === "transparent" ? "" : `color: ${blockHtml.color.value};`);
             //line height pixels added to have extra pixels value due to Outlook
             exportedText = exportedText.replaceAll('{{lineHeightPixels}}', (blockHtml.lineHeightPercent.value * blockHtml.fontSizePixels.value / 100).toString());
             exportedText = exportedText.replaceAll('{{textAlign}}', blockHtml.textAlign.value);
@@ -315,14 +328,14 @@ function exportBlockText(block: IBlock): string {
             exportedText = exportedText.replaceAll('{{color}}', blockButton.color.value);
             exportedText = exportedText.replaceAll('{{backgroundColor}}', blockButton.backgroundColor.value);
             exportedText = exportedText.replaceAll('{{align}}', blockButton.align.value);
-            exportedText = exportedText.replaceAll('{{widthPixels}}', blockButton.widthPixels.value.toString());
-            exportedText = exportedText.replaceAll('{{widthPixelsSuffix}}', blockButton.widthPixels.sizeSuffix);
-            exportedText = exportedText.replaceAll('{{heightPixels}}', blockButton.heightPixels.value.toString());
-            exportedText = exportedText.replaceAll('{{heightPixelsSuffix}}', blockButton.heightPixels.sizeSuffix);
-            exportedText = exportedText.replaceAll('{{lineHeight}}', blockButton.heightPixels.value.toString());
+            exportedText = exportedText.replaceAll('{{paddingTopButton}}', blockButton.paddingTopButton.value.toString());
+            exportedText = exportedText.replaceAll('{{paddingTopButtonSuffix}}', blockButton.paddingTopButton.sizeSuffix);
+            exportedText = exportedText.replaceAll('{{paddingLeftRightButton}}', blockButton.paddingLeftRightButton.value.toString());
+            exportedText = exportedText.replaceAll('{{paddingLeftRightButtonSuffix}}', blockButton.paddingLeftRightButton.sizeSuffix);
+            exportedText = exportedText.replaceAll('{{paddingBottomButton}}', blockButton.paddingBottomButton.value.toString());
+            exportedText = exportedText.replaceAll('{{paddingBottomButtonSuffix}}', blockButton.paddingBottomButton.sizeSuffix);
             exportedText = exportedText.replaceAll('{{borderRadiusPixels}}', blockButton.borderRadius.value.toString());
             exportedText = exportedText.replaceAll('{{borderRadiusPixelsSuffix}}', blockButton.borderRadius.sizeSuffix);
-            exportedText = exportedText.replaceAll('{{borderRadiusPercent}}', (blockButton.borderRadius.value * 2.5).toString());
             break;
     }
     return exportedText;

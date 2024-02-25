@@ -40,10 +40,12 @@ export function ButtonBlock({ block }: IButtonBlockProps) {
             <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlHAlign propertyKey={"align"} data={block.align} handleUpdateProperty={updateKey} />
             <Divider sx={{ mt: 1, mb: 1 }} />
-            <ControlSize propertyKey={"widthPixels"} data={block.widthPixels} handleUpdateProperty={updateKey} />
+            <ControlSize propertyKey={"paddingTopButton"} data={block.paddingTopButton} handleUpdateProperty={updateKey} />
             <Divider sx={{ mt: 1, mb: 1 }} />
-            <ControlSize propertyKey={"heightPixels"} data={block.heightPixels} handleUpdateProperty={updateKey} />
+            <ControlSize propertyKey={"paddingLeftRightButton"} data={block.paddingLeftRightButton} handleUpdateProperty={updateKey} />
             <Divider sx={{ mt: 1, mb:1 }} />
+            <ControlSize propertyKey={"paddingBottomButton"} data={block.paddingBottomButton} handleUpdateProperty={updateKey} />
+            <Divider sx={{ mt: 1, mb: 1 }} />
             <ControlSize propertyKey="borderRadius" data={block.borderRadius} handleUpdateProperty={updateKey} />
         </Fragment>
     );

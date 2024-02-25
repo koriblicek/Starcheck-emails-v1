@@ -126,7 +126,7 @@ export const emailsDataSlice = createSlice({
             block_divider.logo = logo_block_divider;
             const block_button = JSON.parse(JSON.stringify(blockButton)) as IBlock;
             block_button.logo = logo_block_button;
-            state.builtinBlocks = [block_image, block_heading, block_text, block_html, block_divider /*, block_button*/];
+            state.builtinBlocks = [block_image, block_heading, block_text, block_html, block_divider, block_button];
         }
     }
 });

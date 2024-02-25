@@ -32,8 +32,9 @@ button:
  		<table width="100%" align="center" class="mob_full_width" style="width: 100%; min-width: 100%;" border="0" cellspacing="0" cellpadding="0">
  			<tbody><tr>
  				<td align="center" style="padding: 0;"> 
- <table style="display: inline;" border="0" cellspacing="0" cellpadding="0">
- 							<tbody><tr>
+ 					<table style="display: inline;" border="0" cellspacing="0" cellpadding="0">
+ 						<tbody>
+							<tr>
  								<td align="center" class="mob_fontsize_14 mob_button_padding" style="background: red; padding: 7px 30px 10px; border-radius: 5px; color: rgb(255, 255, 255); line-height: 20px; font-family: &quot;Segoe UI Semibold&quot;,&quot;Segoe UI&quot;,SUWSB,Arial,sans-serif; font-size: 16px; font-weight: normal;">
  									<a style="color: rgb(255, 255, 255); text-decoration: none;" href="sadsad" target="_blank" alias="">
  										<strong style="font-weight: normal; white-space: nowrap;">
@@ -42,7 +43,8 @@ button:
  									</a>
  								</td>
  							</tr>
- 						</tbody></table> 				
+ 						</tbody>
+					</table> 				
  				</td>
  			</tr>
  		</tbody></table>

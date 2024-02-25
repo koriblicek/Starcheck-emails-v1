@@ -47,7 +47,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 # New Block definition
-1. src\types\index.ts - add new type to `TBlockIdentifiers`
+1. src\types\index.ts - add new type to `export type TBlockIdentifiers`
 2. src\types\index.ts - declare new interface  extending `IBlock`
 3. src\data\index.ts - add new base block definition (html string, image) 
 4. src\store\emails-data\emailsDataSlice.ts - add initialization initBuiltinBlocks
