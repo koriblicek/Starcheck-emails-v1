@@ -18,7 +18,6 @@ interface IAppProps {
  */
 function App({ inputData }: IAppProps) {
   const dispatch = useDispatch();
-
   const { error, data } = useGetFromAPI<IAppData>(inputData.dataApiLink + inputData.dataId + "/" + inputData.dataModule + "/" + inputData.dataVersion + "/settings");
   //const { error, data } = useGetFromAPI<IAppData>("http://localhost:5000/settings");
 
@@ -26,6 +25,7 @@ function App({ inputData }: IAppProps) {
 
   useEffect(() => {
     if (data) {
+      console.log(data)
       //initialize loaded urls
       dispatch(emailsSettingsActions.initialize({ urls: data, inputData: inputData }));
       //initialize data

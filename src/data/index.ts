@@ -205,7 +205,8 @@ export const emptyTemplate: ITemplate = {
 
 //CONTAINER to be is used as base for all types of containers in app
 //remove  style="{{backgroundColor}}" from line 1 <td>
-const baseContainerHtmlText = `<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center"><![endif]-->
+const baseContainerHtmlText = `
+<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center"><![endif]-->
     <div class="sc-container-parent" style="padding-top: {{paddingTopPixels}}{{paddingTopPixelsSuffix}};padding-bottom: {{paddingBottomPixels}}{{paddingBottomPixelsSuffix}};{{backgroundColor}}">
         <div class="sc-container" style="margin: 0 auto;min-width: 320px;max-width: {{calculatedWidthPixels}}px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;{{contentBackgroundColor}}">
             <div style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;">
@@ -216,7 +217,8 @@ const baseContainerHtmlText = `<!--[if (mso)|(IE)]><table width="100%" cellpaddi
             </div>
         </div>
     </div>
-<!--[if (mso)|(IE)]></td></tr></table><![endif]-->`;
+<!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+`;
 export const baseContainer: IContainer = {
     calculatedWidthPixels: 0,
     id: '',
@@ -394,7 +396,8 @@ export const baseColumn: IColumn = {
 };
 
 //BLOCKS
-const blockHtmlHtmlText = `<!-- HTML TEXT -->
+const blockHtmlHtmlText = `
+<!-- HTML TEXT -->
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
@@ -407,7 +410,8 @@ const blockHtmlHtmlText = `<!-- HTML TEXT -->
             </td>
         </tr>
     </tbody>
-</table>`;
+</table>
+`;
 export const blockHtml: IBlockHtml = {
     calculatedWidthPixels: 0,
     id: '',
@@ -523,7 +527,8 @@ export const blockHtml: IBlockHtml = {
 };
 
 //removed line-height: {{lineHeightPercent}}{{lineHeightPercentSuffix}}; from <h2 style>
-const blockHeadingHtmlText = `<!-- HEADING -->
+const blockHeadingHtmlText = `
+<!-- HEADING -->
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
@@ -536,7 +541,8 @@ const blockHeadingHtmlText = `<!-- HEADING -->
             </td>
         </tr>
     </tbody>
-</table>`;
+</table>
+`;
 export const blockHeading: IBlockHeading = {
     calculatedWidthPixels: 0,
     id: '',
@@ -652,7 +658,8 @@ export const blockHeading: IBlockHeading = {
 };
 
 //removed line-height: {{lineHeightPercent}}{{lineHeightPercentSuffix}};  from <div style
-const blockTextHtmlText = `<!-- TEXT -->
+const blockTextHtmlText = `
+<!-- TEXT -->
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
@@ -665,7 +672,8 @@ const blockTextHtmlText = `<!-- TEXT -->
             </td>
         </tr>
     </tbody>
-</table>`;
+</table>
+`;
 export const blockText: IBlockText = {
     calculatedWidthPixels: 0,
     id: '',
@@ -780,7 +788,8 @@ export const blockText: IBlockText = {
     exportedText: ''
 };
 
-const blockImageHtmlText = `<!-- IMAGE -->
+const blockImageHtmlText = `
+<!-- IMAGE -->
 <table id="{{tableId}}" cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
@@ -797,7 +806,8 @@ const blockImageHtmlText = `<!-- IMAGE -->
             </td>
         </tr>
     </tbody>
-</table>`;
+</table>
+`;
 export const blockImage: IBlockImage = {
     calculatedWidthPixels: 0,
     id: '',
@@ -911,7 +921,8 @@ export const blockImage: IBlockImage = {
     exportedText: ''
 };
 
-const blockDividerHtmlText = `<!-- DIVIDER -->
+const blockDividerHtmlText = `
+<!-- DIVIDER -->
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
         <tr>
@@ -1026,50 +1037,51 @@ export const blockDivider: IBlockDivider = {
     exportedText: '',
 };
 
-const blockButtonHtmlText = `<!-- BUTTON -->
-        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-                <tr>
-                    <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}};" align="{{align}}">
-                        <table cellpadding="0" cellspacing="0" border="0" style="display: inline;" >
-                            <tbody>
-                                <tr>
-                                    <td style="background-color: {{backgroundColor}}; padding: {{paddingTopButton}}{{paddingTopButtonSuffix}} {{paddingLeftRightButton}}{{paddingLeftRightButtonSuffix}} {{paddingBottomButton}}{{paddingBottomButtonSuffix}}; border-radius: {{borderRadiusPixels}}{{borderRadiusPixelsSuffix}}; -webkit-border-radius: {{borderRadiusPixels}}{{borderRadiusPixelsSuffix}}; -moz-border-radius: {{borderRadiusPixels}}{{borderRadiusPixelsSuffix}}; color: {{color}}; font-family: '{{fontFamily}}', font-weight: {{fontWeight}}; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}};">
-                                        <a href="{{anchor}}" target="{{target}}" style="text-decoration: none; color: {{color}}; white-space: nowrap;">
-                                            {{buttonText}}
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        `;
-const blockButtonHtmlTextBad = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+const blockButtonHtmlText = `
+<!-- BUTTON -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
     <tbody>
         <tr>
-            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}}" align="left">
-        
-                <!-- BUTTON -->
-                <!--[if mso]><style>.sc-button {background: transparent !important;}</style><![endif]-->
-                    <div align="{{align}}">
-                    <!--[if mso]>
-                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{anchor}}" style="height:{{heightPixels}}{{heightPixelsSuffix}}; v-text-anchor:middle; width:{{widthPixels}}{{widthPixelsSuffix}};" arcsize="{{borderRadiusPercent}}%" stroke="f" fillcolor="{{backgroundColor}}"><w:anchorlock/>
-                        <center style="color:{{color}}; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}};">
-                        <![endif]-->
-                            <a href="{{anchor}}" target="{{target}}" class="sc-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center; color:{{color}}; background-color: {{backgroundColor}}; border-radius: 5px;-webkit-border-radius: 5px; -moz-border-radius: 5px; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}};font-weight: {{fontWeight}};width:{{widthPixels}}{{widthPixelsSuffix}};height:{{heightPixels}}{{heightPixelsSuffix}};line-height:{{lineHeight}}{{heightPixelsSuffix}};">{{buttonText}}</a>
-                        <!--[if mso]>
-                        </center>
-                    </v:roundrect>
-                    <![endif]-->
-                    </div>
+            <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}};" align="{{align}}">
+                <table cellpadding="0" cellspacing="0" border="0" style="display: inline;" >
+                    <tbody>
+                        <tr>
+                            <td style="background-color: {{backgroundColor}}; padding: {{paddingTopButton}}{{paddingTopButtonSuffix}} {{paddingLeftRightButton}}{{paddingLeftRightButtonSuffix}} {{paddingBottomButton}}{{paddingBottomButtonSuffix}}; border-radius: {{borderRadiusPixels}}{{borderRadiusPixelsSuffix}}; -webkit-border-radius: {{borderRadiusPixels}}{{borderRadiusPixelsSuffix}}; -moz-border-radius: {{borderRadiusPixels}}{{borderRadiusPixelsSuffix}}; color: {{color}}; font-family: '{{fontFamily}}'; font-weight: {{fontWeight}}; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}};">
+                                <a href="{{anchor}}" target="{{target}}" style="text-decoration: none; color: {{color}}; white-space: nowrap;">
+                                    {{buttonText}}
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </td>
         </tr>
     </tbody>
 </table>
 `;
+// const blockButtonHtmlTextBad = `<table cellpadding="0" cellspacing="0" width="100%" border="0">
+//     <tbody>
+//         <tr>
+//             <td style="overflow-wrap:break-word;word-break:break-word;padding:{{paddingTop}}{{paddingTopSuffix}} {{paddingLeftRight}}{{paddingLeftRightSuffix}} {{paddingBottom}}{{paddingBottomSuffix}}" align="left">
+        
+//                 <!-- BUTTON -->
+//                 <!--[if mso]><style>.sc-button {background: transparent !important;}</style><![endif]-->
+//                     <div align="{{align}}">
+//                     <!--[if mso]>
+//                     <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{anchor}}" style="height:{{heightPixels}}{{heightPixelsSuffix}}; v-text-anchor:middle; width:{{widthPixels}}{{widthPixelsSuffix}};" arcsize="{{borderRadiusPercent}}%" stroke="f" fillcolor="{{backgroundColor}}"><w:anchorlock/>
+//                         <center style="color:{{color}}; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}}; font-weight: {{fontWeight}};">
+//                         <![endif]-->
+//                             <a href="{{anchor}}" target="{{target}}" class="sc-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center; color:{{color}}; background-color: {{backgroundColor}}; border-radius: 5px;-webkit-border-radius: 5px; -moz-border-radius: 5px; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none; font-family: '{{fontFamily}}'; font-size: {{fontSizePixels}}{{fontSizePixelsSuffix}};font-weight: {{fontWeight}};width:{{widthPixels}}{{widthPixelsSuffix}};height:{{heightPixels}}{{heightPixelsSuffix}};line-height:{{lineHeight}}{{heightPixelsSuffix}};">{{buttonText}}</a>
+//                         <!--[if mso]>
+//                         </center>
+//                     </v:roundrect>
+//                     <![endif]-->
+//                     </div>
+//             </td>
+//         </tr>
+//     </tbody>
+// </table>
+// `;
 export const blockButton: IBlockButton = {
     calculatedWidthPixels: 0,
     id: '',

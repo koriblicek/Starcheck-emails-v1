@@ -50,3 +50,16 @@ button:
  		</tbody></table>
  	</td>
  </tr>
+
+BUTTON to add
+<table style="display: inline;" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="center" class="" style='background: #02a2dd; padding: 14px 48px; border-radius: 5px; color: rgb(255, 255, 255); line-height: 20px; font-size: 16px; font-weight: normal;'>
+			<a style="color: rgb(255,255,255); text-decoration: none;" href="https://www.noisk.sk/o-nas/organizujeme/ediz2024" target="_blank">
+				<strong style="font-weight: normal; white-space: nowrap;">
+					<b semibold="">Registrujte sa teraz</b>
+				</strong>
+			</a>
+		</td>
+	</tr>
+</table>
