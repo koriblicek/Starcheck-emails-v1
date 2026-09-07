@@ -33,11 +33,11 @@ export function EmailTemplatesView() {
     return (
         <Grid container rowSpacing={2} spacing={2} justifyContent="center" pt={1}>
             <Grid item xs={12} >
-                <Divider><Chip label={t('title.builtinTemplates')} size="small" /></Divider>
+                <Divider><Chip label={t('title.builtinTemplates')} size="small" sx={{ bgcolor: 'primary.dark', color: 'primary.contrastText' }} /></Divider>
             </Grid>
             <EmailTemplatesCategory templates={builtinTemplates} isCustomTemplate={false} errorMessage={t('message.noBuiltinTemplates')} />
             <Grid item xs={12} >
-                <Divider><Chip label={t('title.customTemplates')} size="small" /></Divider>
+                <Divider><Chip label={t('title.customTemplates')} size="small" sx={{ bgcolor: 'primary.dark', color: 'primary.contrastText' }} /></Divider>
             </Grid>
             {/* is loading or data and error is null - to prevent showing no custom templates message*/}
             {(isLoading || (data === null && error === null))

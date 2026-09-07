@@ -66,6 +66,11 @@ i18next
                         builtinTemplates: 'Built-in templates',
                         selectImage: 'Select image',
                     },
+                    table: {
+                        templateName: 'Name',
+                        modificationDate: 'Last modified',
+                        actions: 'Actions',
+                    },
                     languages: {
                         sk: 'Slovak',
                         en: 'English',
@@ -227,6 +232,11 @@ i18next
                         customTemplates: 'Uživatelské šablóny',
                         builtinTemplates: 'Vstavané šablóny',
                         selectImage: 'Vyberte obrázok',
+                    },
+                    table: {
+                        templateName: 'Názov',
+                        modificationDate: 'Posledná úprava',
+                        actions: 'Akcie',
                     },
                     languages: {
                         sk: 'Slovensky',
