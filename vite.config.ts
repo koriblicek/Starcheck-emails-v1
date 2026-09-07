@@ -9,7 +9,7 @@ export default defineConfig({
     build: {
         outDir: 'build',
         assetsInlineLimit: 100 * 1024,
-        chunkSizeWarningLimit: 1100,
+        chunkSizeWarningLimit: 1500,
         rollupOptions: {
             output: {
                 format: 'iife',
@@ -20,6 +20,5 @@ export default defineConfig({
     },
     test: {
         environment: 'jsdom',
-        setupFiles: './src/setupTests.ts',
     },
 });

@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IBlock, IColorType, IColumn, IContainer, IPropertyBase, ISizeType, INumberArrayType, ITemplate, ITextType, ISelectionType, IImageType, IHAlign, THAlign, ITAlign, TTAlign, IMultilineTextType, IBlockHeading, IBlockText, IBlockImage, IBlockHtml, IBlockDivider, IBlockButton } from '../../types';
 import * as uuid from 'uuid';
 import { baseColumn, baseContainer, blockButton, blockDivider, blockHeading, blockHtml, blockImage, blockText, emptyTemplate } from '../../data';
+import { sanitizeEmailHtml } from '../../utils/sanitizeEmailHtml';
 
 interface IState {
     template: ITemplate | null;
@@ -63,7 +64,7 @@ function updateProperty(object: Object, propertyKey: string, value: string) {
                 (Object.values(object)[propertyIndex] as ITextType).value = value;
                 break;
             case "multilineText":
-                (Object.values(object)[propertyIndex] as IMultilineTextType).value = value;
+                (Object.values(object)[propertyIndex] as IMultilineTextType).value = propertyKey === 'html' ? sanitizeEmailHtml(value) : value;
                 break;
             case "numberArray":
                 (Object.values(object)[propertyIndex] as INumberArrayType).value = value.split("|").map(item => Number(item));
@@ -296,7 +297,7 @@ function exportBlockText(block: IBlock): string {
             break;
         case "html":
             const blockHtml = block as IBlockHtml;
-            exportedText = exportedText.replaceAll('{{html}}', blockHtml.html.value);
+            exportedText = exportedText.replaceAll('{{html}}', sanitizeEmailHtml(blockHtml.html.value));
             exportedText = exportedText.replaceAll('{{fontFamily}}', blockHtml.fontFamily.value);
             exportedText = exportedText.replaceAll('{{fontSizePixels}}', blockHtml.fontSizePixels.value.toString());
             exportedText = exportedText.replaceAll('{{fontSizePixelsSuffix}}', blockHtml.fontSizePixels.sizeSuffix);
