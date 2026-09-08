@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import React from 'react';
 import './translations/i18n';
+import { ThemeProvider } from '@mui/material/styles';
+import { appTheme } from './theme';
 
 //input data
 let inputData: IAppInputData | undefined;
@@ -38,9 +40,11 @@ if (rootElement) {
   }
   root.render(
     // <React.StrictMode>
-      <Provider store={store}>
-        {inputData && <App inputData={inputData}/>}
-      </Provider>
+      <ThemeProvider theme={appTheme}>
+        <Provider store={store}>
+          {inputData && <App inputData={inputData}/>}
+        </Provider>
+      </ThemeProvider>
     // </React.StrictMode>
   );
 } else {

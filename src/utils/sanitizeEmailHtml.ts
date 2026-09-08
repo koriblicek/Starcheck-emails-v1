@@ -14,12 +14,45 @@ function normalizeLegacyTag(element: HTMLElement, tagName: 'b' | 'i') {
     element.replaceWith(replacement);
 }
 
+function hasFollowingContent(element: HTMLElement) {
+    let sibling = element.nextSibling;
+
+    while (sibling !== null) {
+        if (sibling.nodeType === 1 || sibling.textContent?.trim() !== '') {
+            return true;
+        }
+
+        sibling = sibling.nextSibling;
+    }
+
+    return false;
+}
+
+function normalizeParagraph(element: HTMLElement) {
+    const content = element.hasAttribute('style') ? document.createElement('span') : document.createDocumentFragment();
+
+    if (content instanceof HTMLElement) {
+        content.setAttribute('style', element.getAttribute('style') ?? '');
+    }
+
+    content.append(...Array.from(element.childNodes));
+    const replacement = document.createDocumentFragment();
+    replacement.append(content);
+
+    if (hasFollowingContent(element)) {
+        replacement.append(document.createElement('br'));
+    }
+
+    element.replaceWith(replacement);
+}
+
 function keepSafeAttributes(html: string) {
     const container = document.createElement('div');
     container.innerHTML = html;
 
     container.querySelectorAll<HTMLElement>('strong').forEach((element) => normalizeLegacyTag(element, 'b'));
     container.querySelectorAll<HTMLElement>('em').forEach((element) => normalizeLegacyTag(element, 'i'));
+    container.querySelectorAll<HTMLElement>('p').forEach(normalizeParagraph);
 
     container.querySelectorAll<HTMLElement>('*').forEach((element) => {
         if (element.tagName !== 'A') {

@@ -54,7 +54,7 @@ export function ControlSize({ propertyKey, data, handleUpdateProperty }: IContro
 
                             onClick={() => add("-" + data.step)}
                         ><Typography variant='body1'>-</Typography></Button> */}
-                        <IconButton size="medium" color='primary' sx={{ borderRadius: 1, borderTopRightRadius: 0, borderBottomRightRadius: 0, border: 1, padding: '9px' }}
+                        <IconButton size="small" color='primary' sx={{ width: 32, height: 32, borderRadius: 1, borderTopRightRadius: 0, borderBottomRightRadius: 0, border: 1 }}
                             onClick={() => add("-" + data.step)}
                         >
                             <RemoveIcon fontSize='small' />
@@ -70,6 +70,9 @@ export function ControlSize({ propertyKey, data, handleUpdateProperty }: IContro
                                 },
                                 "& input[type=number]": {
                                     MozAppearance: "textfield",
+                                },
+                                "& .MuiOutlinedInput-root": {
+                                    height: 32,
                                 },
                             }}
                             inputProps={{ style: { textAlign: 'center' } }}
@@ -93,14 +96,18 @@ export function ControlSize({ propertyKey, data, handleUpdateProperty }: IContro
                     </Grid>
                     <Grid item>
                         <Typography sx={{
-                            p: '7px 5px',
+                            height: 32,
+                            boxSizing: 'border-box',
+                            display: 'flex',
+                            alignItems: 'center',
+                            px: '5px',
                             border: `1px ${theme.palette.grey[400]} solid`,
                             backgroundColor: theme.palette.grey[200],
                             color: theme.palette.grey[500],
                         }}>{data.sizeSuffix}</Typography>
                     </Grid>
                     <Grid item>
-                        <IconButton size="medium" color='primary' sx={{ borderRadius: 1, borderTopLeftRadius: 0, borderBottomLeftRadius: 0, border: 1, padding: '9px' }}
+                        <IconButton size="small" color='primary' sx={{ width: 32, height: 32, borderRadius: 1, borderTopLeftRadius: 0, borderBottomLeftRadius: 0, border: 1 }}
                             onClick={() => add("+" + data.step)}
                         >
                             <AddIcon fontSize='small' />

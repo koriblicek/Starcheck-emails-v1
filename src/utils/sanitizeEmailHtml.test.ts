@@ -10,6 +10,7 @@ describe('sanitizeEmailHtml', () => {
         expect(html).toContain('href="https://starcheck.sk"');
         expect(html).toContain('rel="noopener noreferrer"');
         expect(html).toContain('<ul><li>Položka</li></ul>');
+        expect(html).not.toContain('<p>');
     });
 
     it('preserves inline styles while removing unsafe markup and links', () => {
@@ -27,6 +28,12 @@ describe('sanitizeEmailHtml', () => {
     it('normalizes legacy strong and em tags to b and i', () => {
         const html = sanitizeEmailHtml('<p><strong>Text</strong> <em>kurzíva</em></p>');
 
-        expect(html).toBe('<p><b>Text</b> <i>kurzíva</i></p>');
+        expect(html).toBe('<b>Text</b> <i>kurzíva</i>');
+    });
+
+    it('replaces paragraph boundaries with br while preserving existing br tags', () => {
+        const html = sanitizeEmailHtml('<p>Prvý<br>riadok</p><p><b>Druhý</b></p>');
+
+        expect(html).toBe('Prvý<br>riadok<br><b>Druhý</b>');
     });
 });
