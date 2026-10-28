@@ -580,7 +580,16 @@ export const emailsCurrentEmailSlice = createSlice({
                         state.selectedContainer = found;
                     }
                 }
-                //TODO as new block array is created I should change selectedBlock to new reference
+                if (state.selectedBlock?.id === action.payload.blockId) {
+                    const selectedBlock = state.template.containers
+                        .flatMap((container) => container.columns)
+                        .flatMap((column) => column.blocks)
+                        .find((block) => block.id === action.payload.blockId);
+
+                    if (selectedBlock) {
+                        state.selectedBlock = selectedBlock;
+                    }
+                }
             }
         },
     }

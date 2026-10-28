@@ -24,4 +24,29 @@ describe('emailEditorExtensions', () => {
         expect(html).toContain('href="https://starcheck.sk"');
         expect(html).toContain('style="color: rgb(255, 0, 0);"');
     });
+
+    it('preserves inline styles on formatting marks', () => {
+        editor = new Editor({
+            extensions: emailEditorExtensions,
+            content: '<b style="color: red">tučné</b><i style="background: black">kurzíva</i><span style="font-size: 18px">text</span>',
+        });
+
+        const html = editor.getHTML();
+
+        expect(html).toContain('<b style="color: red;">tučné</b>');
+        expect(html).toContain('<i style="background: black;">kurzíva</i>');
+        expect(html).toContain('<span style="font-size: 18px;">text</span>');
+    });
+
+    it('preserves inline styles on list elements', () => {
+        editor = new Editor({
+            extensions: emailEditorExtensions,
+            content: '<ul style="color: red"><li style="background: black">Položka</li></ul>',
+        });
+
+        const html = editor.getHTML();
+
+        expect(html).toContain('<ul style="color: red;">');
+        expect(html).toContain('<li style="background: black;">');
+    });
 });
